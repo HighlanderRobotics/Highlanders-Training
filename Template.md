@@ -21,3 +21,7 @@ More detailed description about what the page is about. This should also include
 
 - If applicable, have some practice exercises for this topic
 - This should be enough for a student to prove they understand the topic
+
+### Notes
+
+- These are any extraneous notes on good practice or team specific things
