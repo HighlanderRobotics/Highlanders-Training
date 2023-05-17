@@ -3,6 +3,7 @@
 ## Basics
 
 ### - [Java](Java.md)
+### - [Git](BasicGit.md)
 
 ## See Also
 
