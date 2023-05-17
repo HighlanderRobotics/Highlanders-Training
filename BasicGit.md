@@ -20,7 +20,7 @@ While many modern cloud applications, like google docs, have some form of auto-s
 - `git pull` updates the code on your device with the latest code from Github. Recommended to do this whenever someone else has been working on the same branch, otherwise you might make conflicting changes
 - [A simple demo video of commiting some changes](Assets/GitDemoVideo.mp4)
 
-### Exercise
+### Exercises
 
 - Simple commit
   - Clone this repository from Github

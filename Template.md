@@ -17,7 +17,7 @@ More detailed description about what the page is about. This should also include
   - This can also have notes about what is/isn't good about these examples, or to explain what practices differ between our current code and the example
   - These notes can be longer than the linked descriptions
 
-### Exercise
+### Exercises
 
 - If applicable, have some practice exercises for this topic
 - This should be enough for a student to prove they understand the topic
