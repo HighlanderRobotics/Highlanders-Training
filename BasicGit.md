@@ -37,4 +37,4 @@ While many modern cloud applications, like google docs, have some form of auto-s
 
 ### Names
 
-- Lewy
+- Lewy Seiden
