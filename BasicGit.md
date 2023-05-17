@@ -12,10 +12,10 @@ While many modern cloud applications, like google docs, have some form of auto-s
 
 ### Examples
 
-- ![A simple demonstration of commiting and pushing some changes in git](Assets\GitExample.png)
-- Typing `git add .` then `git commit -m "commit name"` then `git push` is the bread and butter of us using git. It takes all of your uncommited changes and commits them
+- ![A simple demonstration of commiting and pushing some changes in git](Assets/GitExample.png)
+- Typing `git add .` then `git commit -m "commit name"` then `git push` is the bread and butter of using git. This sequence takes all of your uncommited changes and commits them, then pushes them to github
 - `git checkout branch-name` switches between branches
-- `git checkout -b new-branch` makes a new branch and switches to it. Note that the first time you push from this branch you will need to enter some extra parameters but the terminal should prompt you with the correct command when you enter `git push`
+- `git checkout -b new-branch` makes a new branch and switches to it. Note that the first time you push from this branch you will need to enter some extra parameters, but the terminal should prompt you with the correct command when you enter `git push`
 - `git status` displays the current branch and what changes you have uncommited and staged
 - `git pull` updates the code on your device with the latest code from Github. Recommended to do this whenever someone else has been working on the same branch, otherwise you might make conflicting changes
 
