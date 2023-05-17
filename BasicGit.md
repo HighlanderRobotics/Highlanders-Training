@@ -18,6 +18,7 @@ While many modern cloud applications, like google docs, have some form of auto-s
 - `git checkout -b new-branch` makes a new branch and switches to it. Note that the first time you push from this branch you will need to enter some extra parameters, but the terminal should prompt you with the correct command when you enter `git push`
 - `git status` displays the current branch and what changes you have uncommited and staged
 - `git pull` updates the code on your device with the latest code from Github. Recommended to do this whenever someone else has been working on the same branch, otherwise you might make conflicting changes
+- [A simple demo video of commiting some changes](Assets/GitDemoVideo.mp4)
 
 ### Exercise
 
