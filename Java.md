@@ -11,8 +11,8 @@ The majority of our robot code is made in Java, and at least basic familiarity w
 
 ### Exercises
 
-- Figure out some extra exercises for people to demonstrate proficiency
+- ***TODO!*** *Figure out some extra exercises for people to demonstrate proficiency*
 
 ### Notes
 
-- We use an auto-formatter to keep the code clean. To run it type `./gradlew spotlessApply` into the terminal.
+- We use an auto-formatter to keep the code clean. To run it type `./gradlew spotlessApply` into the terminal. This should be done before you push code (if not more frequently!) to keep the codebase readable.
