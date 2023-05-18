@@ -6,6 +6,12 @@
 
 ### - [Git](BasicGit.md)
 
+### - [WPILib](WPILib.md)
+
+## Architecture and Best Practices
+
+### - [Command Based](CommandBased.md)
+
 ## See Also
 
 ### - [Training Docs Template](Template.md)
