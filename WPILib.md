@@ -23,5 +23,5 @@ WPILib is an open source project that aims to raise the floor of what FRC teams 
 
 ### Notes
 
-- See also the *Command-based* article for more information about how we architect our code using WPILib
+- See also the [Command-based](CommandBased.md) article for more information about how we architect our code using WPILib
 - A lot of what WPILib does is "under the hood" to let us focus on high-level code rather than low-level hardware interface

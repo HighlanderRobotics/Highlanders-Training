@@ -12,6 +12,10 @@
 
 ### - [Command Based](CommandBased.md)
 
+## Libraries and Tooling
+
+### - [PathPlanner](PathPlanner.md)
+
 ## See Also
 
 ### - [Training Docs Template](Template.md)
