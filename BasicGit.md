@@ -22,10 +22,12 @@ While many modern cloud applications, like google docs, have some form of auto-s
 
 ### Exercises
 
+- Join Highlanders Robotics Github organization by asking Kevin to add your Github account
 - Simple commit
   - Clone this repository from Github
   - Add your name to the list at the bottom of this file
   - Commit and push those changes
+    - You may need to make an auth key for your account for this, ask a  software lead or mentor for more help with this
 
 ### Notes
 
@@ -34,7 +36,8 @@ While many modern cloud applications, like google docs, have some form of auto-s
 - Commit messages should be short and simple, ~10 words is a good target. If it's too long, use multiple lines in the commit message
 - Commits should be frequent, whenever you reach a working state you should commit before you accidentaly break anything again
 - Commiting directly to the `main` branch is frowned upon. `main` should always contain working code when possible and features should be developed on separate branches and merged/pull requested in
-- **ALWAYS ALWAYS ALWAYS** commit before you leave a meeting, especially if you are using a team computer. It is never fun to have to commit someone elses code at the start of the day or find out an hour in that you've been working off of someone elses uncommited (potentially broken!) code. Uncommited code also makes it harder to track what is and isn't finished. That being said, it is good practice to run a `git status` at the start of a meeting to make sure whoever was there before you commited their code and that you are on the right branch. If you are not using a team computer this still applies but has slightly less consequences
+- **ALWAYS ALWAYS ALWAYS** commit before you leave a meeting, especially if you are using a team computer. It is never fun to have to commit someone else's code at the start of the day or find out an hour in that you've been working off of someone elses uncommited (potentially broken!) code. Uncommited code also makes it harder to track what is and isn't finished
+- Run a `git status` at the start of a meeting to make sure whoever was there before you commited their code and that you are on the right branch
 
 ### Names
 
