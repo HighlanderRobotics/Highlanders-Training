@@ -16,6 +16,14 @@
 
 ### - [PathPlanner](PathPlanner.md)
 
+### - [AdvantageKit](AdvantageKit.md)
+
+## Controls
+
+### - [PID](PID.md)
+
+### - [Feedforward](Feedforward.md)
+
 ## See Also
 
 ### - [Training Docs Template](Template.md)
