@@ -6,6 +6,7 @@ While many modern cloud applications, like google docs, have some form of auto-s
 
 ### Resources
 
+- [WPILib Git intro](https://docs.wpilib.org/en/stable/docs/software/basic-programming/git-getting-started.html)
 - [Github Git intro](https://docs.github.com/en/get-started/using-git/about-git)
 - *Record quick intro to git vid/talk at some point, talk to kevin or a software lead until then*
 - [Git install](https://gitforwindows.org/)
