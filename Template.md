@@ -19,9 +19,13 @@ More detailed description about what the page is about. This should also include
 
 ### Exercises
 
-- If applicable, have some practice exercises for this topic
-- This should be enough for a student to prove they understand the topic
+- Have some practice exercises for this topic
+- This should be enough for a student to prove they understand the topic, and is the requirement to get checked off for the course
 
 ### Notes
 
 - These are any extraneous notes on good practice or team specific things
+
+### Whats Next?
+
+- Next course in course progression, if applicable

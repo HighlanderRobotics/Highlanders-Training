@@ -1,28 +1,40 @@
-# This repo contains training information and materials for FRC team 8033, Highlanders Robotics
+# This repo contains robot software training information and materials for FRC team 8033, Highlanders Robotics
+
+Each link down below corresponds to one "course" in the team training system. Each page will have a brief description of the topic and may include links to other resources. At the end of each page there will be one or two exercises to complete. Once you complete them, show a lead or mentor to get checked off as having completed that course and move on to the next one as suggested on the page.
 
 ## Basics
 
-### - [Java](Java.md)
+### - [**JIN** - Java Basics](Java.md)
 
-### - [Git](BasicGit.md)
+## Git
 
-### - [WPILib](WPILib.md)
+### - [**GIT** - Git Basics](BasicGit.md)
+
+### - **GWF** - Team Git Workflow *TODO*
+
+## WPILib
+
+### - [**FPI** - WPILib / Intro to FRC Programming](WPILib.md) *Rework Needed*
 
 ## Architecture and Best Practices
 
-### - [Command Based](CommandBased.md)
+### - [**ARC** - Team Architecture / Command Based](CommandBased.md)
 
-## Libraries and Tooling
+### - [**AKT** - AdvantageKit and Logging](AdvantageKit.md)
 
-### - [PathPlanner](PathPlanner.md)
-
-### - [AdvantageKit](AdvantageKit.md)
+### - [**SIM** - Simulation] *TODO*
 
 ## Controls
 
-### - [PID](PID.md)
+### - [**PID** - PID and Feedforward Control](PID.md) *To be merged with feedforward*
 
-### - [Feedforward](Feedforward.md)
+### - [Feedforward](Feedforward.md) *To be merged with PID*
+
+## Libraries and Tooling
+
+### - [**AUT** - PathPlanner and Auto](PathPlanner.md)
+
+### - [**PVN** - PhotonVision and Vision] *TODO*
 
 ## See Also
 
