@@ -6,7 +6,9 @@ Instead of running programs that, for example, print calculations, run games, or
 
 However, it becomes very clumsy and difficult to interface with these parts directly. Instead of having to deal with the minutiae of “how many volts do we need to send to this thing to make it work”, other folks out there have already done that for us. In addition, there are a lot of utilities that can be reused specifically for FRC. 
 
-WPILib is the standard library for FRC, providing code to interface with hardware, structure and run high-level code, and use advanced controls. It is an open source project that aims to raise the floor of what FRC teams can do with software. The project has a little bit of everything and is the main building block that our code is built on top of. It also has extensive documentation.
+"WPILib contains a set of useful classes and subroutines for interfacing with various parts of the FRC control system (such as sensors, motor controllers, and the driver station), as well as an assortment of other utility functions." It is an open source project that aims to raise the floor of what FRC teams can do with software. The project has a little bit of everything and is the main building block that our code is built on top of. It also has extensive documentation.
+
+
 
 ### Resources
 
