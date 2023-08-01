@@ -16,7 +16,7 @@ However, it becomes very clumsy and difficult to interface with these parts dire
 - [WPILib zero to robot guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/introduction.html)
 - [WPILib repo](https://github.com/wpilibsuite/allwpilib)
 - [Installation guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
-- [Glossary] (https://docs.wpilib.org/en/stable/docs/software/frc-glossary.html)
+- [Glossary of jargon](https://docs.wpilib.org/en/stable/docs/software/frc-glossary.html)
 
 ### Examples
 

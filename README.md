@@ -14,7 +14,7 @@ Each link down below corresponds to one "course" in the team training system. Ea
 
 ## WPILib
 
-### - [**FPI** - WPILib / Intro to FRC Programming](WPILib.md) *Rework Needed*
+### - [**FPI** - WPILib / Intro to FRC Programming](Intro.md) *Rework Needed*
 
 ## Architecture and Best Practices
 
