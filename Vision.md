@@ -2,9 +2,7 @@
 
 ## Vision processing for FRC
 
-Camera go brr
-We’ve got a camera on the robot that’s pretty cool uuuuhhh yea
-**WIP**
+**WIP**  
 We primarily have two uses for vision: target detection and pose estimation. The first usually involves some sort of visual fiducial marker (something that can act as a known point of reference that you can use to find your current location) near the target that we can align to and then score which is relatively easy to set up. The second involves a more complicated system of identifying where certain visual fiducial markers are relative to the robot and then using that to generate an estimated pose of the robot on the field. 
 
 ### Retroreflective tape
