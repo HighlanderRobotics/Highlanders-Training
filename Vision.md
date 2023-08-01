@@ -38,7 +38,7 @@ Photonvision is an app and library that gets vision data from the robot for a va
 ### Notes
 
 - Photonvision is installed on the coprocessor not on your computer, what you’re looking at on your computer is just a web dashboard
-Last year we used a system called a Limelight which had a camera bundled in with a coprocessor. It had a couple of performance issues, so this year we’re probably going to use custom hardware **still tbd if we’re going to use an opi or not so i’ll come back and edit this**
+- Last year we used a system called a Limelight which had a camera bundled in with a coprocessor. It had a couple of performance issues, so this year we’re probably going to use custom hardware **still tbd if we’re going to use an opi or not so i’ll come back and edit this**
 
 ### Whats Next?
 
