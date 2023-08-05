@@ -1,14 +1,12 @@
 # Intro to FRC Programming
 
-## Welcome! We’re happy to have you here. FRC programming is still built upon the programming principles you know, but may look a little different.
+## Programming in FRC is very similar to programming in other contexts, but it's important to be familiar with the tools at our disposal and our architecture and practices
 
-Instead of running programs that, for example, print calculations, run games, or create a website, our code is what gets the robot to do its thing. The roboRIO is a small computer that lives on the robot—it’s what we pass all of our code to and runs it. Through the magic of wiring, we connect it to everything else on the robot that needs instructions, which includes hardware parts like motors, sensors, cameras, and the like.
+Our code runs on the roboRIO, a small linux computer that lives on the robot. Through the magic of wiring, we connect it to everything else on the robot that needs instructions, which includes hardware parts like motors, sensors, and cameras. The robot connects to a laptop running the driver station at home, or the field at tournaments over Wi-Fi to send and recieve data such as button presses, camera feeds, and enable signals.
 
-However, it becomes very clumsy and difficult to interface with these parts directly. Instead of having to deal with the minutiae of “how many volts do we need to send to this thing to make it work”, other folks out there have already done that for us. In addition, there are a lot of utilities that can be reused specifically for FRC. 
+However, it becomes very clumsy and difficult to interface with these parts directly. Instead of controlling exactly the bits sent out over our communication networks, we can call methods built into WPILib, the standard library for FRC, or vendor libraries made by the companies which manufacture motors and sensors for FRC.
 
-"WPILib contains a set of useful classes and subroutines for interfacing with various parts of the FRC control system (such as sensors, motor controllers, and the driver station), as well as an assortment of other utility functions." It is an open source project that aims to raise the floor of what FRC teams can do with software. The project has a little bit of everything and is the main building block that our code is built on top of. It also has extensive documentation.
-
-
+WPIlib is an open source project that aims to raise the floor of what FRC teams can do with software. The project has a large number of features and is the main building block that our code is built on top of. It also has extensive documentation both for it's own API and for the concepts and math behind many of its features. We also use other libraries for specific tasks that WPILib doesn't cover. These include the Phoenix library made by CTRE, the manufacturer of many of our motor controlers, Photonvision, a library that helps us track targets with cameras, and Pathplanner, which enables us to make advanced auto paths. Many of these libraries will have their own articles here as well as their own documentation.
 
 ### Resources
 
