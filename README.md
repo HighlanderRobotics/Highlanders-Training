@@ -26,9 +26,7 @@ Each link down below corresponds to one "course" in the team training system. Ea
 
 ## Controls
 
-### - [**PID** - PID and Feedforward Control](PID.md) *To be merged with feedforward*
-
-### - [Feedforward](Feedforward.md) *To be merged with PID*
+### - [**PID** - PID and Feedforward Control Intro](ControlsIntro.md)
 
 ## Libraries and Tooling
 
