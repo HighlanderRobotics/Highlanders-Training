@@ -17,18 +17,32 @@ We also use other libraries for other tasks that WPILib doesn't support. One of 
 Another is Pathplanner, a library to create and follow paths for the Autonomous portion of a match.
 Many of these libraries will have their own articles here as well as their own documentation.
 
-### Resources
+## Resources
 
-- **[WPILib docs](https://docs.wpilib.org/en/stable/index.html)**
+### Must read/watch
+
+- [Video by frc team 3847 about electrical components](https://www.youtube.com/watch?v=XHx3JeTk0Qw)
+  - In an ideal world, we never have to touch the electrical system.
+    In reality, often we end up finding problems with electrical early in the season.
+    Therefore it is important to know what we are working with to debug and fix the robot.
+  - In addition, it is important to know about the hardware on the robot that we will be interacting with through software.
+- [Installation guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
+- Read through [WPILib's zero to robot programming guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-4/creating-test-drivetrain-program-cpp-java.html)
+  - We will be writing a similar program in the next few weeks.
+  - We mostly use CTRE components, so select that tab for the example code.
+
+### Optional
+
+- [WPILib docs](https://docs.wpilib.org/en/stable/index.html)
 - [WPILib zero to robot guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/introduction.html)
 - [WPILib repo](https://github.com/wpilibsuite/allwpilib)
-- [Installation guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
 - [Glossary of jargon](https://docs.wpilib.org/en/stable/docs/software/frc-glossary.html)
 
 ### Examples
 
 - After installing WPILib, go to the command list by clicking on the WPILib logo in the upper right corner, then pressing "create a new project" then "examples"
 - Look at our old codebase!
+- Look at the kitbot example code in the examples folder of this repo.
 
 ### Exercises
 
