@@ -38,6 +38,7 @@ While many modern cloud applications, like google docs, have some form of auto-s
 - Commits should be frequent, whenever you reach a working state you should commit before you accidentaly break anything again
 - Commiting directly to the `main` branch is frowned upon. `main` should always contain working code when possible and features should be developed on separate branches and merged/pull requested in
 - **ALWAYS ALWAYS ALWAYS** commit before you leave a meeting, especially if you are using a team computer. It is never fun to have to commit someone else's code at the start of the day or find out an hour in that you've been working off of someone elses uncommited (potentially broken!) code. Uncommited code also makes it harder to track what is and isn't finished
+- Similarly, make sure to pull at the start of every meeting
 - Run a `git status` at the start of a meeting to make sure whoever was there before you commited their code and that you are on the right branch
 
 ### Names
