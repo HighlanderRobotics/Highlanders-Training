@@ -10,7 +10,7 @@ Each link down below corresponds to one "course" in the team training system. Ea
 
 ### - [**GIT** - Git Basics](BasicGit.md)
 
-### - **GWF** - Team Git Workflow *TODO*
+### - [**GWF** - Team Git Workflow](GitWorkflow.md)
 
 ## WPILib
 
