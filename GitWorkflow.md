@@ -26,10 +26,7 @@ PRs can be linked to issues to show that an issue has been worked on and automat
 
 ### Examples
 
-- This should link to example code for this topic, if applicable
-- Previous season code is fine
-  - This can also have notes about what is/isn't good about these examples, or to explain what practices differ between our current code and the example
-  - These notes can be longer than the linked descriptions
+- [A video demonstrating the exercise](Assets\PRDemoVideo.mkv)
 
 ### Exercises
 
@@ -42,7 +39,3 @@ PRs can be linked to issues to show that an issue has been worked on and automat
 ### Notes
 
 - We use pull requests to make sure our code is readable and maintainable by having regular review of code.
-
-### Whats Next?
-
-- Next course in course progression, if applicable
