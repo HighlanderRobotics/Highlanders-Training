@@ -37,6 +37,8 @@ PRs can be linked to issues to show that an issue has been worked on and automat
 
 ### Names
 
+- Lewy
+
 ### Notes
 
 - We use pull requests to make sure our code is readable and maintainable by having regular review of code.
