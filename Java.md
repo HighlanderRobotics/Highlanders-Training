@@ -9,9 +9,24 @@ The majority of our robot code is made in Java, and at least basic familiarity w
 - [Code Academy](https://www.codecademy.com/learn/learn-java) - online course
 - [Head First Java](https://www.rcsdk12.org/cms/lib/NY01001156/Centricity/Domain/4951/Head_First_Java_Second_Edition.pdf) - book
 
+If you already have programming experience, but no Java experience, this might be useful:
+
+- [Java for Python Programmers](https://runestone.academy/ns/books/published/java4python/index.html)
+
+Lambdas and functional programming are important concepts to WPILibs Command Based system, which you will learn about in the next few articles.
+Feel free to read this article now or wait until you get some of the context about what Command-Based programming is and how we use it.
+
+- [WPILib docs - Functions as Data](https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html)
+
+The best way to learn to program is to do it and look up things as you need them.
+The exercises below are a starting point (and required) to learn Java, but you are encouraged to continue to write programs in it to improve your understanding of the language.
+
 ### Exercises
 
-- ***TODO!*** *Figure out some extra exercises for people to demonstrate proficiency*
+- [Install Java](https://www.java.com/en/download/help/download_options.html)
+- Write a program to compute the first 64 fibbonaci numbers and print them to the standard output.
+This program must complete in under 1 second.
+- Complete 2 easy problems, or 1 medium problem on [leetcode](https://leetcode.com/problemset/all/) in java.
 
 ### Notes
 
