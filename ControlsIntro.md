@@ -1,6 +1,8 @@
 # Intro to Controls
 
-## Going from a goal for a mechanism ("Extend the elevator to 24 inches out" or "Have the drivetrain follow a path in autonomous") to the actual voltage sent to each motor is a non-trivial task. Luckily, we have many tools at our disposal to control motors and mechanisms in a consistent, quick, and precise way
+## Going from a goal for a mechanism ("Extend the elevator to 24 inches out" or "Have the drivetrain follow a path in autonomous") to the actual voltage sent to each motor is a non-trivial task
+
+Luckily, we have many tools at our disposal to control motors and mechanisms in a consistent, quick, and precise way
 
 Start by reading through the [WPILib docs Advanced Controls Introduction](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/control-system-basics.html) (you should read all the articles under Advanced Controls Introduction, not just Control System Basics).
 You don't need to fully digest the math or jargon, but try to be familiar with the concepts behind PID and Feedforward, and understand the tradeoffs of each.
@@ -17,7 +19,8 @@ Loosely speaking, there are 3 'levels' of control that we tend to use for our me
 1. Is simple feedforward control.
 Really, this is only feedforward in the loosest sense, where we set a DutyCycle or Voltage to the motor.
 This sort of control doesn't set the exact speed of the output, and is really only useful on mechanisms that just need some rotation to work, but not anything precise.
-You'll usually see this on intakes or routing wheels where we just want to pull a game piece into or through the robot. The [Intake Subsystem](https://github.com/HighlanderRobotics/Charged-Up/blob/main/src/main/java/frc/robot/subsystems/IntakeSubsystem.java) from 2023 is an example of this.
+You'll usually see this on intakes or routing wheels where we just want to pull a game piece into or through the robot.
+The [Intake Subsystem](https://github.com/HighlanderRobotics/Charged-Up/blob/main/src/main/java/frc/robot/subsystems/IntakeSubsystem.java) from 2023 is an example of this.
 
 2. Is simple feedback control.
 We tend to use this on mechanisms that we might want to use sensible units for (like rotations per minute, or degrees) instead of an arbitrary output but don't need huge amounts of precision or are so overpowered compared to the forces on them that we can ignore outside forces.
@@ -27,7 +30,8 @@ Often we use this by calling a TalonFX's Position or Velocity control modes.
 3. Is combined feedforward and feedback control.
 This is ideal for most situations where we desire precise control of a mechanism, and should be used on all primary mechanisms of a robot.
 It tends to require more effort to tune and model than the previous levels, but is the correct way to control mechanisms.
-The [Elevator Subsystem](https://github.com/HighlanderRobotics/Charged-Up/blob/main/src/main/java/frc/robot/subsystems/ElevatorSubsystem.java) from 2023 is an example of this, specifically the `updatePID()` method which adds the results of a PID controller calculation with a feedforward controller calculation. Notice the use of a WPILib feedforward class here.
+The [Elevator Subsystem](https://github.com/HighlanderRobotics/Charged-Up/blob/main/src/main/java/frc/robot/subsystems/ElevatorSubsystem.java) from 2023 is an example of this, specifically the `updatePID()` method which adds the results of a PID controller calculation with a feedforward controller calculation.
+Notice the use of a WPILib feedforward class here.
 WPILib provides several classes that model common mechanisms.
 [This article](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/controllers/feedforward.html#feedforward-control-in-wpilib) goes over the classes in more detail.
 Using these means we can avoid a lot of the math involved in feedforward control, but if you are interested in the math you can check out [this book](https://file.tavsys.net/control/controls-engineering-in-frc.pdf), although that is not required for the level of controls we are working with in FRC.

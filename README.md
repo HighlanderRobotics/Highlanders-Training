@@ -1,6 +1,9 @@
 # This repo contains robot software training information and materials for FRC team 8033, Highlanders Robotics
 
-Each link down below corresponds to one "course" in the team training system. Each page will have a brief description of the topic and may include links to other resources. At the end of each page there will be one or two exercises to complete. Once you complete them, show a lead or mentor to get checked off as having completed that course and move on to the next one as suggested on the page.
+Each link down below corresponds to one "course" in the team training system.
+Each page will have a brief description of the topic and may include links to other resources.
+At the end of each page there will be one or two exercises to complete.
+Once you complete them, show a lead or mentor to get checked off as having completed that course and move on to the next one as suggested on the page.
 
 ## Basics
 
