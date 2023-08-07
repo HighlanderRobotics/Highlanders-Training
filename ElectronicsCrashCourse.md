@@ -148,6 +148,29 @@ Unlike many other motors, falcons come with a built in motor controller called t
 The falcon has a built in encoder, or sensor that tracks the rotation and speed of the motor.
 Documentation for the software to control falcons can be found [here for the v5 version of the software we used in 2023](https://v5.docs.ctr-electronics.com/en/stable/) and [here for the v6 version we will use going forward](https://pro.docs.ctr-electronics.com/en/stable/).
 
+### Solenoids and Pneumatics
+
+![A solenoid](Assets\Solenoid.jpg)
+
+Pneumatics are useful for simple, linear, and repeatable motions where motors might not be ideal.
+In the past we have used them primarily for extending intakes.
+If pneumatic pistons are like motors, solenoids are like motor controllers.
+A solenoid takes a control signal and uses it to switch incoming air into one of two output tubes to cause it to either extend or retract.
+We usually use double solenoids, which have both powered extension and retraction.
+Single solenoids only supply air for extension, and rely on the piston having a spring or something similar to retract them.
+
+### Robot Status Light
+
+![RSL](Assets\RSL.jpg)
+
+The Robot Status Light (RSL) is an orange light we are required to have on our robot by competition rules.
+When the robot is powered on it will glow orange.
+When the robot is enabled ie being controlled by joysticks or autonomous code it will flash orange.
+This is handled automatically by WPILib.
+**When the robot is enabled, do not go near the robot**.
+
+We have additional LEDs on the robot that indicate the state of the robot, but they are not standardized year to year and should not be relied upon for safety information.
+
 ### CANivore
 
 ![CANivore](Assets\CANivore.webp)
