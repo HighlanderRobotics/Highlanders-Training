@@ -21,7 +21,7 @@ Many of these libraries will have their own articles here as well as their own d
 
 ### Must read/watch
 
-- [Video by frc team 3847 about electrical components](https://www.youtube.com/watch?v=XHx3JeTk0Qw)
+- [Video by frc team 3847 about electrical components](https://www.youtube.com/watch?v=XHx3JeTk0Qw) OR read through our [reference sheet](ElectronicsCrashCourse.md)
   - In an ideal world, we never have to touch the electrical system.
     In reality, often we end up finding problems with electrical early in the season.
     Therefore it is important to know what we are working with to debug and fix the robot.
