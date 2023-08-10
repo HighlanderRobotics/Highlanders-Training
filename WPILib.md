@@ -2,7 +2,9 @@
 
 ## WPILib is the standard library for FRC, providing code to interface with hardware, structure and run high-level code, and use advanced controls
 
-WPILib is an open source project that aims to raise the floor of what FRC teams can do with software. The project has a little bit of everything in it and is the main building block that our code is built on top of. It also has pretty extensive documentation.
+WPILib is an open source project that aims to raise the floor of what FRC teams can do with software.
+The project has a little bit of everything in it and is the main building block that our code is built on top of.
+It also has pretty extensive documentation.
 
 ### Resources
 
