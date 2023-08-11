@@ -16,11 +16,7 @@ Command based programming revolves around two concepts: Subsystems and Commands.
 
 ### Exercises
 
-- Make basic KitBot code using the Command-Based skeleton
-- Once you finish reading the *PID Docs*, Make code for an elevator that goes to different setpoints when different buttons are pressed
-  - *Make an example of this*
-  - Use a PID loop in the Subsystem file, with a method that sets the setpoint of the loop
-  - Bind that set method to a few different buttons in `RobotContainer`
+- Make basic KitBot code using the Command-Based skeleton. You can follow [this](KitbotExampleWalkthrough.md) tutorial.
 
 ### Notes
 
