@@ -20,6 +20,8 @@ For example, in Charged Up there was RR tape on the cone targets which can be us
 ### AprilTags
 
 Apriltags are a system of visual tags developed by researchers at the University of Michigan to provide low overhead, high accuracy localization for many different applications.
+They look similar to QR codes, but with less pixels.
+This trades amount of information in each tag for quick, easy, and robust detection.
 In the context of FRC, AprilTags are useful for helping your robot know where it is on the field, so it can align itself to some goal position.
 The idea behind this is that when the camera detects an Apriltag, it will calculate the distance, angle, etc. that the robot is from that target and then map that to a diagram that shows where all the Apriltags are on the field and then estimate where the robot is from there.
 This is useful because with a reliable pose estimation system we can automate more of the scoring process.
@@ -28,6 +30,12 @@ This is useful because with a reliable pose estimation system we can automate mo
 
 Photonvision is an app and library that gets vision data from the robot for a variety of applications.
 It makes it a lot easier to interface with the camera and also has plenty of utility methods to get information like distance and position, as well as having some built in pose estimator features and more.
+
+### Limelight
+
+Limelight (LL) is a camera and processor system for FRC designed to make vision easy and simple.
+We used a Limelight 2+ with Limelight's software in 2022 for RR tape detection, and a LL2+ with Photonvision software in 2023 for Apriltag detection.
+The LL2+ was not satisfactory for apriltag detection for us, and we will likely move on to different hardware in the near future.
 
 ### Resources
 

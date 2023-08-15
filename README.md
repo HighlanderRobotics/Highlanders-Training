@@ -17,7 +17,7 @@ Once you complete them, show a lead or mentor to get checked off as having compl
 
 ## WPILib
 
-### - [**FPI** - WPILib / Intro to FRC Programming](Intro.md) *Rework Needed*
+### - [**FPI** - WPILib / Intro to FRC Programming](WPILibIntro.md) *Rework Needed*
 
 ## Architecture and Best Practices
 

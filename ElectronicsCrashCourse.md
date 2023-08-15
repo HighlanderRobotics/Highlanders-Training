@@ -42,9 +42,10 @@ The red button will turn the robot off, and a small black lever on the side of t
 The main breaker is directly connected to the battery and limits the current draw of the robot, or the amount of power it can use at once.
 Whenever you need to be hands on with the robot, make sure the breaker is off.
 If you can't connect to the robot, make sure it's on.
+If the breaker is on, make sure to wear safety glasses.
 
 The breaker should be mounted in a visible and accessible location on all robots, although it tends to blend in with its black casing.
-We tend to have a 3dprinted guard over the off switch to prevent accidental presses by other robots mid-match.
+We tend to have a 3d-printed guard over the off switch to prevent accidental presses by other robots mid-match.
 
 ### Power Distribution Hub (PDH)
 
@@ -55,6 +56,10 @@ We don't have to do anything with the PDH in code, but if a motor or sensor does
 The PDH will also have a smaller breaker for each motor on it, which limits the power draw from each individual motor to 40 amps.
 In practice, we can draw more for a short period of time.
 If you are interested in more details about how and why that works, look at the electrical coursework for the team.
+
+There is a similar product manufactured by CTRE called the Power Distribution Panel, or PDP.
+This is essentially an older version of the PDH with fewer motor slots, and is largely legacy hardware.
+You might see it in older documentation and robots, however.
 
 The PDH is also usually at one end of our CAN network. What's CAN? Glad you asked . . .
 
@@ -94,9 +99,11 @@ These ports include:
 - The large set of pins in the middle of the Rio is the MXP port.
   MXP (and the SPI port in the top-right corner) is used for communication over serial interfaces such as I²C protocal.
   Unfortunately, there is an issue with I²C that can cause the code to lock up when it is used, so we avoid using the serial ports.
+  We can get around this issue by using a coprocessor (computer other than the rio, like a raspberry pi) to convert the signal to a different protocal.
 - The CAN network originates at the RIO.
 - Several USB ports are available on the Rio.
-  Common uses include external USB sticks to store logs or the CANivore (see later in this page)
+  Common uses include external USB sticks to store logs or the [CANivore](#canivore) (see later in this page).
+  The usb ports can also be used to connect the rio to a computer to deploy code and run the robot, although we usually prefer to use ethernet if we need to run tethered.
 - An ethernet port which connects to the radio (keep reading) to communicate to the driver station.
 
 The Rio also has an SD card as its memory.
@@ -167,7 +174,7 @@ The Robot Status Light (RSL) is an orange light we are required to have on our r
 When the robot is powered on it will glow orange.
 When the robot is enabled ie being controlled by joysticks or autonomous code it will flash orange.
 This is handled automatically by WPILib.
-**When the robot is enabled, do not go near the robot**.
+**When the robot is enabled wear safety glasses and do not go near the robot**.
 
 We have additional LEDs on the robot that indicate the state of the robot, but they are not standardized year to year and should not be relied upon for safety information.
 
