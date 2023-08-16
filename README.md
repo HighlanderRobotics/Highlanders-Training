@@ -24,7 +24,7 @@ Once you complete them, show a lead or mentor to get checked off as having compl
 ## Git
 
 - [**GIT** - Git Basics](BasicGit.md)
-- **GWF** - Team Git Workflow *TODO*
+- [**GWF** - Team Git Workflow](GitWorkflow.md)
 
 ## WPILib
 
