@@ -18,7 +18,7 @@ AdvantageKit logs every input and output to and from the robot, so that we can p
 
 Running this amount of logging has performance overhead on the rio, using valuable cpu time each loop. Logging also requires a non-insignificant architecture change to our codebase by using an IO layer under each of our subsystems. While this does require some additional effort to write subsystems, it also makes simulating subsystems easier so it is a worthwhile tradeoff.
 
-We have not yet done significant on-robot r&d with AdvantageKit and need to assess the performance impacts of using it. *Update this section in fall 2023 once more development has happened*
+We have not yet done significant on-robot r&d with AdvantageKit and need to assess the performance impacts of using it.
 
 ### Resources
 
@@ -35,9 +35,5 @@ We have not yet done significant on-robot r&d with AdvantageKit and need to asse
 
 ### Exercises
 
-- Refactor the kitbot exercise to use AdvantageKit following [this tutorial](https://github.com/Mechanical-Advantage/AdvantageKit/blob/45d8067b336c7693e63ee01cdeff0e5ddf50b92d/docs/INSTALLATION.md)
-
-### Notes
-
-- See also the *Simulation* article for more on the IO layer structure
-- *When we have log files, put a link to one here as an example*
+- Install AdvantageKit into your kitbot project following [this tutorial](https://github.com/Mechanical-Advantage/AdvantageKit/blob/45d8067b336c7693e63ee01cdeff0e5ddf50b92d/docs/INSTALLATION.md).
+You do not need to modify the subsystem file yet, we will do that as part of the simulation tutorial.
