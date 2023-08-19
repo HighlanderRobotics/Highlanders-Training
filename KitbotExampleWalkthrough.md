@@ -27,7 +27,7 @@ Inputs/Outputs:
 Electronics:
 
 - Each side of the chassis has two Falcon 500 motors, which will work together to power the left and right sides of the chassis.
-In code this will look like a total of 4 Talon FX motor controllers, since thats the component we can talk to.
+  In code this will look like a total of 4 Talon FX motor controllers, since thats the component we can talk to.
 
 ## Code Walkthrough
 
@@ -210,7 +210,7 @@ This line is a little long now, so break it up into a few lines to keep it reada
 ```Java
 drivetrainSubsystem.setDefaultCommand(
     drivetrainSubsystem.setVoltagesArcadeCommand(
-        () -> controller.getLeftY(), 
+        () -> controller.getLeftY(),
         () -> controller.getRightX()));
 ```
 
@@ -261,7 +261,7 @@ Now we can add this method into our drive command.
 ```Java
 drivetrainSubsystem.setDefaultCommand(
       drivetrainSubsystem.setVoltagesArcadeCommand(
-        () -> modifyJoystick(controller.getLeftY()), 
+        () -> modifyJoystick(controller.getLeftY()),
         () -> modifyJoystick(controller.getRightX())));
 ```
 

@@ -1,4 +1,3 @@
-
 # Robot Software Training Materials
 
 ## FRC Team 8033, Highlander Robotics
@@ -34,7 +33,7 @@ Once you complete them, show a lead or mentor to get checked off as having compl
 
 - [**ARC** - Team Architecture / Command Based](CommandBased.md)
 - [**AKT** - AdvantageKit and Logging](AdvantageKit.md)
-- [**SIM** - Simulation] *TODO*
+- [**SIM** - Simulation] _TODO_
 
 ## Controls
 
@@ -44,7 +43,7 @@ Once you complete them, show a lead or mentor to get checked off as having compl
 
 - [**AUT** - PathPlanner and Auto](PathPlanner.md)
 
-- [**PVN** - PhotonVision and Vision](Vision.md)*WIP*
+- [**PVN** - PhotonVision and Vision](Vision.md)_WIP_
 
 ## See Also
 

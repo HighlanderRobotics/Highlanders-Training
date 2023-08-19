@@ -10,13 +10,13 @@ The library also has features to trigger non-drivetrain Commands during auto let
 
 - [PathPlanner Repository](https://github.com/mjansen4857/pathplanner)
 - [PathPlanner Docs](https://github.com/mjansen4857/pathplanner/wiki)
-- *Make a demo video of setting up pathplanner and making an auto*
+- _Make a demo video of setting up pathplanner and making an auto_
 
 ### Examples
 
 - Previous years code
   - `AutoChooser.java` in 2023
-- *example code from video to make*
+- _example code from video to make_
 
 ### Exercises
 
@@ -27,4 +27,4 @@ The library also has features to trigger non-drivetrain Commands during auto let
 ### Notes
 
 - We may be reworking how we do our autos in the near future, including doing a partial rewrite of PathPlanner.
-Talk to a software lead or mentor for more details (and *update this page later*!)
+  Talk to a software lead or mentor for more details (and _update this page later_!)

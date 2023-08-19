@@ -3,9 +3,9 @@
 ## Motion Profiles are a way to smoothly control a mechanism by combining PID and FF control
 
 As the [feedforward](Feedforward.md) article covered, it is often beneficial to combine feedforward and feedback (for our use, usually PID) control.
-One problem with this is that a feedforward for a dc motor (such as a falcon 500) controls *velocity* while a mechanism might require *position* control.
+One problem with this is that a feedforward for a dc motor (such as a falcon 500) controls _velocity_ while a mechanism might require _position_ control.
 A motion profile smoothly interpolates, or transitions between, between a starting position and a setpoint position.
-There are a variety of types of motion profiles, but the one we use most often is called a *trapezoidal motion profile*.
+There are a variety of types of motion profiles, but the one we use most often is called a _trapezoidal motion profile_.
 When using a trapezoidal motion profile, a mechanism will attempt to accelerate at a constant rate to some cruising speed, then deaccelerate to a standstill at the setpoint position.
 ![An illustration of a trapezoidal motion profile](Assets/MotionProfileExample.webp)
 
@@ -32,5 +32,5 @@ The real advantage of this is that now we have both a position and velocity setp
 ### Notes
 
 - Motion profiling is primarily used for position-controlled mechanisms like elevators and arms.
-It can also be used on velocity controlled mechanisms, although it provides less of a benefit.
+  It can also be used on velocity controlled mechanisms, although it provides less of a benefit.
 - The `motion magic` control mode for a talon fx is really just running motion profiling on the motor controller.

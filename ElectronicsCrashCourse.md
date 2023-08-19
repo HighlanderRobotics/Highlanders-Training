@@ -4,7 +4,7 @@
 
 ### Electrical system diagram
 
-![Rev electrical system diagram](<Assets/RevElectricalSystemDiagram.png>)
+![Rev electrical system diagram](Assets/RevElectricalSystemDiagram.png)
 
 This diagram shows many of the electrical components found on a typical FRC robot.
 You don't need to memorize this layout, but its handy to have this as a reference.
@@ -89,10 +89,10 @@ It is built around a computer running Linux with a large number of Input/Output 
 These ports include:
 
 - Digital IO (DIO) can accept inputs and outputs that are either a 1 or 0, on or off.
- When used as an input the signal can rapidly be turned on and off to send numerical data.
- This is done using Pulse Width Modulation (PWM), essentially measuring how long a signal is on compared to how long it is off in a given time window to get a numerical value.
- For more information on PWM read [this article](https://learn.sparkfun.com/tutorials/pulse-width-modulation/all)
-- PWM pins provide additional pins to *output* PWM signals.
+  When used as an input the signal can rapidly be turned on and off to send numerical data.
+  This is done using Pulse Width Modulation (PWM), essentially measuring how long a signal is on compared to how long it is off in a given time window to get a numerical value.
+  For more information on PWM read [this article](https://learn.sparkfun.com/tutorials/pulse-width-modulation/all)
+- PWM pins provide additional pins to _output_ PWM signals.
   Unlike the DIO ports the PWM ports cannot take inputs.
   Many motor controllers support using a PWM signal for control instead of CAN, although it has significantly limited features.
 - Analog inputs provide adititional sensor ports, although most sensors use DIO or CAN.

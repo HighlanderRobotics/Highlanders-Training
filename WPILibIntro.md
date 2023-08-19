@@ -51,4 +51,4 @@ Many of these libraries will have their own articles here as well as their own d
 ### Notes
 
 - A lot of what WPILib does is "under the hood" to let us focus on high-level code rather than low-level hardware interface.
-This type of code is called the Hardware Abstraction Layer, or HAL
+  This type of code is called the Hardware Abstraction Layer, or HAL

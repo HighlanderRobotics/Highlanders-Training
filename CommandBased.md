@@ -13,10 +13,10 @@ Because each Subsystem can only be used by one Command at once, we are safe from
 ### Resources
 
 - [WPILib docs](https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html).
-Read through these docs until you finish "The Command Scheduler"
+  Read through these docs until you finish "The Command Scheduler"
 - [WPILib intro to functional programming](https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html).
-Read through this article on lambda expressions and functional programming.
-- *Make or find a video explanation*
+  Read through this article on lambda expressions and functional programming.
+- _Make or find a video explanation_
 
 ### Examples
 
@@ -30,11 +30,11 @@ Read through this article on lambda expressions and functional programming.
 ### Notes
 
 - We prefer making simple Commands with Command factories, or methods in a subsystem that return a Command.
-These methods should be simple interactions like `setTargetExtensionInches()` or `extendIntake()`.
-Then you can use decorators as described [here](https://docs.wpilib.org/en/stable/docs/software/commandbased/command-compositions.html) to compose the basic Commands into more complex sequences.
-Generally we make these compositions in `RobotContainer` but you can also make single-Subsystem compositions within that Subsystem.
-See our code from previous years for examples of this pattern, or talk to a software lead.
+  These methods should be simple interactions like `setTargetExtensionInches()` or `extendIntake()`.
+  Then you can use decorators as described [here](https://docs.wpilib.org/en/stable/docs/software/commandbased/command-compositions.html) to compose the basic Commands into more complex sequences.
+  Generally we make these compositions in `RobotContainer` but you can also make single-Subsystem compositions within that Subsystem.
+  See our code from previous years for examples of this pattern, or talk to a software lead.
 - In our 2023 code we started using a pattern called the `SuperstructureSubsystem`.
-This pattern involves creating a Subsystem that has references to most other Subsystems to make Command factory methods with multiple Subsystems.
-This pattern doesn't really make sense on inspection though, since the `SuperstructureSubsystem` doesn't actually lock any hardware from multiple-access and you can just make the composed Commands in `RobotContainer` instead.
-In the future, just make multiple-Subsystem Command factories in `RobotContainer`.
+  This pattern involves creating a Subsystem that has references to most other Subsystems to make Command factory methods with multiple Subsystems.
+  This pattern doesn't really make sense on inspection though, since the `SuperstructureSubsystem` doesn't actually lock any hardware from multiple-access and you can just make the composed Commands in `RobotContainer` instead.
+  In the future, just make multiple-Subsystem Command factories in `RobotContainer`.

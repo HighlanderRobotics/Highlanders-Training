@@ -29,7 +29,7 @@ Logging also requires a non-insignificant architecture change to our codebase by
 While this does require some additional effort to write subsystems, it also makes simulating subsystems easier so it is a worthwhile tradeoff.
 
 We have not yet done significant on-robot r&d with AdvantageKit and need to assess the performance impacts of using it.
-*Update this section in fall 2023 once more development has happened*
+_Update this section in fall 2023 once more development has happened_
 
 ### Resources
 
@@ -50,5 +50,5 @@ We have not yet done significant on-robot r&d with AdvantageKit and need to asse
 
 ### Notes
 
-- See also the *Simulation* article for more on the IO layer structure
-- *When we have log files, put a link to one here as an example*
+- See also the _Simulation_ article for more on the IO layer structure
+- _When we have log files, put a link to one here as an example_

@@ -29,12 +29,12 @@ The exercises below are a starting point (and required) to learn Java, but you a
 ### Exercises
 
 - Write a program to compute the first 64 fibbonaci numbers and print them to the standard output.
-This program must complete in under 1 second.
-Feel free to use [this website](https://www.programiz.com/java-programming/online-compiler/) to write and run the code, or run it on your own machine.
+  This program must complete in under 1 second.
+  Feel free to use [this website](https://www.programiz.com/java-programming/online-compiler/) to write and run the code, or run it on your own machine.
 - Complete 2 easy problems, or 1 medium problem on [leetcode](https://leetcode.com/problemset/all/) in java if you need more practice.
 
 ### Notes
 
 - We use an auto-formatter to keep the code clean.
-To run it type `./gradlew spotlessApply` into the terminal when in a WPILib project.
-This should be done before you push code (if not more frequently!) to keep the codebase readable.
+  To run it type `./gradlew spotlessApply` into the terminal when in a WPILib project.
+  This should be done before you push code (if not more frequently!) to keep the codebase readable.
