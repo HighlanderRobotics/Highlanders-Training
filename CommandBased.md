@@ -6,7 +6,10 @@ Command based programming revolves around two concepts: Subsystems and Commands.
 
 ### Resources
 
-- [WPILib docs](https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html)
+- [WPILib docs](https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html).
+Read through these docs until you finish "The Command Scheduler"
+- [WPILib intro to functional programming](https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html).
+Read through this article on lambda expressions and functional programming.
 - *Make or find a video explanation*
 
 ### Examples
