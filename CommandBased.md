@@ -12,7 +12,10 @@ Because each Subsystem can only be used by one Command at once, we are safe from
 
 ### Resources
 
-- [WPILib docs](https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html)
+- [WPILib docs](https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html).
+Read through these docs until you finish "The Command Scheduler"
+- [WPILib intro to functional programming](https://docs.wpilib.org/en/stable/docs/software/basic-programming/functions-as-data.html).
+Read through this article on lambda expressions and functional programming.
 - *Make or find a video explanation*
 
 ### Examples
@@ -22,11 +25,7 @@ Because each Subsystem can only be used by one Command at once, we are safe from
 
 ### Exercises
 
-- Make basic KitBot code using the Command-Based skeleton
-- Once you finish reading the *PID Docs*, Make code for an elevator that goes to different setpoints when different buttons are pressed
-  - *Make an example of this*
-  - Use a PID loop in the Subsystem file, with a method that sets the setpoint of the loop
-  - Bind that set method to a few different buttons in `RobotContainer`
+- Make basic KitBot code using the Command-Based skeleton. You can follow [this](KitbotExampleWalkthrough.md) tutorial.
 
 ### Notes
 
