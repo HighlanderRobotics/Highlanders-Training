@@ -55,7 +55,8 @@ This means that while one person works on code for the autonomous, another could
 ### Names
 
 - Lewy Seiden
-- Petro Papahadjopoulos
+- Petro Papahadjopoluos
 - Sneha Narayan
 - Aliya Vora
 - Athena Li
+- Jerry Yu
