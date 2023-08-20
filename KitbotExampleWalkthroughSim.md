@@ -174,3 +174,295 @@ public interface DrivetrainIO {
     public abstract void setVolts(double left, double right);
 }
 ```
+
+Next lets add the IO Implementation.
+This will be a file that defines the `updateInputs()` and `setVolts()` method.
+Since we aren't writing this for real hardware, we are going to make `DrivetrainIOSim`.
+On a real robot we would also have a `DrivetrainIOFalcon` or something similar, named after the type of hardware it is built with.
+
+Start by making a new class called `DrivetrainIOSim` in the Drivetrain folder.
+
+Then, add `implements DrivetrainIO` to the class declaration.
+This is very similar to using `extends`, except for interfaces instead of classes.
+This means we could have multiple interfaces it implements, instead of just one class.
+
+```Java
+public class DrivetrainIOSim implements DrivetrainIO {}
+```
+
+This will make vscode angry since `DrivetrainIOSim` needs to implement all the abstract methods in `DrivetrainIO`.
+Hover over it, hit "quick fix", and click "add unimplemented methods".
+Now you should have a template for both of these methods.
+
+```Java
+public class DrivetrainIOSim implements DrivetrainIO {
+
+    @Override
+    public void updateInputs(DrivetrainIOInputs inputs) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setVolts(double left, double right) {
+        // TODO Auto-generated method stub
+        
+    }
+}
+```
+
+Before we get into implementing these, we need to add the hardware to this IO Implementation.
+Add in the falcons from `DrivetrainSubsystem`.
+
+```Java
+TalonFX leftFalcon = new TalonFX(Constants.drivetrainLeftFalconID);
+TalonFX rightFalcon = new TalonFX(Constants.drivetrainRightFalconID);
+```
+
+Lets add all of the needed fields to `updateInputs`, even though we won't be able to set any of them yet.
+One way to get all of the needed fields is to copy and paste the body of `DrivetrainIOInputs` into `updateInputs`.
+
+```Java
+@Override
+public void updateInputs(DrivetrainIOInputs inputs) {
+    public double leftOutputVolts = 0.0;
+    public double rightOutputVolts = 0.0;
+
+    public double leftVelocityMetersPerSecond = 0.0;
+    public double rightVelocityMetersPerSecond = 0.0;
+
+    public double leftPositionMeters = 0.0;
+    public double rightPositionMeters = 0.0;
+
+    public double[] leftCurrentAmps = new double[0];
+    public double[] leftTempCelsius = new double[0];
+    public double[] rightCurrentAmps = new double[0];
+    public double[] rightTempCelsius = new double[0];
+}
+```
+
+Then replace the `public` and types with `inputs.`
+
+```Java
+@Override
+public void updateInputs(DrivetrainIOInputs inputs) {
+    inputs.leftOutputVolts = 0.0;
+    inputs.rightOutputVolts = 0.0;
+
+    inputs.leftVelocityMetersPerSecond = 0.0;
+    inputs.rightVelocityMetersPerSecond = 0.0;
+
+    inputs.leftPositionMeters = 0.0;
+    inputs.rightPositionMeters = 0.0;
+
+    inputs.leftCurrentAmps = new double[0];
+    inputs.leftTempCelsius = new double[0];
+    inputs.rightCurrentAmps = new double[0];
+    inputs.rightTempCelsius = new double[0];
+}
+```
+
+Some of these fields we can get directly from a simulated falcon.
+TalonFX comes with built-in simulation support, so we can treat it like a regular motor for the most part.
+To get the simulated outputs we can call `talon.getSimState()` and store the results in a variable.
+Do this in `updateInputs`.
+
+```Java
+@Override
+public void updateInputs(DrivetrainIOInputs inputs) {
+    var leftSimState = leftFalcon.getSimState();
+    var rightSimState = rightFalcon.getSimState();
+    // Snip
+}
+```
+
+Now you can call `simState.getMotorVoltage()` to get the voltage for each motor.
+Do this for the `left-` and `rightOutputVolts`.
+
+```Java
+@Override
+public void updateInputs(DrivetrainIOInputs inputs) {
+    // Snip
+    inputs.leftOutputVolts = leftSimState.getMotorVoltage();
+    inputs.rightOutputVolts = rightSimState.getMotorVoltage();
+    // Snip
+}
+```
+
+We can also get the current from each of the motor's sim states.
+There are two types of current we can measure: `TorqueCurrent` and `SupplyCurrent`.
+`SupplyCurrent` is like the available current for the motor, and is what the breaker measures.
+`TorqueCurrent` is the amount of current the motor is actually using, and is important for heat management.
+`TorqueCurrent` is more useful for our purposes since it shows the actual current usage of the motor.
+
+```Java
+@Override
+public void updateInputs(DrivetrainIOInputs inputs) {
+    // Snip
+    inputs.leftCurrentAmps = new double[] {leftSimState.getTorqueCurrent()};
+    inputs.leftTempCelsius = new double[0];
+    inputs.rightCurrentAmps = new double[] {rightSimState.getTorqueCurrent()};
+    inputs.rightTempCelsius = new double[0];
+}
+```
+
+This information is useless without having a way to set the motor voltage.
+Copy the `VoltageOut` objects from `DrivetrainSubsystem` below the `TalonFX`s.
+
+```Java
+TalonFX leftFalcon = new TalonFX(Constants.drivetrainLeftFalconID);
+TalonFX rightFalcon = new TalonFX(Constants.drivetrainRightFalconID);
+
+VoltageOut leftVoltage = new VoltageOut(0);
+VoltageOut rightVoltage = new VoltageOut(0);
+```
+
+Then copy the `setVoltages` method from `DrivetrainSubsystem` into the `setVoltage` method.
+
+```Java
+@Override
+public void setVolts(double left, double right) {
+    leftFalcon.setControl(leftVoltage.withOutput(left));
+    rightFalcon.setControl(rightVoltage.withOutput(left));
+}
+```
+
+Finally we need to add a physics sim.
+This will take these motor voltages and figure out how the mechanims might actually behave using a mathematical model.
+WPILib provides the `DifferentialDrivetrainSim` class for this.
+This class has the `createKitbotSim()` static method to provide a convenient way to set this up with the physical constants for a kitbot.
+
+Start by creating a new `DifferentialDrivetrainSim` called `physicsSim` under the `VoltageOut`s.
+
+```Java
+DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
+    null, 
+    null, 
+    null, 
+    null);
+```
+
+The first value in this constructor is the motor for the sim.
+We can use `KitbotMotor.kDoubleFalcon500PerSide` to generate the constants for this.
+This model assumes we have 2 motors on each side of the drivetrain, although we only programmed one.
+For a sim this doesn't matter, but for a real robot we would need to add follower motors.
+We are going to ignore that for this tutorial.
+
+```Java
+DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
+    KitbotMotor.kDoubleFalcon500PerSide, 
+    null, 
+    null, 
+    null);
+```
+
+The second parameter is the gearing of the drivetrain.
+This is something we normally would ask mechanical for.
+In this case, since the drivetrain is simulated, we can use the standard 8p45 gearbox.
+
+```Java
+DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
+    KitbotMotor.kDoubleFalcon500PerSide, 
+    KitbotGearing.k8p45, 
+    null, 
+    null);
+```
+
+The third parameter is the size of the wheels.
+By default the kitbot comes with 6 inch wheels.
+
+```Java
+DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
+    KitbotMotor.kDoubleFalcon500PerSide, 
+    KitbotGearing.k8p45, 
+    KitbotWheelSize.kSixInch, 
+    null);
+```
+
+The final parameter is the "measurement standard deviations".
+This is a way for us to add uncertainty to our simulated model in a way that matches real sensor noise.
+For this exercise we can ignore it and leave it as null.
+
+Now we have a fully set up physics sim.
+On real robots we often have to be more careful when finding these physical constans, since they aren't usually so standard, but the kitbot is nice and easy.
+Make sure to work with mechanical to find these constants in season.
+
+Next we need to actually use the physics sim.
+In `updateInputs` add a call to `physicsSim.update()`.
+
+```Java
+@Override
+    public void updateInputs(DrivetrainIOInputs inputs) {
+    physicsSim.update(0.020);
+
+    var leftSimState = leftFalcon.getSimState();
+    var rightSimState = rightFalcon.getSimState();
+    // Snip
+}
+```
+
+This method runs the simulation for the number of seconds passed in.
+We use 20 milliseconds, which is the default loop time of the rio.
+
+Next we need up update the inputs to the sim based on the motor voltages.
+Call `physicsSim.setInputs()` with the motor sim state voltages.
+
+```Java
+@Override
+    public void updateInputs(DrivetrainIOInputs inputs) {
+    physicsSim.update(0.020);
+
+    var leftSimState = leftFalcon.getSimState();
+    var rightSimState = rightFalcon.getSimState();
+
+    physicsSim.setInputs(leftSimState.getMotorVoltage(), rightSimState.getMotorVoltage());
+    // Snip
+}
+```
+
+We're almost done with `DrivetrainIOSim`!
+Now we just need to update the rest of the IOInputs based on the simulator.
+Start by making the wheel speeds update with the `physicsSim.getLeftVelocityMetersPerSecond`.
+Then update the wheel positions with `physicsSim.getLeftPositionMeters`.
+
+```Java
+@Override
+public void updateInputs(DrivetrainIOInputs inputs) {
+    // Snip
+    inputs.leftVelocityMetersPerSecond = physicsSim.getLeftVelocityMetersPerSecond();
+    inputs.rightVelocityMetersPerSecond = physicsSim.getRightVelocityMetersPerSecond();
+
+    inputs.leftPositionMeters = physicsSim.getLeftPositionMeters();
+    inputs.rightPositionMeters = physicsSim.getRightPositionMeters();
+    // Snip
+}
+```
+
+Theres one more thing we should do to help make this sim realistic.
+When our motors are running the voltage of the battery will "sag" or drop.
+This can reduce our motor's output in the extreme case.
+To simulate this use `simState.setSupplyVoltage(RoboRioSim.getVInVoltage())`.
+`setSupplyVoltage` will control how much voltage is available to the motor simulation.
+`RoboRioSim.getVInVoltage()` will record how much battery our motors should be using, and the effect that will have on the battery.
+
+```Java
+@Override
+public void updateInputs(DrivetrainIOInputs inputs) {
+    physicsSim.update(0.020);
+
+    var leftSimState = leftFalcon.getSimState();
+    leftSimState.setSupplyVoltage(RoboRioSim.getVInVoltage());
+
+    var rightSimState = rightFalcon.getSimState();
+    rightSimState.setSupplyVoltage(RoboRioSim.getVInVoltage());
+    // Snip
+}
+```
+
+Now we're done with the `DrivetrainIOSim` class! 🎉
+
+Let's refactor our `DrivetrainSubsystem` to finish off this rewrite.
+
+First, we need to replace all the functionality that moved to `DrivetrainIOSim` with an instance of `DrivetrainIOSim`.
+Get rid of the `TalonFX` objects and `VoltageOut` requests.
+
