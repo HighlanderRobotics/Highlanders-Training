@@ -13,6 +13,7 @@ Then, this works just like the main branch with `pull`, `add`, `commit`, and `pu
 
 Right now, this branch is only local to your computer. To upload this branch to everyone else:
 `git push origin <branch name>`
+
 > optional to add the flag -u to the end so you do not need to repeat `git push origin <branch name>` everytime you want to push to remote.
 
 ## Pull requests and other organization practices are crucial to write maintainable, clean code
