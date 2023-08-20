@@ -132,3 +132,45 @@ Finally to finish this IOInputs class we need to add the `@AutoLog` annotation a
 This annotation automatically generates code to convert these values to a loggable format and back.
 However it is limited to only certain types of values, so be careful when making IOInputs classes.
 If you want to log other types than `@AutoLog` supports you can follow the [AdvantageKit docs example](https://github.com/Mechanical-Advantage/AdvantageKit/blob/main/docs/CODE-STRUCTURE.md#autolog-annotation) on it.
+
+Next we need to add a method called `updateInputs` that takes in the `IOInputs` object and updates it based off of the new values from our sensors.
+Because we are just defining the interface instead of the actual method, we can call it an `abstract` method.
+`abstract` means that it won't have any default behaviour but will require our IO Implementations to implement it.
+
+```Java
+public abstract void updateInputs(DrivetrainIOInputs inputs);
+```
+
+Finally, lets add the methods that we use to interact with the hardware.
+For this case it will just be a method `setVolts` to set the left and right output volts, like our `setVoltages` method that we have right now.
+
+Now your `DrivetrainIO` file should look like this:
+
+```Java
+package frc.robot.Subsystems.Drivetrain;
+
+import org.littletonrobotics.junction.AutoLog;
+
+public interface DrivetrainIO {
+    @AutoLog
+    public static class DrivetrainIOInputs {
+        public double leftOutputVolts = 0.0;
+        public double rightOutputVolts = 0.0;
+
+        public double leftVelocityMetersPerSecond = 0.0;
+        public double rightVelocityMetersPerSecond = 0.0;
+
+        public double leftPositionMeters = 0.0;
+        public double rightPositionMeters = 0.0;
+
+        public double[] leftCurrentAmps = new double[0];
+        public double[] leftTempCelsius = new double[0];
+        public double[] rightCurrentAmps = new double[0];
+        public double[] rightTempCelsius = new double[0];
+    }
+
+    public abstract void updateInputs(DrivetrainIOInputs inputs);
+
+    public abstract void setVolts(double left, double right);
+}
+```

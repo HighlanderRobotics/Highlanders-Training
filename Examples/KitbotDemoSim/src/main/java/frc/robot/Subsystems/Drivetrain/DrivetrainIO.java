@@ -4,8 +4,10 @@
 
 package frc.robot.Subsystems.Drivetrain;
 
-/** Add your docs here. */
+import org.littletonrobotics.junction.AutoLog;
+
 public interface DrivetrainIO {
+    @AutoLog
     public static class DrivetrainIOInputs {
         public double leftOutputVolts = 0.0;
         public double rightOutputVolts = 0.0;
@@ -21,4 +23,8 @@ public interface DrivetrainIO {
         public double[] rightCurrentAmps = new double[0];
         public double[] rightTempCelsius = new double[0];
     }
+
+    public abstract void updateInputs(DrivetrainIOInputs inputs);
+
+    public abstract void setVolts(double left, double right);
 }
