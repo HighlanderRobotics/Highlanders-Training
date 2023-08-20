@@ -30,9 +30,7 @@ public class Robot extends LoggedRobot {
     } else {
       Logger.getInstance().addDataReceiver(new NT4Publisher()); // Publish data to NetworkTables
     }
-
-    // Logger.getInstance().disableDeterministicTimestamps() // See "Deterministic
-    // Timestamps" in the "Understanding Data Flow" page
+    
     Logger.getInstance().start(); // Start logging! No more data receivers, replay sources, or metadata values may
                                   // be added.
 
