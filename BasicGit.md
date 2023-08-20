@@ -60,3 +60,4 @@ This means that while one person works on code for the autonomous, another could
 - Aliya Vora
 - Athena Li
 - Jerry Yu
+- Nathan Tuan
