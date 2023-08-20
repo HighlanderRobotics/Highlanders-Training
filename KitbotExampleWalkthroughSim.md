@@ -466,3 +466,123 @@ Let's refactor our `DrivetrainSubsystem` to finish off this rewrite.
 First, we need to replace all the functionality that moved to `DrivetrainIOSim` with an instance of `DrivetrainIOSim`.
 Get rid of the `TalonFX` objects and `VoltageOut` requests.
 
+```Java
+public class DrivetrainSubsystem extends SubsystemBase {
+    DrivetrainIO io = new DrivetrainIOSim();
+    // Snip
+}
+```
+
+Then we should add an `IOInputs` object to track the inputs to the subsystem.
+Theres a catch though: since we used `@AutoLog` we have to use `DrivetrainIOInputsAutoLogged`, otherwise it won't properly log.
+
+```Java
+public class DrivetrainSubsystem extends SubsystemBase {
+    DrivetrainIO io = new DrivetrainIOSim();
+    DrivetrainIOInputsAutoLogged inputs = new DrivetrainIOInputsAutoLogged();
+}
+```
+
+Now we need to finish the AdvantageKit io setup.
+Add a call to `io.updateInputs(inputs)` in the `periodic()` method of `DrivetrainSubsystem`.
+
+```Java
+@Override
+public void periodic() {
+    io.updateInputs(inputs);
+}
+```
+
+Then we need to push those inputs to the log.
+We do this by calling `Logger.getInstance().processInputs("Drivetrain", inputs)`.
+
+```Java
+@Override
+public void periodic() {
+    io.updateInputs(inputs);
+    Logger.getInstance().processInputs("Drivetrain", inputs);
+}
+```
+
+Finally, lets change the `setVoltages` method to use the io layer.
+
+```Java
+private void setVoltages(double left, double right) {
+    io.setVolts(left, right);
+}
+```
+
+This will work as a sim!
+But it won't have any way to track the position of the drivebase.
+Remember that we can use odometry to track the position of a drivebase.
+We can create a new `DifferentialDriveOdometry` object in `DrivetrainSubsystem` to handle this.
+
+```Java
+public class DrivetrainSubsystem extends SubsystemBase {
+  DrivetrainIO io = new DrivetrainIOSim();
+  DrivetrainIOInputsAutoLogged inputs = new DrivetrainIOInputsAutoLogged();
+
+  DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
+  // Snip
+}
+```
+
+We will need to update this every processor loop.
+Normally we would have a gyro to track the heading (rotation) of the drive base.
+However, in simulation we don't have an easy way to make a gyro that behaves how we would expect.
+Instead, we can use the following line to fudge it:
+
+```Java
+odometry.getPoseMeters().getRotation()
+    .plus(
+        Rotation2d.fromRadians(
+            (inputs.leftSpeedMetersPerSecond - inputs.rightSpeedMetersPerSecond)
+             * 0.020 / Units.inchesToMeters(26)))
+```
+
+This line is using a small piece of math to calculate what the new rotation should be based off of our wheel speeds.
+You don't need to know how this works in particular, just know it's a bit of a hack.
+
+We are going to wrap this in an `odometry.update()` call.
+
+```Java
+@Override
+public void periodic() {
+io.updateInputs(inputs);
+Logger.getInstance().processInputs("Drivetrain", inputs);
+
+odometry.update(
+    odometry.getPoseMeters().getRotation()
+        // Use differential drive kinematics to find the rotation rate based on the wheel speeds and distance between wheels
+        .plus(Rotation2d.fromRadians((inputs.leftVelocityMetersPerSecond - inputs.rightVelocityMetersPerSecond)
+            * 0.020 / Units.inchesToMeters(26))),
+    inputs.leftPositionMeters, inputs.rightPositionMeters);
+}
+```
+
+Finally, we need to send the odometry pose to the logger so we can visualize it.
+We do this using `Logger.getInstance().recordOutput()` and `odometry.getPoseMeters()`.
+
+```Java
+@Override
+public void periodic() {
+    // Snip
+    Logger.getInstance().recordOutput("Drivebase Pose", odometry.getPoseMeters());
+}
+```
+
+This should be everything you need to have a full drivebase simulation!
+
+### Running the Simulation
+
+To run a robot code simulation, click on the WPILib icon in the top right corner.
+Then find or search for "Simulate Robot Code" and press it.
+Once the code builds, it will prompt you to choose between using the driver station and sim gui.
+Choose the sim gui.
+
+The sim gui is perfectly serviceable for testing, but we can do better.
+AdvantageScope supports connecting to a simulation to visualize IO.
+When you open AdvantageScope, hit "file", then "Connect to Simulator".
+This lets you visualize data from the simulator in the same way as you would with a real robot.
+
+

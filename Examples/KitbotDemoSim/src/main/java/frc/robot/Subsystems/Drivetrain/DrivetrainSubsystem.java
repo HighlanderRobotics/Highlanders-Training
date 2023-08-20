@@ -6,9 +6,14 @@ package frc.robot.Subsystems.Drivetrain;
 
 import java.util.function.DoubleSupplier;
 
+import org.littletonrobotics.junction.Logger;
+
 import com.ctre.phoenixpro.controls.VoltageOut;
 import com.ctre.phoenixpro.hardware.TalonFX;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -16,19 +21,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DrivetrainSubsystem extends SubsystemBase {
-  TalonFX leftFalcon = new TalonFX(Constants.drivetrainLeftFalconID);
-  TalonFX rightFalcon = new TalonFX(Constants.drivetrainRightFalconID);
+  DrivetrainIO io = new DrivetrainIOSim();
+  DrivetrainIOInputsAutoLogged inputs = new DrivetrainIOInputsAutoLogged();
 
-  VoltageOut leftVoltage = new VoltageOut(0);
-  VoltageOut rightVoltage = new VoltageOut(0);
+  DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
 
   /** Creates a new Drivetrain. */
   public DrivetrainSubsystem() {
   }
 
   private void setVoltages(double left, double right) {
-    leftFalcon.setControl(leftVoltage.withOutput(left));
-    rightFalcon.setControl(rightVoltage.withOutput(left));
+    io.setVolts(left, right);
   }
 
   public CommandBase setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
@@ -44,6 +47,16 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    io.updateInputs(inputs);
+    Logger.getInstance().processInputs("Drivetrain", inputs);
+
+    odometry.update(
+        odometry.getPoseMeters().getRotation()
+            // Use differential drive kinematics to find the rotation rate based on the
+            // wheel speeds and distance between wheels
+            .plus(Rotation2d.fromRadians((inputs.leftVelocityMetersPerSecond - inputs.rightVelocityMetersPerSecond)
+                * 0.020 / Units.inchesToMeters(26))),
+        inputs.leftPositionMeters, inputs.rightPositionMeters);
+    Logger.getInstance().recordOutput("Drivetrain Pose", odometry.getPoseMeters());
   }
 }

@@ -3,5 +3,15 @@
     "types": {
       "/FMSInfo": "FMSInfo"
     }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "AdvantageKit": {
+        "RealOutputs": {
+          "open": true
+        },
+        "open": true
+      }
+    }
   }
 }
