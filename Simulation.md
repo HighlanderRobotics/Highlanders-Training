@@ -17,6 +17,7 @@ Then we have WPILibs simulation physics classes.
 These are built around a state-space model of a class of mechanism, and exist for many common mechanisms.
 We tend to use one or two of these per robot for major mechanisms.
 If you want to learn more about this sort of modelling, look at the [control theory for FRC book](https://file.tavsys.net/control/controls-engineering-in-frc.pdf).
+Note that the topics covered by this book are largely far more advanced than high schoolers have the math background for, and it is not required reading.
 
 Running a model is useful, but even more useful is being able to visualize the output of the model.
 [AdvantageScope](https://github.com/Mechanical-Advantage/AdvantageScope) is a tool developed by team 6328 to visualize data from live robots, simulated robots, and robot logs.
