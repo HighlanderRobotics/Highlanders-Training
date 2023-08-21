@@ -1,7 +1,17 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "window": {
+        "visible": false
+      }
+    }
+  },
   "NTProvider": {
     "types": {
-      "/FMSInfo": "FMSInfo"
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Talon FX (Pro) [0]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX (Pro) [1]": "Motor Controller"
     }
   },
   "NetworkTables Info": {

@@ -30,9 +30,9 @@ public class RobotContainer {
   }
 
   private double modifyJoystick(double in) {
-    if (Math.abs(in) < 0.05) {
-      return 0;
-    }
+    // if (Math.abs(in) < 0.05) {
+    //   return 0;
+    // }
     return in * in * Math.signum(in);
   }
 }
