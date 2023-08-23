@@ -60,12 +60,19 @@ It will contain all of the hardware that the drivetrain uses, in this case Talon
 Other subsystems will contain sensors, solenoids, and more.
 It will also contain methods that we use to interact with the subsystem from the rest of our code.
 
-Our team names subsystem files using the NameSubsystem convention.
+Our team names subsystem files using the "NameSubsystem" convention.
 That means that our file should end in Subsystem, so it's clear what it is.
 This will become more important later when we add AdvantageKit into our code.
 The name should also be reasonably short and descriptive.
 `IntakeSubsystem` is a good name.
 `GreybotsGrabberSubsystem` is too long, and `CircleThingySubsystem` is not specific.
+
+Make sure this class extends `SubsystemBase`.
+This is needed to make sure that it is treated as a Subsystem where only one Command can use it at a time.
+
+```Java
+public class DrivetrainSubsystem extends SubsystemBase {}
+```
 
 In this subsystem file we will need to add our hardware.
 But to have access to the API for our motors, we need to install the CTRE Phoenix library.
