@@ -46,7 +46,7 @@ We have not yet done significant on-robot r&d with AdvantageKit and need to asse
 ### Exercises
 
 - Install AdvantageKit into your kitbot project following [this tutorial](https://github.com/Mechanical-Advantage/AdvantageKit/blob/45d8067b336c7693e63ee01cdeff0e5ddf50b92d/docs/INSTALLATION.md).
-You do not need to modify the subsystem file yet, we will do that as part of the simulation tutorial.
+  You do not need to modify the subsystem file yet, we will do that as part of the simulation tutorial.
 
 ### Notes
 

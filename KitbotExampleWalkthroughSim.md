@@ -200,13 +200,13 @@ public class DrivetrainIOSim implements DrivetrainIO {
     @Override
     public void updateInputs(DrivetrainIOInputs inputs) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void setVolts(double left, double right) {
         // TODO Auto-generated method stub
-        
+
     }
 }
 ```
@@ -336,9 +336,9 @@ Start by creating a new `DifferentialDrivetrainSim` called `physicsSim` under th
 
 ```Java
 DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
-    null, 
-    null, 
-    null, 
+    null,
+    null,
+    null,
     null);
 ```
 
@@ -350,9 +350,9 @@ We are going to ignore that for this tutorial.
 
 ```Java
 DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
-    KitbotMotor.kDoubleFalcon500PerSide, 
-    null, 
-    null, 
+    KitbotMotor.kDoubleFalcon500PerSide,
+    null,
+    null,
     null);
 ```
 
@@ -362,9 +362,9 @@ In this case, since the drivetrain is simulated, we can use the standard 8p45 ge
 
 ```Java
 DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
-    KitbotMotor.kDoubleFalcon500PerSide, 
-    KitbotGearing.k8p45, 
-    null, 
+    KitbotMotor.kDoubleFalcon500PerSide,
+    KitbotGearing.k8p45,
+    null,
     null);
 ```
 
@@ -373,9 +373,9 @@ By default the kitbot comes with 6 inch wheels.
 
 ```Java
 DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
-    KitbotMotor.kDoubleFalcon500PerSide, 
-    KitbotGearing.k8p45, 
-    KitbotWheelSize.kSixInch, 
+    KitbotMotor.kDoubleFalcon500PerSide,
+    KitbotGearing.k8p45,
+    KitbotWheelSize.kSixInch,
     null);
 ```
 

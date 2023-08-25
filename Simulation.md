@@ -44,4 +44,4 @@ By having a simulation and real IOImplementation for each mechanism we can easil
 ### Notes
 
 - Structuring a codebase to be simulateable is not an easy task.
-It is important to be familiar with the tools we have and stick to a clean structure to make it easy to simulate our code.
+  It is important to be familiar with the tools we have and stick to a clean structure to make it easy to simulate our code.
