@@ -57,6 +57,6 @@ public class DrivetrainIOSim implements DrivetrainIO {
     @Override
     public void setVolts(double left, double right) {
         leftFalcon.setControl(leftVoltage.withOutput(left));
-        rightFalcon.setControl(rightVoltage.withOutput(left));
+        rightFalcon.setControl(rightVoltage.withOutput(right));
     }
 }

@@ -323,7 +323,7 @@ Then copy the `setVoltages` method from `DrivetrainSubsystem` into the `setVolta
 @Override
 public void setVolts(double left, double right) {
     leftFalcon.setControl(leftVoltage.withOutput(left));
-    rightFalcon.setControl(rightVoltage.withOutput(left));
+    rightFalcon.setControl(rightVoltage.withOutput(right));
 }
 ```
 
@@ -584,5 +584,8 @@ The sim gui is perfectly serviceable for testing, but we can do better.
 AdvantageScope supports connecting to a simulation to visualize IO.
 When you open AdvantageScope, hit "file", then "Connect to Simulator".
 This lets you visualize data from the simulator in the same way as you would with a real robot.
+You can use the 3d field visualization to have a fun way to show the robot on the field.
 
-
+To drive the robot, add "keyboard 0" to "joystick 0" in the sim gui.
+You might have to change your keyboard settings in the sim gui to make it properly emulate a joystick.
+Then make sure to set the mode to teleop.
