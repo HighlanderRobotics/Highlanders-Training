@@ -5,8 +5,11 @@
 The majority of our robot code is made in Java, and at least basic familiarity with the language is necessary to contribute to robot code.
 APCSA, FTC, or the following resources are all great starting points to learn java, and you should be able to pick up a lot of it by working with the robot code.
 If you already know another language you might be able to skip this step, but familiarizing yourself with the language is always valuable.
+Feel free to look at the resources below, but none of them are required.
 
 ### Resources
+
+These resources are good if you are totally new to programming, and cover Java from the very basics.
 
 - [Code Academy](https://www.codecademy.com/learn/learn-java) - online course
 - [Head First Java](https://www.rcsdk12.org/cms/lib/NY01001156/Centricity/Domain/4951/Head_First_Java_Second_Edition.pdf) - book
@@ -25,13 +28,13 @@ The exercises below are a starting point (and required) to learn Java, but you a
 
 ### Exercises
 
-- [Install Java](https://www.java.com/en/download/help/download_options.html)
 - Write a program to compute the first 64 fibbonaci numbers and print them to the standard output.
-This program must complete in under 1 second.
-- Complete 2 easy problems, or 1 medium problem on [leetcode](https://leetcode.com/problemset/all/) in java.
+  This program must complete in under 1 second.
+  Feel free to use [this website](https://www.programiz.com/java-programming/online-compiler/) to write and run the code, or run it on your own machine.
+- Complete 2 easy problems, or 1 medium problem on [leetcode](https://leetcode.com/problemset/all/) in java if you need more practice.
 
 ### Notes
 
 - We use an auto-formatter to keep the code clean.
-To run it type `./gradlew spotlessApply` into the terminal.
-This should be done before you push code (if not more frequently!) to keep the codebase readable.
+  To run it type `./gradlew spotlessApply` into the terminal when in a WPILib project.
+  This should be done before you push code (if not more frequently!) to keep the codebase readable.

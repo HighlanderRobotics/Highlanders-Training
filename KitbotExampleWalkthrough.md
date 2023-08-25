@@ -27,7 +27,7 @@ Inputs/Outputs:
 Electronics:
 
 - Each side of the chassis has two Falcon 500 motors, which will work together to power the left and right sides of the chassis.
-In code this will look like a total of 4 Talon FX motor controllers, since thats the component we can talk to.
+  In code this will look like a total of 4 Talon FX motor controllers, since thats the component we can talk to.
 
 ## Code Walkthrough
 
@@ -72,6 +72,7 @@ But to have access to the API for our motors, we need to install the CTRE Phoeni
 Use the instructions [here](https://pro.docs.ctr-electronics.com/en/stable/docs/installation/pro-installation.html) to install the API.
 Make sure to get the pro or v6 api.
 For this project you may use the online installer, but if you want to use your computer to run and setup the robot it is useful to have Tuner X installed.
+The [api docs](https://pro.docs.ctr-electronics.com/en/stable/docs/api-reference/index.html) for CTRE are also on the same website.
 
 Once you have installed the vendor library, create two TalonFX objects in your subsystem called `leftFalcon` and `rightFalcon`.
 By convention, hardware should have a succinct, descriptive name followed by the type of hardware it is.
@@ -104,6 +105,7 @@ Then change DrivetrainSubsystem to use the new constants.
 Next, lets add the `ControlRequest` objects.
 In CTREs v6/pro api, we set the output of a motor by passing it a subclass of `ControlRequest` like `VoltageOut` or `PositionDutyCycle`.
 Below the Talons, add two `VoltageOut`s.
+The constructor for these takes in a default voltage, which we can set to 0 to avoid any nasty surprises when we turn the robot on.
 
 ```Java
 TalonFX leftFalcon = new TalonFX(Constants.drivetrainLeftFalconID);
@@ -144,7 +146,7 @@ This lets us use this command to drive the robot with joysticks, an autonomous c
 In the body of the method we return a `RunCommand`.
 `RunCommand` is a subtype of CommandBase, and represents a Command which runs a single function over and over again.
 This function is defined using lambda syntax, or the `() ->` symbol.
-On the right of the arrow is a call to our `setVoltages()` method, which checks our `DoubleSuppliers` for their value each call of the function, in this case every 20ms as part of the Command loop.
+On the right of the arrow is a call to our `setVoltages()` method, which calls our `DoubleSupplier`s which each return a value each call of the function, in this case every 20ms as part of the Command loop.
 
 We might not want to drive the robot just by setting the left and right wheel speeds, however.
 Lets add a method that uses a desired forwards/backwards and turning velocity to set the wheel speeds.
@@ -159,19 +161,30 @@ public CommandBase setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier
 }
 ```
 
-This method is named `setVoltagesArcadeCommand` after the arcade drive inverse kinematics (IK) it uses, but other types of IK can also work.
+This method is named `setVoltagesArcadeCommand` after the arcade drive control it uses, or one input for driving speed and one for turning speed.
+The "IK" stands for "Inverse Kinematics", a fancy term for a bit of math to convert from the desired driving and turning speed to the needed wheel speeds.
+More generally, IK lets us convert from useful units, like an arms position in space, or a drivetrains speed in each direction, to ones we can directly use, like motor speeds or positions.
+
+Arcade drive isn't the only option we have for "useful units" for a drivetrain.
+Curvature drive is another example which tries to emulate a car by only turning when forward motion is happening.
 On a real robot what we use would come down to driver preference.
+
 In the method itself we have a very similar structure to the previous method.
 The main difference is that instead of having one method in our lambda (`() ->`), we have a code block ({} block).
 This means we need to end each line with a ; but can use multiple lines in our Command.
 In this case we call arcadeDriveIK from WPILib's `DifferentialDrive` class and store the result in a variable called `speeds`.
-Then we pass speeds to the drive method, multiplying by 12 to convert from the -1..1 units from the IK method to voltage.
+
+Then we pass speeds to the drive method.
+However, theres a catch to these speeds.
+Because WPILibs `DifferentialDrive` class doesn't know what kind of motors we run or what voltage our robot is at, it gives us motor speeds in the range -1 to 1, where 1 corresponds to full forward output and -1 corresponds to full reverse output.
+We can convert to voltage by multiplying by 12, which our robot should nominally be at.
 
 These methods are all well and good on their own, but it would be nice if we had a way to actually use them.
 Lets bind them to a joystick.
 Go to RobotContainer.java and add a `CommandXboxController` object.
 
 ```Java
+// Create a new Xbox controller on port 0
 CommandXboxController controller = new CommandXboxController(0);
 ```
 
@@ -197,14 +210,27 @@ This line is a little long now, so break it up into a few lines to keep it reada
 ```Java
 drivetrainSubsystem.setDefaultCommand(
     drivetrainSubsystem.setVoltagesArcadeCommand(
-        () -> controller.getLeftY(), 
+        () -> controller.getLeftY(),
         () -> controller.getRightX()));
 ```
 
 Using the joystick values directly is perfectly fine, but sometimes our driver wants a different feel to the controls.
 One common way is to square the inputs to the drivetrain, which reduces the sensitivity of the drivebase at low speeds.
+
+![A graph of the inputs normally, and squared](Assets/SqauredVLinearGraph.png)
+
+The red line here is if we directly take the input, and the blue line shows the squared input.
+
 Another is to add a "deadband" where we wont output any voltage if the input is less than some threshold.
 This stops the robot from moving if the controllers don't perfectly read 0 when they aren't pressed.
+
+![A graph showing the difference between an input with and without a deadband](Assets/DeadbandVNotGraph.png)
+
+This graph shows an input without a deadband in red, and one with an exaggerated deadband in blue.
+Notice how the graphs overlap outside of the deadband.
+Also notice the jump in inputs when the deadband stops applying.
+For an exaggerated one like this it would be an issue, but for a real input the deadband is usually small enough that this jump is not significant.
+
 Lets add a function in RobotContainer to modify the joystick inputs.
 
 Create a function that takes in a double and returns a double called `modifyJoystick`.
@@ -235,7 +261,7 @@ Now we can add this method into our drive command.
 ```Java
 drivetrainSubsystem.setDefaultCommand(
       drivetrainSubsystem.setVoltagesArcadeCommand(
-        () -> modifyJoystick(controller.getLeftY()), 
+        () -> modifyJoystick(controller.getLeftY()),
         () -> modifyJoystick(controller.getRightX())));
 ```
 

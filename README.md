@@ -23,7 +23,7 @@ Once you complete them, show a lead or mentor to get checked off as having compl
 ## Git
 
 - [**GIT** - Git Basics](BasicGit.md)
-- **GWF** - Team Git Workflow *TODO*
+- [**GWF** - Team Git Workflow](GitWorkflow.md)
 
 ## WPILib
 
@@ -33,7 +33,7 @@ Once you complete them, show a lead or mentor to get checked off as having compl
 
 - [**ARC** - Team Architecture / Command Based](CommandBased.md)
 - [**AKT** - AdvantageKit and Logging](AdvantageKit.md)
-- [**SIM** - Simulation] *TODO*
+- [**SIM** - Simulation] _TODO_
 
 ## Controls
 
@@ -43,7 +43,7 @@ Once you complete them, show a lead or mentor to get checked off as having compl
 
 - [**AUT** - PathPlanner and Auto](PathPlanner.md)
 
-- [**PVN** - PhotonVision and Vision] *TODO*
+- [**PVN** - PhotonVision and Vision](Vision.md)_WIP_
 
 ## See Also
 

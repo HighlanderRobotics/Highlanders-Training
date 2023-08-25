@@ -11,7 +11,7 @@ Detail is good here, since this is our main place to add an intro to the topic.
 - This should have links to other resources about the topic
 - Preferably other people have made these so we don't have to
 - Multiple formats are preferred, i.e.
-one video resource, a docs article, and an online course
+  one video resource, a docs article, and an online course
 
 ### Examples
 
