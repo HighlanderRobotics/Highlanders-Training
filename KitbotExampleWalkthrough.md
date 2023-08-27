@@ -87,7 +87,7 @@ public DrivetrainSubsystem() {}
 
 The number being passed into the constructor for the TalonFXs is the ID number of the motor, which we set using Tuner.
 Since we don't have real hardware for this example this number is arbitrary, but it's good practice to have a separate configuration file to store these sorts of constants.
-Create a new file in the robot folder (where Robot.java and RobotContainer.java are) called Constants.
+**Create a new file in the robot folder (where Robot.java and RobotContainer.java are) called Constants.**
 You can use the "create a new class or command" option and select "Empty Class" to speed this up.
 
 In Constants.java add two `public static final int`s, one for the left motor's ID and one for the right motor.
@@ -106,6 +106,8 @@ Next, lets add the `ControlRequest` objects.
 In CTREs v6/pro api, we set the output of a motor by passing it a subclass of `ControlRequest` like `VoltageOut` or `PositionDutyCycle`.
 Below the Talons, add two `VoltageOut`s.
 The constructor for these takes in a default voltage, which we can set to 0 to avoid any nasty surprises when we turn the robot on.
+Make sure you import these classes.
+You can do this by hovering over the red underlined code, hitting "quick fix", and pressing "import . . .".
 
 ```Java
 TalonFX leftFalcon = new TalonFX(Constants.drivetrainLeftFalconID);
