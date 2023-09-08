@@ -39,7 +39,7 @@ By having a simulation and real IOImplementation for each mechanism we can easil
 ### Exercises
 
 - Download and install [AdvantageScope](https://github.com/Mechanical-Advantage/AdvantageScope).
-- Follow this tutorial to convert your kitbot code to AdvantageKit and simulation.
+- Follow [this tutorial](KitbotExampleWalkthroughSim.md) to convert your kitbot code to AdvantageKit and simulation.
 
 ### Notes
 
