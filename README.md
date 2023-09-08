@@ -33,7 +33,7 @@ Once you complete them, show a lead or mentor to get checked off as having compl
 
 - [**ARC** - Team Architecture / Command Based](CommandBased.md)
 - [**AKT** - AdvantageKit and Logging](AdvantageKit.md)
-- [**SIM** - Simulation] _TODO_
+- [**SIM** - Simulation](Simulation.md)
 
 ## Controls
 
