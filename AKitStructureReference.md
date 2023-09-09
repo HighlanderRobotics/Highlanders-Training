@@ -6,7 +6,7 @@ It should be used when planning out the structure of a subsystem.
 ## Basic Layout
 
 ```mermaid
-graph TD
+flowchart TD
     Subsystem-->IO
     IO-->IO Implementation Real
     IO-->IO Implementation Sim
