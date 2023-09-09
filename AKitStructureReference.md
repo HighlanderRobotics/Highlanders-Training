@@ -7,9 +7,9 @@ It should be used when planning out the structure of a subsystem.
 
 ```mermaid
 graph TD;
-Subsystem->IO
-IO->IO Implementation Real
-IO->IO Implementation Sim
+    Subsystem->IO;
+    IO->IO Implementation Real;
+    IO->IO Implementation Sim;
 ```
 
 This diagram shows the basic structure of an AKit Subsystem.
