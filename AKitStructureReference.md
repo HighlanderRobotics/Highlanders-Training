@@ -6,10 +6,10 @@ It should be used when planning out the structure of a subsystem.
 ## Basic Layout
 
 ```mermaid
-graph TD;
-    Subsystem-->IO;
-    IO-->IO Implementation Real;
-    IO-->IO Implementation Sim;
+graph TD
+    Subsystem-->IO
+    IO-->IO Implementation Real
+    IO-->IO Implementation Sim
 ```
 
 This diagram shows the basic structure of an AKit Subsystem.
