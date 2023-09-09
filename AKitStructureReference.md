@@ -12,6 +12,14 @@ flowchart TD
     IO-->IO Implementation Sim
 ```
 
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
 This diagram shows the basic structure of an AKit Subsystem.
 It includes 3 layers:
 
