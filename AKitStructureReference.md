@@ -7,9 +7,9 @@ It should be used when planning out the structure of a subsystem.
 
 ```mermaid
 flowchart TD
-    Subsystem-->IO
-    IO-->IO Implementation Real
-    IO-->IO Implementation Sim
+    A[Subsystem]-->B[IO]
+    B-->C[IO Implementation Real]
+    B-->D[IO Implementation Sim]
 ```
 
 ```mermaid
