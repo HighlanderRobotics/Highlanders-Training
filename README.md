@@ -5,7 +5,7 @@
 This repository is set up mainly as an organized set of resources for robot software training for FRC team 8033, Highlander Robotics.
 The goal of these resources is to build enough familiarity with our code structure and the sorts of work we encounter to allow new students to quickly start on projects for the team.
 This means that a new student should be able to look through a robot project, find commonly modified pieces of code, and have a basic understanding of why it is organized the way it is.
-This material is *not* made to comprehensively teach everything you need to know about FRC programming, or programming in general.
+This material is _not_ made to comprehensively teach everything you need to know about FRC programming, or programming in general.
 
 We believe that the best way to learn what is needed to be succesful on the team is to work hands on on real projects, not be taught by a rigid curriculum (if the classroom was the best way, we would be doing that instead of building robots, after all).
 To that end these materials exist primarily to soften the learning curve and provide reference material.
