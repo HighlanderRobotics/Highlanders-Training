@@ -4,7 +4,7 @@
 
 ### What is a kitbot?
 
-![AM14U4 or Kitbot Chassis](Assets/Kitbot.jpg)
+![AM14U4 or Kitbot Chassis](../../Assets/Kitbot.jpg)
 
 The kitbot is a drivetrain which comes in the Kit of Parts provided by FIRST as part of registration.
 It is a typical of example of a type of drivetrain known as a differential drive.
@@ -37,23 +37,23 @@ If you have any questions about why we did it this way, ask a lead.
 
 To start, open up WPILib vscode and create a new project.
 
-![A screenshot of wpilib vscode showing where to press to create a new project](Assets/KitbotScreenshot0.png)
+![A screenshot of wpilib vscode showing where to press to create a new project](../../Assets/KitbotScreenshot0.png)
 
 Select `Template`, `Java`, `Command Robot Skeleton (Advanced)` as the template for your project.
 Select whichever folder you want and title the project something along the lines of "Kitbot Example".
 Set the team to 8033.
 Make sure to enable desktop support, since it's necessary for simulation work which we will do on this project down the line.
 
-![A screenshot of the wpilib vscode project creator with the proper settings](Assets/KitbotScreenshot1.png)
+![A screenshot of the wpilib vscode project creator with the proper settings](../../Assets/KitbotScreenshot1.png)
 
 Once you've created your project, open the src\main\java\frc\robot folder.
 In this folder, create a new folder "Subsystems".
 
-![A screenshot of the file tree of the project](Assets/KitbotScreenshot2.png)
+![A screenshot of the file tree of the project](../../Assets/KitbotScreenshot2.png)
 
 In that folder, right click and then click "create a new class/command"
 
-![A screenshot of the context menu to create a new class/command](Assets/KitbotScreenshot3.png)
+![A screenshot of the context menu to create a new class/command](../../Assets/KitbotScreenshot3.png)
 
 Select Subsystem and name it DrivetrainSubsystem. This file is the subsystem file for the kitbot drivetrain.
 It will contain all of the hardware that the drivetrain uses, in this case TalonFX motor controllers.
@@ -226,14 +226,14 @@ drivetrainSubsystem.setDefaultCommand(
 Using the joystick values directly is perfectly fine, but sometimes our driver wants a different feel to the controls.
 One common way is to square the inputs to the drivetrain, which reduces the sensitivity of the drivebase at low speeds.
 
-![A graph of the inputs normally, and squared](Assets/SqauredVLinearGraph.png)
+![A graph of the inputs normally, and squared](../../Assets/SqauredVLinearGraph.png)
 
 The red line here is if we directly take the input, and the blue line shows the squared input.
 
 Another is to add a "deadband" where we wont output any voltage if the input is less than some threshold.
 This stops the robot from moving if the controllers don't perfectly read 0 when they aren't pressed.
 
-![A graph showing the difference between an input with and without a deadband](Assets/DeadbandVNotGraph.png)
+![A graph showing the difference between an input with and without a deadband](../../Assets/DeadbandVNotGraph.png)
 
 This graph shows an input without a deadband in red, and one with an exaggerated deadband in blue.
 Notice how the graphs overlap outside of the deadband.

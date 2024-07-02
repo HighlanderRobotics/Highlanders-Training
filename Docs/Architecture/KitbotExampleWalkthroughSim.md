@@ -8,7 +8,7 @@ Luckily, we have a handy piece of code that to refactor to be simulateable!
 In this tutorial we are going to rework your kitbot code to be easy to simulate and expand on.
 In the end your code should be able to do this:
 
-[Video of robot in sim](Assets/SimDemo.mp4)
+[Video of robot in sim](../../Assets/SimDemo.mp4)
 
 ## Code Walkthrough
 
@@ -44,7 +44,7 @@ Recall the [IO layer structure](https://github.com/Mechanical-Advantage/Advantag
 Right now we have one file for `DrivetrainSubsystem`.
 Lets put it in a `Drivetrain` folder under `Subsystems` so that everything stays organized as we add more files.
 
-![A screenshot showing the new folder](Assets/KitbotExampleSimScreenshot0.png)
+![A screenshot showing the new folder](../../Assets/KitbotExampleSimScreenshot0.png)
 
 Next lets make a new file called `DrivetrainIO` in the same folder.
 Remember that this file will define all the methods we use to interact with the hardware on the drivetrain.

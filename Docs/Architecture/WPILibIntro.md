@@ -13,7 +13,7 @@ It also has extensive documentation both for it's own API and for the concepts a
 Venders (companies that sell us parts) also often have libraries to interface with their parts.
 These include the Phoenix library made by CTRE, the manufacturer of the majority of our motor controllers.
 
-We also use other libraries for other tasks that WPILib doesn't support. One of these is [Photonvision](Vision.md), a library that processes our camera feeds to turn them into useful target information.
+We also use other libraries for other tasks that WPILib doesn't support. One of these is [Photonvision](../Specifics/Vision.md), a library that processes our camera feeds to turn them into useful target information.
 Another is Pathplanner, a library to create and follow paths for the Autonomous portion of a match.
 Many of these libraries will have their own articles here as well as their own documentation.
 
@@ -21,7 +21,7 @@ Many of these libraries will have their own articles here as well as their own d
 
 ### Must read/watch
 
-- [Video by frc team 3847 about electrical components](https://www.youtube.com/watch?v=XHx3JeTk0Qw) OR read through our [reference sheet](ElectronicsCrashCourse.md)
+- [Video by frc team 3847 about electrical components](https://www.youtube.com/watch?v=XHx3JeTk0Qw) OR read through our [reference sheet](Electr../../ElectronicsCrashCourse.md
   - In an ideal world, we never have to touch the electrical system.
     In reality, often we end up finding problems with electrical early in the season.
     Therefore it is important to know what we are working with to debug and fix the robot.

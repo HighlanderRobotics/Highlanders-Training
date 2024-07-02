@@ -24,50 +24,37 @@ Each page will have a brief description of the topic and may include links to ot
 At the end of each page, there will be one or two exercises to complete.
 Once you complete them, show a lead or mentor to get checked off as having completed that course and move on to the next one as suggested on the page.
 The order that these need to be completed roughly matches the order on this page.
-Everything through [Architecture and Best Practices](#architecture-and-best-practices) including simulation is required, but pages after it do provide useful information.
+Everything through [Architecture](#architecture) including simulation is required, but pages after it do provide useful information.
 Controls in particular contain techniques used in most mechanisms on the robot.
 
-## Table of Contents
+## Docs
 
-- [Basics](#basics)
-- [Git](#git)
-- [WPILib](#wpilib)
-- [Architecture and Best Practices](#architecture-and-best-practices)
-- [Controls](#controls)
-- [Libraries and Tooling](#libraries-and-tooling)
+### General Programming
 
-### Basics
+- [**JIN** - Java Basics](Docs/General/Java.md)
+- [**GIT** - Git Basics](Docs/General/BasicGit.md)
+- [**GWF** - Team Git Workflow](Docs/General/GitWorkflow.md)
 
-- [**JIN** - Java Basics](Java.md)
+### Architecture
 
-### Git
-
-- [**GIT** - Git Basics](BasicGit.md)
-- [**GWF** - Team Git Workflow](GitWorkflow.md)
-
-### WPILib
-
-- [**FPI** - WPILib / Intro to FRC Programming](WPILibIntro.md)
-
-### Architecture and Best Practices
-
-- [**ARC** - Team Architecture / Command Based](CommandBased.md)
-- [**AKT** - AdvantageKit and Logging](AdvantageKit.md)
-- [**SIM** - Simulation](Simulation.md)
+- [**FPI** - WPILib / Intro to FRC Programming](Docs/Architecture/WPILibIntro.md)
+- [**ARC** - Team Architecture / Command Based](Docs/Architecture/CommandBased.md)
+- [**AKT** - AdvantageKit and Logging](Docs/Architecture/AdvantageKit.md)
+- [**SIM** - Simulation](Docs/Architecture/Simulation.md)
 
 ### Controls
 
-- [**PID** - PID and Feedforward Control Intro](ControlsIntro.md)
+- [**PID** - PID and Feedforward Control Intro](Docs/Specifics/ControlsIntro.md)
 
 ### Libraries and Tooling
 
     This section is a work in progress, due to changes in how we do auto paths and vision in the 2023 offseason.
 
-- [**AUT** - PathPlanner and Auto](PathPlanner.md)
+- [**AUT** - PathPlanner and Auto](Docs/Specifics/PathPlanner.md)
 
-- [**PVN** - PhotonVision and Vision](Vision.md)
+- [**PVN** - PhotonVision and Vision](Docs/Specifics/Vision.md)
 
 ### See Also
 
 - [Training Docs Template](Template.md)
-- [Further Reading](ReadingList.md)
+- [Further Reading](Docs/General/ReadingList.md)

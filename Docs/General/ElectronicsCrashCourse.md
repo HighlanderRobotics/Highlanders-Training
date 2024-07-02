@@ -4,14 +4,14 @@
 
 ### Electrical system diagram
 
-![Rev electrical system diagram](Assets/RevElectricalSystemDiagram.png)
+![Rev electrical system diagram](../../Assets/RevElectricalSystemDiagram.png)
 
 This diagram shows many of the electrical components found on a typical FRC robot.
 You don't need to memorize this layout, but its handy to have this as a reference.
 
 ### Battery
 
-![Battery](Assets/Battery.jpg)
+![Battery](../../Assets/Battery.jpg)
 
 All of the power our robot uses comes from a single 12-volt car battery.
 These can be found on our battery cart in the corner of the lab.
@@ -35,7 +35,7 @@ Needless to say we want to avoid any brownout conditions in a match or when test
 
 ### Main Breaker
 
-![Main Breaker](Assets/Breaker.jpg)
+![Main Breaker](../../Assets/Breaker.jpg)
 
 The main breaker is the power switch of the robot.
 The red button will turn the robot off, and a small black lever on the side of the breaker will turn it on.
@@ -49,7 +49,7 @@ We tend to have a 3d-printed guard over the off switch to prevent accidental pre
 
 ### Power Distribution Hub (PDH)
 
-![PDH](Assets/PDH.webp)
+![PDH](../../Assets/PDH.webp)
 
 The PDH takes the power from the battery and distributes it to the motors, sensors, and other components on the robot (Almost like its a hub for distributing power!).
 We don't have to do anything with the PDH in code, but if a motor or sensor does not have power it could have a bad connection with the PDH.
@@ -65,7 +65,7 @@ The PDH is also usually at one end of our CAN network. What's CAN? Glad you aske
 
 ### The CAN Network
 
-![CAN Wire](Assets/CANWire.png)
+![CAN Wire](../../Assets/CANWire.png)
 
 CAN is a type of communication along wires that allow our sensors and motors to communicate along our robot.
 In FRC, CAN is transmitted over yellow and green pairs of cables.
@@ -82,7 +82,7 @@ This app also has features to test and configure devices on the CAN network.
 
 ### RoboRIO 2
 
-![RoboRIO](Assets/RoboRIO.jpg)
+![RoboRIO](../../Assets/RoboRIO.jpg)
 
 The RoboRIO (rio) is the brain of the robot.
 It is built around a computer running Linux with a large number of Input/Output (IO) ports.
@@ -112,7 +112,7 @@ The WPILib docs have [instructions](https://docs.wpilib.org/en/stable/docs/zero-
 
 ### Radio
 
-![Radio](Assets/Radio.jpg)
+![Radio](../../Assets/Radio.jpg)
 
 The radio is essentially a Wi-Fi router that connects the robot to the driver station.
 At tournaments we have to take the radio to get reprogrammed for that competition.
@@ -134,7 +134,7 @@ Other things that can cause imaging issues include bad cables or radios, so be t
 
 ### Motor Controllers
 
-![Spark Max](Assets/SparkMax.jpg)
+![Spark Max](../../Assets/SparkMax.jpg)
 
 Motors are the primary form of movement on the robot, but on their own they are just expensive paperweights.
 Motor controllers take signals from our code, often over CAN, and turn them into the voltage sent to the motor.
@@ -148,7 +148,7 @@ However, our combo of choice is . . .
 
 ### The Falcon 500 / Talon FX
 
-![Falcon](Assets/Falcon.jpg)
+![Falcon](../../Assets/Falcon.jpg)
 
 The Falcon 500 (falcon) motor is the primary motor we use on the robot.
 Unlike many other motors, falcons come with a built in motor controller called the Talon FX.
@@ -157,7 +157,7 @@ Documentation for the software to control falcons can be found [here for the v5 
 
 ### Solenoids and Pneumatics
 
-![A solenoid](Assets/Solenoid.jpg)
+![A solenoid](../../Assets/Solenoid.jpg)
 
 Pneumatics are useful for simple, linear, and repeatable motions where motors might not be ideal.
 In the past we have used them primarily for extending intakes.
@@ -168,7 +168,7 @@ Single solenoids only supply air for extension, and rely on the piston having a 
 
 ### Robot Status Light
 
-![RSL](Assets/RSL.jpg)
+![RSL](../../Assets/RSL.jpg)
 
 The Robot Status Light (RSL) is an orange light we are required to have on our robot by competition rules.
 When the robot is powered on it will glow orange.
@@ -180,7 +180,7 @@ We have additional LEDs on the robot that indicate the state of the robot, but t
 
 ### CANivore
 
-![CANivore](Assets/CANivore.webp)
+![CANivore](../../Assets/CANivore.webp)
 
 The CANivore is a device that connects to the Rio over usb.
 It allows us to have a second CAN network with increased bandwidth.
@@ -191,8 +191,8 @@ The CANivore gets around some hardware limitations of the Rio to have extra band
 
 ### Encoders
 
-![CANcoder](Assets/CANcoder.jpg)
-![Rev Through Bore ENcoder](Assets/RevThroughBore.webp)
+![CANcoder](../../Assets/CANcoder.jpg)
+![Rev Through Bore ENcoder](../../Assets/RevThroughBore.webp)
 
 Encoders are devices that measure rotation.
 We use them to measure the angles of our swerve modules, the speed of our wheels, the position of our elevator, and much more.
@@ -218,7 +218,7 @@ If it is infeasable to have an encoder that goes 1 or less rotations for a mecha
 
 ### Limit Switches
 
-![Limit Switch](Assets/LimitSwitch.jpg)
+![Limit Switch](../../Assets/LimitSwitch.jpg)
 
 A limit switch is a simple sensor that tells us whether a switch is pressed or not.
 They are one of the electrically simplest sensors we can use, and are quite useful as a way to reset the encoder on a mechanism ("Zero" the mechanism).
@@ -229,7 +229,7 @@ When it was pressed, we knew that the elevator must be fully retracted so we cou
 
 ### IMU
 
-![Pigeon 2 Gyro](Assets/Pigeon2.webp)
+![Pigeon 2 Gyro](../../Assets/Pigeon2.webp)
 
 An Inertial Measurement Unit (IMU or sometimes Gyro) is a sensor that measures its acceleration and rotation.
 We primarily use them to measure the rotation of the robot (heading) so that the robot knows which way it is pointing on the field.
@@ -238,11 +238,11 @@ Pictured above is the Pigeon 2.0 IMU by CTRE, an IMU that connects over the CAN 
 
 ### Cameras and Vision
 
-![A Limelight Camera](Assets/LimeLight.png)
+![A Limelight Camera](../../Assets/LimeLight.png)
 
 Cameras and vision systems are an important part of advanced FRC software.
 Vision in FRC can be used to detect special retroreflective tape on the field, visual markers called apriltags on the field, game pieces, and even other robots.
 The pictured camera is a Limelight camera, a purchaseable vision solution that we have used for the past few years.
 Limelights connect to the robot over ethernet.
 However they are generally not built for apriltag detection and pose estimation, which has pushed us towards custom solutions.
-See the [Vision](Vision.md) article for more details.
+See the [Vision](../Specifics/Vision.md) article for more details.
