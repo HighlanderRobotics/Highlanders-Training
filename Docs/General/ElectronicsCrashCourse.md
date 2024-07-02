@@ -20,18 +20,20 @@ One way we can see the performance of a battery is the resting voltage (or volta
 This can be checked with the battery beak or on the driver station.
 A good battery will have a resting voltage of over 13 volts, and any battery we use will be above 12.
 As the battery is used the voltage will go down.
-We tend to swap our batteries after they get to around 11 and a half volts, although if we are testing something sensitive to voltage (like auto) we might swap them sooner.
+We tend to swap our batteries after they get to around 12.2 volts, although if we are testing something sensitive to voltage (like auto) we might swap them sooner.
 After a match a good battery is usually still above 12 volts.
-To track batteries so we know which batteries are "good" and which are "bad" we give them names like Garbanzo or W.I.S. (Women In STEM).
+To track batteries so we know which batteries are "good" and which are "bad" we give them names like "Garbanzo" or "W.I.S. (Women In STEM)".
 
-When the robot is on the voltage will also drop as power is actively used by mechanisms.
+When the robot is on, the voltage will also drop as power is actively used by mechanisms.
 This is called voltage sag.
 This means that we can't pull full power from every motor on the robot at once and have to be careful to design and program around our power budget.
 When the voltage of the robot drops too low we can brownout.
 This is usually first visible when the LEDs on the robot go out.
-When the voltage is low enough motors will begin to be turned off which is visible as a stuttering or jerking.
+When the voltage is low enough, motors will begin to be turned off automatically, which is visible as a stuttering or jerking.
 If the voltage is even lower, the robot can restart.
-Needless to say we want to avoid any brownout conditions in a match or when testing.
+Needless to say we want to avoid any brownout conditions in a match or when testing, but we often end up seeing them when pushing the robot in testing.
+
+$V = IR$ is the equation which governs voltage sag, where $V$ is amount the voltage will sag from resting, $I$ is the current draw of the robot, and $R$ is the internal resistance of the battery.
 
 ### Main Breaker
 
@@ -40,6 +42,7 @@ Needless to say we want to avoid any brownout conditions in a match or when test
 The main breaker is the power switch of the robot.
 The red button will turn the robot off, and a small black lever on the side of the breaker will turn it on.
 The main breaker is directly connected to the battery and limits the current draw of the robot, or the amount of power it can use at once.
+This limit is theoretically 120a, but in practice we can draw much more than that for small but significant periods of time (several seconds).
 Whenever you need to be hands on with the robot, make sure the breaker is off.
 If you can't connect to the robot, make sure it's on.
 If the breaker is on, make sure to wear safety glasses.
@@ -61,7 +64,7 @@ There is a similar product manufactured by CTRE called the Power Distribution Pa
 This is essentially an older version of the PDH with fewer motor slots, and is largely legacy hardware.
 You might see it in older documentation and robots, however.
 
-The PDH is also usually at one end of our CAN network. What's CAN? Glad you asked . . .
+The PDH is also often at one end of our CAN network. What's CAN? Glad you asked . . .
 
 ### The CAN Network
 
