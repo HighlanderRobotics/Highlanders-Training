@@ -31,7 +31,7 @@ When the voltage of the robot drops too low we can brownout.
 This is usually first visible when the LEDs on the robot go out.
 When the voltage is low enough, motors will begin to be turned off automatically, which is visible as a stuttering or jerking.
 If the voltage is even lower, the robot can restart.
-Needless to say we want to avoid any brownout conditions in a match or when testing, but we often end up seeing them when pushing the robot in testing.
+Needless to say, we want to avoid any brownout conditions in a match or when testing, but we often end up seeing them when pushing the robot in testing.
 
 $V = IR$ is the equation which governs voltage sag, where $V$ is amount the voltage will sag from resting, $I$ is the current draw of the robot, and $R$ is the internal resistance of the battery.
 
