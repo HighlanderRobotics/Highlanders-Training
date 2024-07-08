@@ -1,7 +1,8 @@
 # Command Based Presentation Notes
 
 This doc is a set of notes for a live presentation on Command-Based programming.
-A recording should be posted once the presentation is completed.
+A recording of this talk is available [here](https://drive.google.com/file/d/1ykFDfXVYk27aHlXYKTAqtj1U2T80Szdj/view?usp=sharing).
+Note that some of the code shown in the video differs from the current version of this document, as this has been updated with newer best practices.
 
 ## What is Command-Based?
 
@@ -27,25 +28,37 @@ A recording should be posted once the presentation is completed.
 
 ### How to make Commands
 
-- The two main types of Commands we use are `RunCommand`s and `InstantCommand`s
-  - `RunCommand`s run an action over and over until they are interrupted
-  - `InstantCommand`s run once and then immediately stop
+- The two main types of Commands we use are `run`s and `runOnce`s
+  - `run` runs an action over and over until it is interrupted
+  - `runOnce` runs once and then immediately stops
 
 For example:
 
 ```Java
 // Runs the intake rollers forever
-new RunCommand(() -> intakeSubsystem.spinRoller(), intakeSubsystem);
+Commands.run(() -> intakeSubsystem.spinRoller(), intakeSubsystem);
 
 // Retracts the intake
 // Note that the real hardware doesn't move instantly
 // But we only need to set it once in code
-new InstantCommand(() -> intakeSubsystem.retract(), intakeSubsystem);
+Commands.runOnce(() -> intakeSubsystem.retract(), intakeSubsystem);
+```
+
+If these Commands are defined in a Subsystem file, we can make them even simpler by calling `run` and `runOnce` on the subsystem itself
+
+```Java
+// Inside IntakeSubsystem.java
+
+// Notice how we don't need to define the requirements for these
+// The subsystem does it implicitly
+this.run(() -> spinRoller());
+
+this.runOnce(() -> retract());
 ```
 
 Anatomy of a Command declaration:
 
-- Command Object
+- Command Binding
 - Lambda
 - Requirements
 
@@ -57,7 +70,7 @@ Anatomy of a Command declaration:
 ```Java
 // In RobotContainer.java
 // When the a button on the controller is pressed, run the rollers on the intake
-controller.a().whenPressed(new RunCommand(() -> intakeSubsystem.runRollers(), intakeSubsystem));
+controller.a().whenPressed(Commands.run(() -> intakeSubsystem.runRollers(), intakeSubsystem));
 ```
 
 - This is somewhat wordy
@@ -67,7 +80,8 @@ controller.a().whenPressed(new RunCommand(() -> intakeSubsystem.runRollers(), in
 ```Java
 // In IntakeSubsystem.java
 public CommandBase runRollersCommand() {
-    return new RunCommand(() -> intakeSubsystem.runRollers(), intakeSubsystem);
+    // Note implicit requirements
+    return this.run(() -> runRollers());
 }
 ```
 
@@ -93,14 +107,26 @@ intakeSubsystem.extendCommand().andThen(intakeSubsystem.runRollersCommand())
   - `andThen()` adds another Command after one finishes
   - `alongWith()` will run two or more Commands side by side until both finish
   - `raceWith()` will run two or more Commands side by side and interrupt all of them when any Command finishes
+  - `withTimeout()` will interrupt a Command after a set amount of seconds
 
 ```Java
 // An example of a more complex group
 
-intakeSubsystem.extendCommand().andThen(
-    intakeSubsystem.runRollersCommand().until(() ->
+intakeSubsystem.extend().andThen(
+    intakeSubsystem.runRollers().until(() ->
         intakeSubsystem.hasGamePiece()
     ),
     intakeSubsystem.retract()
 )
+
+// Another example
+
+elevatorSubsystem.runToScoringHeight()
+  .alongWith(
+    grabberSubsystem.holdGamePiece()
+  ).until(() -> elevatorSubsystem.isAtScoringHeight())
+  .andThen(
+    // Outtake game piece for 1 second
+    grabberSubsystem.outtakeGamePiece().withTimeout(1.0)
+  )
 ```
