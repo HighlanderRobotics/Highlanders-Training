@@ -18,7 +18,7 @@ This means that while one person works on code for the autonomous, another could
 
 ### Examples
 
-- ![A simple demonstration of commiting and pushing some changes in git](Assets/GitExample.png)
+- ![A simple demonstration of commiting and pushing some changes in git](../../Assets/GitExample.png)
 - Typing `git add .` then `git commit -m "commit name"` then `git push` is the bread and butter of using git.
   This sequence takes all of your uncommited changes and commits them, then pushes them to github
 - `git checkout branch-name` switches between branches
@@ -27,7 +27,7 @@ This means that while one person works on code for the autonomous, another could
 - `git status` displays the current branch and what changes you have uncommited and staged
 - `git pull` updates the code on your device with the latest code from Github.
   Recommended to do this whenever someone else has been working on the same branch, otherwise you might make conflicting changes
-- [A simple demo video of commiting some changes](Assets/GitDemoVideo.mp4)
+- [A simple demo video of commiting some changes](../../Assets/GitDemoVideo.mp4)
 
 ### Exercises
 

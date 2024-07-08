@@ -7,7 +7,7 @@ One problem with this is that a feedforward for a dc motor (such as a falcon 500
 A motion profile smoothly interpolates, or transitions between, between a starting position and a setpoint position.
 There are a variety of types of motion profiles, but the one we use most often is called a _trapezoidal motion profile_.
 When using a trapezoidal motion profile, a mechanism will attempt to accelerate at a constant rate to some cruising speed, then deaccelerate to a standstill at the setpoint position.
-![An illustration of a trapezoidal motion profile](Assets/MotionProfileExample.webp)
+![An illustration of a trapezoidal motion profile](../../Assets/MotionProfileExample.webp)
 
 This graph shows a motion profile over time, although the specific values aren't important.
 The blue line is the position of the controller, the black line is the velocity of the controller and the red line is acceleration.

@@ -34,7 +34,7 @@ By having a simulation and real IOImplementation for each mechanism we can easil
 
 ### Examples
 
-- The [kitbot example code](Examples/KitbotDemoSim/)
+- The [kitbot example code](../../Examples/KitbotDemoSim)
 
 ### Exercises
 
