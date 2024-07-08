@@ -61,10 +61,10 @@ PR's will be explained further in the Git Workflow docs.
 
 ### Names
 
-- Lewy Seiden
-- Petro Papahadjopoluos
-- Sneha Narayan
-- Aliya Vora
-- Athena Li
-- Jerry Yu
-- Nathan Tuan
+- Lewy
+- Petro
+- Sneha
+- Aliya
+- Athena
+- Jerry
+- Nathan
