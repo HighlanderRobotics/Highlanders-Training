@@ -20,11 +20,12 @@ One way we can see the performance of a battery is the resting voltage (or volta
 This can be checked with the battery beak or on the driver station.
 A good battery will have a resting voltage of over 13 volts, and any battery we use will be above 12.
 As the battery is used the voltage will go down.
-We tend to swap our batteries after they get to around 12.2 volts, although if we are testing something sensitive to voltage (like auto) we might swap them sooner.
+We tend to swap our batteries after they get to around 12.5 volts, although if we are testing something sensitive to voltage (like auto) we might swap them sooner.
 After a match a good battery is usually still above 12 volts.
 To track batteries so we know which batteries are "good" and which are "bad" we give them names like "Garbanzo" or "W.I.S. (Women In STEM)".
 
-When the robot is on, the voltage will also drop as power is actively used by mechanisms.
+When the robot is on, the voltage will drop as power is used by processors and lights.
+When the robot is enabled, the voltage will drop further as power is actively used by mechanisms.
 This is called voltage sag.
 This means that we can't pull full power from every motor on the robot at once and have to be careful to design and program around our power budget.
 When the voltage of the robot drops too low we can brownout.
