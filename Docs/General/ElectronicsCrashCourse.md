@@ -132,7 +132,7 @@ The WPILib docs have [instructions](https://docs.wpilib.org/en/stable/docs/zero-
 
 The radio is essentially a Wi-Fi router that connects the robot to the driver station.
 At tournaments we have to take the radio to get reprogrammed for that competition.
-This makes it able to connect to the field so that our robot gets enabled and disabled at the right times during matches, however it prevents us from connecting to the robot with a laptop wirelessly$^1$.
+This makes it able to connect to the field so that our robot gets enabled and disabled at the right times during matches, however it prevents us from connecting to the robot with a laptop wirelessly$`^1`$.
 The radio has four ethernet ports and a pair of terminals for power wires.
 One ethernet port connects to the rio and is labeled RIO.
 One is usually reserved for tethering to a laptop and is labeled DS.
@@ -147,7 +147,7 @@ The radio can also be connected to via a second radio acting as an access point.
 At time of writing we have not tried this, and best practices are still being figured out.
 
 The radio can either be powered using Power-Over-Ethernet (PoE) or the power terminals.
-This radio model is new at time of writing$^2$, and best practices are still being figured out.
+This radio model is new at time of writing$`^2`$, and best practices are still being figured out.
 Be careful with checking for good, consistent radio power if you are having connection issues.
 
 Footnote $1$
