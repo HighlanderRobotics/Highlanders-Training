@@ -4,14 +4,14 @@
 
 ### Electrical system diagram
 
-![Rev electrical system diagram](../../Assets/RevElectricalSystemDiagram.png)
+<img alt="Rev electrical system diagram" src="../../Assets/RevElectricalSystemDiagram.png" width="400" height="400">
 
 This diagram shows many of the electrical components found on a typical FRC robot.
 You don't need to memorize this layout, but its handy to have this as a reference.
 
 ### Battery
 
-![Battery](../../Assets/Battery.jpg)
+<img alt="Battery" src="../../Assets/Battery.jpg" width="400" height="400">
 
 All of the power our robot uses comes from a single 12-volt car battery.
 These can be found on our battery cart in the corner of the lab.
@@ -38,7 +38,7 @@ $V = IR$ is the equation which governs voltage sag, where $V$ is amount the volt
 
 ### Main Breaker
 
-![Main Breaker](../../Assets/Breaker.jpg)
+<img alt="Main Breaker" src="../../Assets/Breaker.jpg" width="400" height="400">
 
 The main breaker is the power switch of the robot.
 The red button will turn the robot off, and a small black lever on the side of the breaker will turn it on.
@@ -53,7 +53,7 @@ We tend to have a 3d-printed guard over the off switch to prevent accidental pre
 
 ### Power Distribution Hub (PDH)
 
-![PDH](../../Assets/PDH.webp)
+<img alt="PDH" src="../../Assets/PDH.webp" width="400" height="400">
 
 The PDH takes the power from the battery and distributes it to the motors, sensors, and other components on the robot (Almost like its a hub for distributing power!).
 We don't have to do anything with the PDH in code, but if a motor or sensor does not have power it could have a bad connection with the PDH.
@@ -69,7 +69,7 @@ The PDH is also often at one end of our CAN network. What's CAN? Glad you asked 
 
 ### The CAN Network
 
-![CAN Wire](../../Assets/CANWire.png)
+<img alt="CAN Wire" src="../../Assets/CANWire.png" width="400" height="400">
 
 CAN is a type of communication along wires that allow our sensors and motors to communicate along our robot.
 In FRC, CAN is transmitted over yellow and green pairs of cables.
@@ -86,7 +86,7 @@ This app also has features to test and configure devices on the CAN network.
 
 ### CANivore
 
-![CANivore](../../Assets/CANivore.webp)
+<img alt="CANivore" src="../../Assets/CANivore.webp" width="400" height="400">
 
 The CANivore is a device that connects to the [Rio](#roborio-2) (in the next section) over usb.
 It allows us to have a second CAN network with increased bandwidth.
@@ -97,7 +97,7 @@ In 2024 we exclusively used the CANivore network for motors and sensors.
 
 ### RoboRIO 2
 
-![RoboRIO](../../Assets/RoboRIO.jpg)
+<img alt="RoboRIO" src="../../Assets/RoboRIO.jpg" width="400" height="400">
 
 The RoboRIO (rio) is the brain of the robot.
 It is built around a computer running Linux with a large number of Input/Output (IO) ports.
@@ -128,7 +128,7 @@ The WPILib docs have [instructions](https://docs.wpilib.org/en/stable/docs/zero-
 
 ### Vivid Hosting Radio
 
-![Radio](../../Assets/Radio.png)
+<img alt="Radio" src="../../Assets/Radio.png" width="400" height="400">
 
 The radio is essentially a Wi-Fi router that connects the robot to the driver station.
 At tournaments we have to take the radio to get reprogrammed for that competition.
@@ -162,11 +162,11 @@ An older radio known as the OM5P was in use until champs 2024, and you may encou
 It was much worse to deal with (more fragile and finicky) and we are lucky to be done with it.
 It is pictured below.
 
-![Old Radio](../../Assets/OldRadio.jpg)
+<img alt="Old Radio" src="../../Assets/OldRadio.jpg" width="400" height="400">
 
 ### Motor Controllers
 
-![Spark Max](../../Assets/SparkMax.jpg)
+<img alt="Spark Max" src="../../Assets/SparkMax.jpg" width="400" height="400">
 
 Motors are the primary form of movement on the robot, but on their own they are just expensive paperweights.
 Motor controllers take signals from our code, often over CAN, and turn them into the voltage sent to the motor.
@@ -177,14 +177,14 @@ For instance they might be able to run PID loops much faster than our code is ab
 Knowing what motor controller you are using and what features it has is very important when writing robot code.
 Pictured above is the Spark Max built by REV Robotics, a common modern motor controller often used with the NEO and NEO 550 motors.
 REV also produces a motor called the NEO Vortex which uses the Spark Flex, pictured below.
-![NEO Vortex + Spark Flex](../../Assets/VortexFlex.png)
+<img alt="NEO Vortex + Spark Flex" src="../../Assets/VortexFlex.png" width="400" height="400">
 
 However, we avoid using REV motors due to poor software and historical mechanical issues.
 Instead we use . . .
 
 ### The Talon FX + Kraken X60
 
-![Kraken](../../Assets/Kraken.png)
+<img alt="Kraken" src="../../Assets/Kraken.png" width="400" height="400">
 
 The Kraken X60 ("kraken") motor is the primary motor we use on the robot.
 Unlike many other motors, krakens come with a built in motor controller called the Talon FX.
@@ -196,11 +196,11 @@ Slightly less powerful, slightly older, and likely out of stock for the forseeab
 Because falcons also have an integrated TalonFX, they behave exactly the same in code as krakens.
 A falcon is pictured below.
 
-![Falcon](../../Assets/Falcon.jpg)
+<img alt="Falcon" src="../../Assets/Falcon.jpg" width="400" height="400">
 
 ### Solenoids and Pneumatics
 
-![A solenoid](../../Assets/Solenoid.jpg)
+<img alt="A solenoid" src="../../Assets/Solenoid.jpg" width="400" height="400">
 
 Pneumatics are useful for simple, linear, and repeatable motions where motors might not be ideal.
 In the past we have used them primarily for extending intakes.
@@ -212,7 +212,7 @@ Our mechanical team has moved somewhat away from pneumatics over weight and comp
 
 ### Robot Status Light
 
-![RSL](../../Assets/RSL.jpg)
+<img alt="RSL" src="../../Assets/RSL.jpg" width="400" height="400">
 
 The Robot Status Light (RSL) is an orange light we are required to have on our robot by competition rules.
 When the robot is powered on it will glow solid orange.
@@ -226,8 +226,8 @@ We have additional LEDs on the robot that indicate the state of the robot, but t
 
 ### Encoders
 
-![CANcoder](../../Assets/CANcoder.jpg)
-![Rev Through Bore ENcoder](../../Assets/RevThroughBore.webp)
+<img alt="CANcoder" src="../../Assets/CANcoder.jpg" width="400" height="400">
+<img alt="Rev Through Bore ENcoder" src="../../Assets/RevThroughBore.webp" width="400" height="400">
 
 Encoders are devices that measure rotation.
 We use them to measure the angles of our swerve modules, the speed of our wheels, the position of our elevator, and much more.
@@ -251,7 +251,7 @@ Some teams have seen success getting around the absolute encoder only having one
 
 ### Limit Switches
 
-![Limit Switch](../../Assets/LimitSwitch.jpg)
+<img alt="Limit Switch" src="../../Assets/LimitSwitch.jpg" width="400" height="400">
 
 A limit switch is a simple sensor that tells us whether a switch is pressed or not.
 They are one of the electrically simplest sensors we can use, and are quite useful as a way to reset the encoder on a mechanism ("Zero" the mechanism).
@@ -268,7 +268,7 @@ This tells us that we are at the hardstop in the same way that a limit switch wo
 
 ### IMU
 
-![Pigeon 2 Gyro](../../Assets/Pigeon2.webp)
+<img alt="Pigeon 2 Gyro" src="../../Assets/Pigeon2.webp" width="400" height="400">
 
 An Inertial Measurement Unit (IMU or sometimes Gyro) is a sensor that measures its acceleration and rotation.
 We primarily use them to measure the rotation of the robot (heading) so that the robot knows which way it is pointing on the field.
@@ -277,7 +277,7 @@ Pictured above is the Pigeon 2.0 IMU by CTRE, an IMU that connects over the CAN 
 
 ### Cameras and Vision
 
-![A Limelight Camera](../../Assets/LimeLight.png)
+<img alt="A Limelight Camera" src="../../Assets/LimeLight.png" width="400" height="400">
 
 Cameras and vision systems are an important part of advanced FRC software.
 Vision in FRC can be used to detect visual markers called apriltags on the field, game pieces, and even other robots.
