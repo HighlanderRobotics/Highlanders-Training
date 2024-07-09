@@ -37,7 +37,7 @@ Controls in particular contain techniques used in most mechanisms on the robot.
 
 ### Architecture
 
-- [**FPI** - WPILib / Intro to FRC Programming](Docs/Architecture/WPILibIntro.md)
+- [**FPI** - WPILib / Intro to FRC Programming](Docs/Architecture/WPILib.md)
 - [**ARC** - Team Architecture / Command Based](Docs/Architecture/CommandBased.md)
 - [**AKT** - AdvantageKit and Logging](Docs/Architecture/AdvantageKit.md)
 - [**SIM** - Simulation](Docs/Architecture/Simulation.md)
