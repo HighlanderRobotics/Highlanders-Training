@@ -19,7 +19,8 @@ Read one of the following:
 
 Install the following:
 
-- [Git install](https://gitforwindows.org/)
+- [Windows Git install](https://gitforwindows.org/)
+- [Linux/Mac Git install](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ### Examples
 
