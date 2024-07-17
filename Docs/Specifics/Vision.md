@@ -68,7 +68,7 @@ Another way is contour filtering, which looks for the outlines of a shape like a
 
 A more complicated system is through machine learning models that have been specially trained on the objects we want to detect, such as game pieces or other robots.
 Due to the significant processing power that this requires, in FRC this is typically done on the Rockchip Neural Processing Unit (NPU), which is on the Orange Pi 5 and similar coprocessors.
-While we haven't implemented this, the greater FRC community has developed several models linked below in the Resources section.
+While we haven't implemented this, the greater FRC community has developed several models and other resources.
 In 2024, Photonvision also ships with a pretrained model for notes.
 
 ### PhotonVision
