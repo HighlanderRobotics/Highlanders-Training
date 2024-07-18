@@ -5,6 +5,7 @@
 Branches are a deviation or split from the main branch that can be adding or removing a specific feature
 For example, I can open a branch to work on a new doc page for this training repo.
 Since I am on my own branch, I am not interfering with the main branch's commit history, which is supposed to be kept clean.
+A "clean" commit history is made up of large, well named commits to make it easy to quickly skim recent changes.
 Because I am on my own branch, another student can also work on their own article without fear of interfering with my work.
 
 To create a branch run:
@@ -14,7 +15,8 @@ Then, this new branch works just like the main branch with `pull`, `add`, `commi
 You should see your current branch in blue in the command prompt if you are using git bash.
 Otherwise you can use `git status` to check your branch.
 
-Right now, this branch is only local to your computer. To upload this branch to everyone else:
+Right now, this branch is only local to your computer.
+To upload this branch to the remote repository so others can view it:
 `git push --set-upstream origin <branch name>`
 
 Once you have pushed the branch for the first time, it should show up on GitHub and be accessable by others.
