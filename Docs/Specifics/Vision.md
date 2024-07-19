@@ -17,14 +17,16 @@ AprilTags are a system of visual tags developed by researchers at the University
 
 They look similar to QR codes, but with less pixels.
 This trades the amount of information in each tag for quick, easy, and robust detection.
-There are several different "families" of tags depending on how many bits a tag can represent.
-In 2023, the FRC game Charged Up used 16h5, while in 2024 (and presumably onwards) 36h11 was used instead.
+There are several different "families" of tags, which have different sizes, shapes, and patterns.
+These provide tradeoffs between detail, robustness, and number of potential IDs.
+In 2023, the FRC game Charged Up used 16h5, while in 2024 36h11 was used instead.
 In each frame in the camera stream, we are looking for these tags.
 Through a series of image processing algorithms (removing colors, decimation, identifying regions of relative lightness/darkness), we're able to identify both *which* tag it is (a numerical ID corresponding to the unique pattern of the tag) and *where* the corners of the tag are in the frame.
 
 In the context of FRC, because AprilTags are placed in various known locations around the field, we can use them in order for the robot to know where it is on the field.
 The simplest application of this is single tag detection and 2D alignment.
-For example, if we know that when a certain tag is in the middle of the camera's field of vision, our robot's shooter is lined up correctly with the target, we can write code that instructs the shooter to release a game piece once that tag has been centered, the drivetrain to adjust so that the tag is centered, etc.
+For example, we might know that when a certain tag is in the middle of the camera's field of vision, our robot's shooter is lined up correctly with the target.
+We can then write code that instructs the shooter to release a game piece once that tag has been centered, the drivetrain to adjust so that the tag is centered, etc.
 
 ### Pose Estimation
 We can also use AprilTags in a more sophisticated way to perform pose estimation.
@@ -49,27 +51,40 @@ If we also have pose estimates from other tags that are less ambiguous, we can t
 Having multiple cameras also helps with this, as another camera at a different angle could generate a more accurate pose with the same tag.
 Comparing a vision pose against odometry can also rule out incorrect poses.
 
+There are several different strategies to pick which pose we want to use.
+One of these is lowest ambiguity.
+This finds the pose corresponding to the vision result with the lowest reprojection error (a measurement of the difference between a measured 3D point and its projected 2D point in the camera frame).
+This is useful when we only have one tag in frame that we can use to differentiate between these possible poses.
+Another is to choose the pose closest to some other known pose, such as the camera's pose or the last calculated pose.
+Historically in FRC, it's been unlikely that a robot would be above the ground or outside the field, so this can eliminate such poses that are further than the robot could have traveled in the time since the last measurement.
+Lastly, the best way to take advantage of multiple tags is by using the multitag PNP (Perspective-n-Point) strategy.
+This maps the 3D points of visible AprilTags to 2D points to estimate the field-to-camera transformation.
+
 An important step to take before using 3D pose estimation is to correctly calibrate the camera.
 All camera lenses have some level of distortion that we need to account for when processing images gathered from them, especially in applications where it's important to accurately calculate where things are in 3D space.
 
 ![Example of distorted chessboard](/Assets/Distortion.jpg)
 
 It's possible for us to undistort these images—we just need to find the camera-specific numbers that will allow us to perform that math, which we can do by calibrating the camera.
-There are a couple ways to do this, but one way is to take a lot of photos with the camera being calibrated of a chessboard pattern (which we know has straight lines and certain measurements) at different angles and positions and send those photos to programs that then handle the math for us and return those numbers.
+There are a couple ways to do this, but one way is to take a lot of photos with the camera being calibrated of a chessboard pattern (which we know has straight lines and certain measurements) at different angles and positions and send those photos to programs (such as PhotonVision or mrcal) that then handle the math for us and return those numbers.
 
 ### Object Detection
 
 Sometimes we want to be able to detect other things on the field that aren't AprilTags.
-This could include game pieces, other robots, and more.
-One way of accomplishing this is through tuning HSV thresholds to only pick up on a certain color, such as the orange of a Crescendo note.
+In the past, FRC games have included retroreflective tape on various game elements, which is made out of the same shiny material on safety vests and road medians.
+This primarily includes game pieces, but can include other robots or more.
+One way of accomplishing this is through tuning HSV (hue, saturation, and value, which is a way of defining colors) thresholds to only pick up on a certain color, such as the orange of a Crescendo note.
+
+![2024 Crescendo note](/Assets/Note.jpg)
+
 Another way is contour filtering, which looks for the outlines of a shape like a circle or a triangle, such as a cone from Charged Up.
 
 <img src="../../Assets/ShapeDetection.webp" alt="Example of detecting a triangular object" width="600"/>
 
 A more complicated system is through machine learning models that have been specially trained on the objects we want to detect, such as game pieces or other robots.
-Due to the significant processing power that this requires, in FRC this is typically done on the Rockchip Neural Processing Unit (NPU), which is on the Orange Pi 5 and similar coprocessors.
+Due to the significant processing power that this requires, in FRC this is typically done on the Rockchip Neural Processing Unit (NPU), which is on the Orange Pi 5 and similar coprocessors, or a Google Coral.
 While we haven't implemented this, the greater FRC community has developed several models and other resources.
-In 2024, Photonvision also ships with a pretrained model for notes.
+Photonvision has also shipped ML based game piece detection recently, and likely will continue to.
 
 ### PhotonVision
 
@@ -80,6 +95,11 @@ It simplifies interfacing with the camera and also has plenty of utility methods
 
 Limelight (LL) is a camera and processor system for FRC designed to make vision easy and simple.
 We used a Limelight 2+ with Limelight's software in 2022 for retroreflective tape detection, and a LL2+ with Photonvision software in 2023 for Apriltag detection.
+
+Limelight has recently released the LL3, which possesses more processing power for AprilTags and object detection, and other teams have had success with it.
+The LL3G also features a global shutter camera for further improved AprilTag performance.
+At time of writing we have not tested either.
+
 The LL2+ was not satisfactory for Apriltag detection for us, so we switched to the...
 
 ### Orange Pi + Arducam
@@ -87,12 +107,14 @@ The LL2+ was not satisfactory for Apriltag detection for us, so we switched to t
 While we have the roboRIO to run much of our code on the robot, it is not capable of handling vision processing at a usable speed.
 Instead, we run this on a coprocessor, which is a second, faster computer also onboard the robot.
 For vision, we've been using the Orange Pi 5, a single board computer which is quite similar to Raspberry Pis you may have seen elsewhere.
-This is what Photonvision runs on.
+This is what we run Photonvision on.
 
 ![Orange Pi 5](/Assets/OrangePi.jfif)
 
 Of course, we also need a camera.
-We've been using Arducam USB cameras, though other USB cameras also work.
+We've been using Arducam USB cameras (specifically OV9281s and OV2311s), which have worked well, though other USB cameras also work.
+Generally, a reasonably high resolution, high speed, global shutter camera is best for FRC applications.
+Some test data of other frequently used cameras is linked below in the Resources section.
 
 <img src="../../Assets/Arducam.webp" alt="Arducam OV9281" width="600"/>
 
@@ -102,13 +124,9 @@ We've been using Arducam USB cameras, though other USB cameras also work.
 - [Photonvision repo](https://github.com/PhotonVision/photonvision)
 - [WPILib article on vision](https://docs.wpilib.org/en/stable/docs/software/vision-processing/index.html)
 - [Anand's Coprocessor Roundup 2023](https://docs.google.com/document/d/1N-Cda1iHJvoNv8osOsZ9h4vovqR4tkuL9hg8aaVzPwU/edit#heading=h.tq4turyc03l3)
+- [Anand's camera testing 2023](https://docs.google.com/document/d/17DNCNHxUo31Rh-7VmXXyn-Y25UtGND3NPoGL9gRosaQ/edit#heading=h.t136qtqvhq75)
 
 ### Examples
 
 - [Photonlib examples](https://github.com/PhotonVision/photonvision/tree/master/photonlib-java-examples)
 - [8033 2024 implementation](https://github.com/HighlanderRobotics/Crescendo/tree/main/src/main/java/frc/robot/subsystems/vision)
-
-
-### Exercises
-
-- Once you have Photonvision installed on the coprocessor and connect to the web dashboard, mess around with the pipeline tuning settings
