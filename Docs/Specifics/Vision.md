@@ -52,13 +52,12 @@ Having multiple cameras also helps with this, as another camera at a different a
 Comparing a vision pose against odometry can also rule out incorrect poses.
 
 There are several different strategies to pick which pose we want to use.
-One of these is lowest ambiguity.
-This finds the pose corresponding to the vision result with the lowest reprojection error (a measurement of the difference between a measured 3D point and its projected 2D point in the camera frame).
+One of these is lowest ambiguity, which finds the pose corresponding to the vision result with the lowest reprojection error (a measurement of the difference between a measured 3D point and its projected 2D point in the camera frame).
 This is useful when we only have one tag in frame that we can use to differentiate between these possible poses.
 Another is to choose the pose closest to some other known pose, such as the camera's pose or the last calculated pose.
 Historically in FRC, it's been unlikely that a robot would be above the ground or outside the field, so this can eliminate such poses that are further than the robot could have traveled in the time since the last measurement.
 Lastly, the best way to take advantage of multiple tags is by using the multitag PNP (Perspective-n-Point) strategy.
-This maps the 3D points of visible AprilTags to 2D points to estimate the field-to-camera transformation.
+This solves some equations to get a robot pose based on all the poses that we calculate from each tag and "averages" it out.
 
 An important step to take before using 3D pose estimation is to correctly calibrate the camera.
 All camera lenses have some level of distortion that we need to account for when processing images gathered from them, especially in applications where it's important to accurately calculate where things are in 3D space.
@@ -66,7 +65,7 @@ All camera lenses have some level of distortion that we need to account for when
 ![Example of distorted chessboard](/Assets/Distortion.jpg)
 
 It's possible for us to undistort these images—we just need to find the camera-specific numbers that will allow us to perform that math, which we can do by calibrating the camera.
-There are a couple ways to do this, but one way is to take a lot of photos with the camera being calibrated of a chessboard pattern (which we know has straight lines and certain measurements) at different angles and positions and send those photos to programs (such as PhotonVision or mrcal) that then handle the math for us and return those numbers.
+There are a couple ways to do this, but one way is to take a lot of photos with the camera being calibrated of a chessboard pattern (which we know has straight lines and certain measurements) at different angles and positions and send those photos to programs (such as [PhotonVision](https://docs.photonvision.org/en/latest/docs/calibration/calibration.html) or [mrcal](https://mrcal.secretsauce.net/)) that then handle the math for us and return those numbers.
 
 ### Object Detection
 
