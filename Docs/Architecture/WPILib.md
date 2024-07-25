@@ -1,29 +1,55 @@
-# WPILib
+# Intro to FRC Programming
 
-## WPILib is the standard library for FRC, providing code to interface with hardware, structure and run high-level code, and use advanced controls
+## Programming in FRC is very similar to programming in other contexts, but it's important to be familiar with the tools at our disposal and our architecture and practices
 
-WPILib is an open source project that aims to raise the floor of what FRC teams can do with software.
-The project has a little bit of everything in it and is the main building block that our code is built on top of.
-It also has pretty extensive documentation.
+Our code runs on the roboRIO, a small linux computer that lives on the robot.
+Through the magic of wiring, we connect it to everything else on the robot that needs instructions, which includes hardware parts like motors, sensors, and cameras.
+The robot connects to either a laptop running the driver station or the field at competitions over Wi-Fi to send and recieve data such as button presses, camera feeds, and enable signals.
 
-### Resources
+However, it becomes very clumsy and difficult to interface with these parts directly.
+WPILib is an open source library built for FRC which abstracts away the low level code to allow us to focus on the high-level control logic.
+The project has a large number of features and is the main building block that our code is built on top of.
+It also has extensive documentation both for it's own API and for the concepts and math behind many of its features.
+Venders (companies that sell us parts) also often have libraries to interface with their parts.
+These include the [Phoenix library](https://v6.docs.ctr-electronics.com/en/stable/) made by CTRE, the manufacturer of the majority of our motor controllers.
 
-- **[WPILib docs](https://docs.wpilib.org/en/stable/index.html)**
+We also use other libraries for other tasks that WPILib doesn't support. One of these is [Photonvision](../Specifics/Vision.md), a library that processes our camera feeds to turn them into useful target information.
+Another is Pathplanner, a library to create and follow paths for the Autonomous portion of a match.
+Many of these libraries will have their own articles here as well as their own documentation.
+
+## Resources
+
+### Must read/watch
+
+- Read through our [electrical reference sheet](../General/ElectronicsCrashCourse.md)
+  - In an ideal world, we never have to touch the electrical system.
+    In reality, often we end up finding problems with electrical early in the season.
+    Therefore it is important to know what we are working with to debug and fix the robot.
+  - In addition, it is important to know about the hardware on the robot that we will be interacting with through software.
+  - Alternatively you *can* watch [this](https://www.youtube.com/watch?v=XHx3JeTk0Qw) video on FRC electronics, but it is somewhat out of date.
+- [Installation guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
+- Read through [WPILib's zero to robot programming guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-4/creating-test-drivetrain-program-cpp-java.html)
+  - We will be writing a similar program in the next few weeks.
+  - We mostly use CTRE components, so select that tab for the example code.
+
+### Optional
+
+- [WPILib docs](https://docs.wpilib.org/en/stable/index.html)
 - [WPILib zero to robot guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/introduction.html)
 - [WPILib repo](https://github.com/wpilibsuite/allwpilib)
-- [Installation guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html)
+- [Glossary of jargon](https://docs.wpilib.org/en/stable/docs/software/frc-glossary.html)
 
 ### Examples
 
 - After installing WPILib, go to the command list by clicking on the WPILib logo in the upper right corner, then pressing "create a new project" then "examples"
 - Look at our old codebase!
+- Look at the kitbot example code in the examples folder of this repo.
 
 ### Exercises
 
 - Download and install WPILib
-- Create a basic set of kitbot drive code from the timed robot skeleton
 
 ### Notes
 
-- See also the [Command-based](CommandBased.md) article for more information about how we architect our code using WPILib
-- A lot of what WPILib does is "under the hood" to let us focus on high-level code rather than low-level hardware interface
+- A lot of what WPILib does is "under the hood" to let us focus on high-level code rather than low-level hardware interface.
+  This type of code is called the Hardware Abstraction Layer, or HAL
