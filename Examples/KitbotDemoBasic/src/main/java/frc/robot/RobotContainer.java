@@ -21,8 +21,8 @@ public class RobotContainer {
   private void configureBindings() {
     drivetrainSubsystem.setDefaultCommand(
       drivetrainSubsystem.setVoltagesArcadeCommand(
-        () -> modifyJoystick(controller.getLeftY()), 
-        () -> modifyJoystick(controller.getRightX())));
+        modifyJoystick(controller::getLeftY), 
+        modifyJoystick(controller::getRightX)));
   }
 
   public Command getAutonomousCommand() {

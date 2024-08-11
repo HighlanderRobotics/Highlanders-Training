@@ -45,7 +45,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   // Command that wraps drive method
   public CommandBase driveCommand(DoubleSupplier speed, DoubleSupplier angle, BooleanSupplier isClosedLoop) {
-    return new RunCommand(() -> drive(speed.getAsDouble(), angle.getAsDouble(), isClosedLoop.getAsBoolean()), this);
+    return new RunCommand(drive(speed.getAsDouble(), angle.getAsDouble(), isClosedLoop::getAsBoolean), this);
   }
 
   @Override

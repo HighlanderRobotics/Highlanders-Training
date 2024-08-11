@@ -22,8 +22,8 @@ public class RobotContainer {
     // Default Command
     drivetrainSubsystem
         .setDefaultCommand(drivetrainSubsystem.driveCommand(
-            () -> modifyJoystickAxis(controller.getLeftY()),
-            () -> modifyJoystickAxis(-controller.getLeftX()), 
+            modifyJoystickAxis(controller::getLeftY),
+            modifyJoystickAxis(-controller::getLeftX), 
             () -> false));
   }
 

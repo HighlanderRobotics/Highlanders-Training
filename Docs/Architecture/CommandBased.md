@@ -6,7 +6,7 @@ Command based programming revolves around three concepts: **Subsystems**, **Comm
 
 A Subsystem is a set of hardware that forms one system on our robot, like the drivetrain, elevator, arm, or intake.
 Each subsystem contains some associated hardware (motors, pistons, sensors, etc.) They are the "nouns" of our robot, what it is.
-Each Subsystem is generally made to contain as broad of a set of hardware that will always operate as a unit as possible.
+Each Subsystem is generally made to contain a broad set of hardware that will always operate as a unit.
 
 Commands are the "verbs" of the robt, or what our robot does.
 Each Subsystem can be used by one Command at the same time, but Commands may use many Subsystems.
@@ -15,7 +15,7 @@ Because each Subsystem can only be used by one Command at once, we are safe from
 
 Subsystems are ways to organize resources that can be used by one Command at a time.
 
-Some hardware might not be stored in a Subsystem if multiple things can/should use it.
+Some hardware might not be stored in a Subsystem if multiple things can/should use it at the same time safely.
 For example, a vision setup can be read from by many things, and might not need to be locked by Commands.
 Therefore, it might not be stored in a Subsystem.
 

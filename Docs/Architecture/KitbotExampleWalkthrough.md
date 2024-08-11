@@ -143,7 +143,7 @@ To do this we need to make a Command factory method, or a method that returns `C
 
 ```Java
 public CommandBase setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
-    return new RunCommand(() -> this.setVoltages(left.getAsDouble(), right.getAsDouble()), this);
+    return new RunCommand(this.setVoltages(left.getAsDouble(), right::getAsDouble), this);
 }
 ```
 
@@ -219,8 +219,8 @@ This line is a little long now, so break it up into a few lines to keep it reada
 ```Java
 drivetrainSubsystem.setDefaultCommand(
     drivetrainSubsystem.setVoltagesArcadeCommand(
-        () -> controller.getLeftY(),
-        () -> controller.getRightX()));
+        controller::getLeftY,
+        controller::getRightX));
 ```
 
 Using the joystick values directly is perfectly fine, but sometimes our driver wants a different feel to the controls.
@@ -270,8 +270,8 @@ Now we can add this method into our drive command.
 ```Java
 drivetrainSubsystem.setDefaultCommand(
       drivetrainSubsystem.setVoltagesArcadeCommand(
-        () -> modifyJoystick(controller.getLeftY()),
-        () -> modifyJoystick(controller.getRightX())));
+        modifyJoystick(controller::getLeftY),
+        modifyJoystick(controller::getRightX)));
 ```
 
 Congratulations!

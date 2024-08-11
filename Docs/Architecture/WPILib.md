@@ -10,7 +10,7 @@ However, it becomes very clumsy and difficult to interface with these parts dire
 WPILib is an open source library built for FRC which abstracts away the low level code to allow us to focus on the high-level control logic.
 The project has a large number of features and is the main building block that our code is built on top of.
 It also has extensive documentation both for it's own API and for the concepts and math behind many of its features.
-Venders (companies that sell us parts) also often have libraries to interface with their parts.
+Vendors (companies that sell us parts) also often have libraries to interface with their parts.
 These include the [Phoenix library](https://v6.docs.ctr-electronics.com/en/stable/) made by CTRE, the manufacturer of the majority of our motor controllers.
 
 We also use other libraries for other tasks that WPILib doesn't support. One of these is [Photonvision](../Specifics/Vision.md), a library that processes our camera feeds to turn them into useful target information.
