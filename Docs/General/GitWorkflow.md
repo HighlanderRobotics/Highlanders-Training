@@ -55,6 +55,7 @@ PRs can be linked to issues to show that an issue has been worked on and automat
 - Aliya
 - Sneha
 - Jerry
+- Sam
 
 ### Notes
 
