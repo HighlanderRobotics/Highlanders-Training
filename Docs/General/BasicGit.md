@@ -61,3 +61,4 @@ This means that while one person works on code for the autonomous, another could
 - Athena Li
 - Jerry Yu
 - Nathan Tuan
+- Sam Charlson
