@@ -62,3 +62,5 @@ This means that while one person works on code for the autonomous, another could
 - Jerry Yu
 - Nathan Tuan (8/15/24)
 - Sam Charlson
+- Viviane Oesterer
+  
