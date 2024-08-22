@@ -25,7 +25,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   // We could make this select an io type based off of if the robot was real or
   // not
-  // Robot.isReal() ? new DrivetrainIOFalcon() : new DrivetrainIOSim()
+  // Robot.isReal() ? new DrivetrainIOReal() : new DrivetrainIOSim()
   DrivetrainIO io = new DrivetrainIOSim();
   DrivetrainIOInputsAutoLogged inputs = new DrivetrainIOInputsAutoLogged();
 
@@ -45,7 +45,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   // Command that wraps drive method
   public CommandBase driveCommand(DoubleSupplier speed, DoubleSupplier angle, BooleanSupplier isClosedLoop) {
-    return new RunCommand(drive(speed.getAsDouble(), angle.getAsDouble(), isClosedLoop::getAsBoolean), this);
+    return this.run(drive(speed.getAsDouble(), angle.getAsDouble(), isClosedLoop.getAsBoolean()));
   }
 
   @Override

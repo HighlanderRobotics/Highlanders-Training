@@ -18,7 +18,7 @@ Note that some of the code shown in the video differs from the current version o
   - Motors
   - Pneumatics
   - Sensors
-- [Mutex](https://en.wikipedia.org/wiki/Lock_(computer_science)), prevents multiple things from using the same hardware at the same time
+- [Mutex (short for "mutually exclusive")](https://en.wikipedia.org/wiki/Lock_(computer_science)), prevents multiple things from using the same hardware at the same time
 
 ### Commands
 
