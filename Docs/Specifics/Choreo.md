@@ -2,6 +2,7 @@
 
 Choreo is a path planning library that uses path-optimization to create time-constrained autonomous paths for the autonomous period. Learning to integrate Choreo into our codebase is important as autonomous, the first 15 seconds of the match, can be the make or break of a high-scoring teleop match.
 
+
 ## Choreo Structure
 
 The following is the stack that is involved to integrate with Choreo:
@@ -23,6 +24,27 @@ The Choreo GUI communicates with Sleipnr and receives results back (as Sleipnir 
 ## Official Choreo Docs
 
 The official Choreo [usage docs](https://sleipnirgroup.github.io/Choreo/usage/editing-paths/) give the best instructions on how to use the Choreo GUI app for creating these paths.
+
+## Why Choreo
+
+### Intro to Numerical Optimization
+
+Choreo is a new approach to creating auto trajectories by using numerical optimization, namely Convex Optimization. Convex Optimization with respect to time constraints applies to minimizing the time it takes to travel a path. A convex function simply is a function that curves downward, like an upward parabola. The constraints (independent variables) axis would be changed to affect the time (dependent variables) axis. It's the solver's job to try as hard as possible to minimize the time taken for a path, which in turn allows robotics teams to score more points in the auto period.
+
+Resources:
+- [What Is Mathematical Optimization?](https://www.youtube.com/watch?v=AM6BY4btj-M)
+
+![graph of a convex function](../../Assets/convex.png)
+
+### Comparison of other Tools
+
+8033 used to use PathPlanner, a spline-based path system. The path is created by plotting waypoints on the field and using a spline based system with its arcs and rotations so people can manipulate it to their liking. However, many teams have found that the splines generated have noticeably inconsistent and had "fudging" of values to "make it work," instead of just generating a path in Choreo and having a higher confidence of it working as it did in the Choreo GUI/editor.
+
+### How the Solver Generates Paths
+
+The solver is first given a list of waypoints that include its position, angle, and other metadata. Then it guesses initial guess points that can be used to better interpolate between the path. Next, control intervals are gussed based on a guess of its general shape (trapezoid, ..) (the biggest factor of generation times).
+
+![alt text](image.png)
 
 
 ## Choreo Java Integration
