@@ -76,7 +76,7 @@ public class DrivetrainSubsystem extends SubsystemBase {}
 
 In this subsystem file we will need to add our hardware.
 But to have access to the API for our motors, we need to install the CTRE Phoenix library.
-Use the instructions [here](https://pro.docs.ctr-electronics.com/en/stable/docs/installation/pro-installation.html) to install the API.
+Use the instructions [here](https://pro.docs.ctr-electronics.com/en/stable/docs/installation/installation-frc.html) to install the API.
 Make sure to get the pro or v6 api.
 For this project you may use the online installer, but if you want to use your computer to run and setup the robot it is useful to have Tuner X installed.
 The [api docs](https://pro.docs.ctr-electronics.com/en/stable/docs/api-reference/index.html) for CTRE are also on the same website.
