@@ -2,7 +2,7 @@
 
 ## Simulation is the process of running our robot code on a computer other than the robot to test it without being limited by physical hardware
 
-Generally speaking, simulation depends on sending the inputs we would like to test to a model of a system and analyzing the simulated results.
+Generally speaking, simulation depends on sending the inputs we would like to test to a model of a system (mechanism) and analyzing the simulated results.
 There are several ways to do this, depending on what you’re simulating.
 This could be something small, like simulated readings of an encoder, or something more complex, like a physics simulation of an arm.
 Simulation is important for a couple of reasons—we can test something without risking breaking an actual physical part, as well as being able to concurrently develop code as those physical components are being built (which is often the case during the build season).
@@ -16,12 +16,26 @@ The sim graphical user interface (GUI) looks like this and can be launched throu
 
 <img src="../../Assets/SimGUI.webp" alt="Screenshot of the sim GUI" width="600"/>
 
-From here, you can view some interesting bits of information about your simulated robot, such as its state, timing, joysticks, etc.
+From here, you can view some interesting bits of information about your simulated robot, such as whether it's enabled or not, how long it's been up, joysticks, etc. More details are [here](https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/robot-simulation/simulation-gui.html#using-the-gui).
 
 Then we have WPILib’s simulation physics classes.
-These are built around a state-space model (a set of matrix equations that describe how a system changes over time) of a class of mechanism and exist for many common mechanisms to predict how they will behave.
+These are built around a state space model of a class of mechanism and exist for many common mechanisms to predict how they will behave.
+
+<details>
+<summary>Quick digression on state space</summary>
+
+A state is a characteristic of a system at a certain point in time.
+A vector is just a way to represent these states.
+(If you aren't familiar with vectors/matrices, that's okay!)
+For example, a drivetrain system might have the states $\begin{bmatrix}x\\y\\\theta\end{bmatrix}$ to describe its position on the field - the x is the x position, y is the y position, and $\theta$ is the rotation of the robot, all in a column vector.
+A state-space model is a set of matrix equations that describe how a system changes over time by basically multiplying these state vectors by (scalar) inputs.
+
+---
+</details>
+
+
 Like other simulated systems, the mechanism’s state is updated periodically with simulated inputs.
-For example, we can simulate the position of an elevator after calculating and applying a certain voltage to its motor.
+For example, we can simulate the change in position of an elevator when a certain voltage is applied to its motor using this mathematical model.
 
 Sometimes these models will be very accurate.
 Sometimes they will make a lot of untrue assumptions about the mechanism.
@@ -48,7 +62,7 @@ This is so we can easily test our code in sim and have minimal work to move it t
 ### Resources
 
 - Read through the [WPILib docs intro to simulation](https://docs.wpilib.org/en/stable/docs/software/wpilib-tools/robot-simulation/introduction.html).
-- Some more on [state space control](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/state-space-intro.html)
+- Optional additional reading on [state space modeling](https://docs.wpilib.org/en/stable/docs/software/advanced-controls/state-space/state-space-intro.html)
 
 ### Examples
 
