@@ -21,8 +21,8 @@ From here, you can view some interesting bits of information about your simulate
 Then we have WPILib’s simulation physics classes.
 These are built around a state space model of a class of mechanism and exist for many common mechanisms to predict how they will behave.
 
----
-### Quick digression on state space
+<details>
+<summary>Quick digression on state space</summary>
 
 A state is a characteristic of a system at a certain point in time.
 A vector is just a way to represent these states.
@@ -31,6 +31,7 @@ For example, a drivetrain system might have the states $`\begin{bmatrix}x\\y\\\t
 A state-space model is a set of matrix equations that describe how a system changes over time by basically multiplying these state vectors by (scalar) inputs.
 
 ---
+</details>
 
 
 Like other simulated systems, the mechanism’s state is updated periodically with simulated inputs.
