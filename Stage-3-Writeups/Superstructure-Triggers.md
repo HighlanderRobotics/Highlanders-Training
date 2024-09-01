@@ -42,6 +42,8 @@ By using a Trigger for each state, we can easily integrate with existing Subsyst
 By using an explicit state machine, it clearly structures the codebase.
 
 Because of our highly integrated robot architecture for Banshee, all non-swerve subsystems were integrated in the superstructure.
+This includes the intake, carriage, feeder, pivot, both flywheels, and elevator.
+I also split the shooter into flywheels and the pivot for cleanliness.
 
 To set up the superstructure, I wrote out all the states that the robot would be in and the edges between them.
 This is the original state machine I worked from.
@@ -75,7 +77,6 @@ READY_INDEXED_CARRIAGE --> INDEX_SHOOTER;
 READY_INDEXED_SHOOTER --> REVERSE_INDEX_CARRIAGE;
 REVERSE_INDEX_CARRIAGE --> INTAKE;
 
-
 IDLE --> SPIT;
 READY_INDEXED_SHOOTER --> SPIT;
 READY_INDEXED_CARRIAGE --> SPIT;
@@ -90,3 +91,33 @@ HOME_ELEVATOR --> IDLE;
 IDLE --> HOME_SHOOTER;
 HOME_SHOOTER --> IDLE;
 ```
+
+The current state (and previous state) is stored in an enum member of the superstructure.
+A HashMap of state -> Trigger bindings is created, and each Trigger is setup up to have a set of commands including a call to `setState` which advances through the graph.
+`setState` is called through the use of Trigger composition with `.and`.
+An example of one of these bindings is bellow.
+
+```Java
+stateTriggers
+        .get(SuperState.INTAKE)
+        .whileTrue(intake.intake())
+        .onFalse(intake.stop())
+        .whileTrue(carriage.setVoltageCmd(CarriageSubsystem.INDEXING_VOLTAGE))
+        // State Transition
+        .and(carriage.beambreakTrig.or(feeder.beambreakTrig))
+        .onTrue(
+            this.setState(
+                target.get().isSpeakerAlike()
+                    ? SuperState.INDEX_SHOOTER
+                    : SuperState.INDEX_CARRIAGE));
+```
+
+The binding starts with a call to get the Trigger from the map of state Triggers.
+Then we bind the commands that run while that state is active (ie which subsystems have non-default behavior).
+This includes running the intake and spinning the carriage indexing wheels.
+Then we `.and` on another Trigger to check if either beambreak sees something.
+If they do, we run a Command to move to the next state in the graph.
+
+This setup is a simple way to declare the mechanism states for each robot state, and how the robot states transition between each other.
+In my opinion, it is relatively readable if somewhat verbose.
+I wrote each command as being triggered by a separate `.whileTrue` clause, but this makes sequences within states more difficult to write when multiple subsystems may need to coordinate with each other, forcing the state graph to grow larger.
