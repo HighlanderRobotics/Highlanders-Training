@@ -117,7 +117,15 @@ Then we bind the commands that run while that state is active (ie which subsyste
 This includes running the intake and spinning the carriage indexing wheels.
 Then we `.and` on another Trigger to check if either beambreak sees something.
 If they do, we run a Command to move to the next state in the graph.
+This state is a bit of a special case because of its branching behavior here.
 
 This setup is a simple way to declare the mechanism states for each robot state, and how the robot states transition between each other.
 In my opinion, it is relatively readable if somewhat verbose.
 I wrote each command as being triggered by a separate `.whileTrue` clause, but this makes sequences within states more difficult to write when multiple subsystems may need to coordinate with each other, forcing the state graph to grow larger.
+In the future, I would likely use Command groups instead.
+
+Inputs to the superstructure are handled by several member Triggers, called "requests", of the superstructure such as `intakeRequest`.
+These make it easy to bind default bindings, but make it hard to request states from other commands such as autos.
+To remedy this, some requests had an additional boolean member request which could be set by a Command factory in the superstructure.
+This boolean would be `.or`ed onto the existing Trigger, and the Command would be called from autos to request needed states.
+This was a somewhat hacky workaround, and in the future going all Trigger or all boolean + Command bindings is likely optimal.
