@@ -31,8 +31,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     rightFalcon.setControl(rightVoltage.withOutput(left));
   }
 
-  public CommandBase setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
-    return this.run(this.setVoltages(left.getAsDouble(), right.getAsDouble()));
+  public CommandBase setVoltagesCommandBase(DoubleSupplier left, DoubleSupplier right) {
+    return this.run(() -> this.setVoltages(left.getAsDouble(), right.getAsDouble()));
   }
 
   public CommandBase setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier steer) {

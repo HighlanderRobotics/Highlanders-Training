@@ -8,17 +8,12 @@ import java.util.function.DoubleSupplier;
 
 import org.littletonrobotics.junction.Logger;
 
-import com.ctre.phoenixpro.controls.VoltageOut;
-import com.ctre.phoenixpro.hardware.TalonFX;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
 public class DrivetrainSubsystem extends SubsystemBase {
   DrivetrainIO io = new DrivetrainIOSim();
@@ -35,7 +30,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   }
 
   public CommandBase setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
-    return this.run(this.setVoltages(left.getAsDouble(), right.getAsDouble()));
+    return this.run(() -> this.setVoltages(left.getAsDouble(), right.getAsDouble()));
   }
 
   public CommandBase setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier steer) {

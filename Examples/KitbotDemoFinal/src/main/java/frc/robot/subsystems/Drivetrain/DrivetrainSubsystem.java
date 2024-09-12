@@ -14,7 +14,6 @@ import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DrivetrainSubsystem extends SubsystemBase {
@@ -45,7 +44,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
   // Command that wraps drive method
   public CommandBase driveCommand(DoubleSupplier speed, DoubleSupplier angle, BooleanSupplier isClosedLoop) {
-    return this.run(drive(speed.getAsDouble(), angle.getAsDouble(), isClosedLoop.getAsBoolean()));
+    return this.run(() -> drive(speed.getAsDouble(), angle.getAsDouble(), isClosedLoop.getAsBoolean()));
   }
 
   @Override

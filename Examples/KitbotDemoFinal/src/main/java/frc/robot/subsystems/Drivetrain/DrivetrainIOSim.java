@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems.Drivetrain;
 
-import org.littletonrobotics.junction.Logger;
-
 import com.ctre.phoenixpro.controls.VelocityDutyCycle;
 import com.ctre.phoenixpro.controls.VoltageOut;
 import com.ctre.phoenixpro.hardware.TalonFX;
