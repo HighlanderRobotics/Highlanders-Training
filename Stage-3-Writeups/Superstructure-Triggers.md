@@ -4,6 +4,11 @@ Lewis Seiden, 2024 Crescendo Offseason
 
 ## Abstract
 
+This project is a [refactor of 8033s 2024 codebase](https://github.com/HighlanderRobotics/Crescendo/tree/superstructure-subsystem) to use an explicit finite state machine to control subsystems rather than simple Commands.
+This refactor would help with approaching the codebase and organizing behavior, but would add some amount of boilerplate and a m    onolithic file.
+
+## Procedure and Findings
+
 I started on this project after seeing [2974's](https://github.com/WaltonRobotics/Crescendo/blob/main/src/main/java/frc/robot/subsystems/Superstructure.java) and [5940's](https://github.com/BREAD5940/2024-Onseason/blob/main/src/main/java/frc/robot/subsystems/Superstructure.Java) code, and wondering if using explicitly defined states could help manage our code.
 These teams had a superstructure file which coordinated several subsystems based on a state machine.
 This allowed for complex control flow with less places for confusion.
@@ -129,3 +134,10 @@ These make it easy to bind default bindings, but make it hard to request states 
 To remedy this, some requests had an additional boolean member request which could be set by a Command factory in the superstructure.
 This boolean would be `.or`ed onto the existing Trigger, and the Command would be called from autos to request needed states.
 This was a somewhat hacky workaround, and in the future going all Trigger or all boolean + Command bindings is likely optimal.
+
+## Conclusion
+
+This pattern is a useful tool to have for programming.
+It provides a way to make "supersystems" on the robot that coordinate while still maintaining separate mutexes for their components.
+The system is somewhat clunky when applied to a whole robot, especially for smaller states like "Home Elevator".
+The process of writing out a full robot state machine was helpful to conceptualize what the robot needed to do and would be helpful to organize code whether or not the superstructure pattern is used.
