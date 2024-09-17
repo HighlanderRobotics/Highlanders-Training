@@ -9,7 +9,7 @@ This refactor would help with approaching the codebase and organizing behavior, 
 
 ## Procedure and Findings
 
-I started on this project after seeing [2974's](https://github.com/WaltonRobotics/Crescendo/blob/main/src/main/java/frc/robot/subsystems/Superstructure.java) and [5940's](https://github.com/BREAD5940/2024-Onseason/blob/main/src/main/java/frc/robot/subsystems/Superstructure.Java) code, and wondering if using explicitly defined states could help manage our code.
+I started on this project after seeing [2974's](https://github.com/WaltonRobotics/Crescendo/blob/main/src/main/java/frc/robot/subsystems/Superstructure.java) and [5940's](https://github.com/BREAD5940/2024-Onseason/blob/main/src/main/java/frc/robot/subsystems/Superstructure.Java) code, and wondered if using explicitly defined states could help manage our code.
 These teams had a superstructure file which coordinated several subsystems based on a state machine.
 This allowed for complex control flow with less places for confusion.
 
