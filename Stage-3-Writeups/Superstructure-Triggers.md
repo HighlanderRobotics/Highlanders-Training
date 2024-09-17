@@ -5,7 +5,7 @@ Lewis Seiden, 2024 Crescendo Offseason
 ## Abstract
 
 This project is a [refactor of 8033s 2024 codebase](https://github.com/HighlanderRobotics/Crescendo/tree/superstructure-subsystem) to use an explicit finite state machine to control subsystems rather than simple Commands.
-This refactor would help with approaching the codebase and organizing behavior, but would add some amount of boilerplate and a m    onolithic file.
+This refactor would help with approaching the codebase and organizing behavior, but would add some amount of boilerplate and a monolithic file.
 
 ## Procedure and Findings
 
