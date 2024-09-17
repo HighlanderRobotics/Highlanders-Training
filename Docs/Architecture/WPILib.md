@@ -14,7 +14,7 @@ Vendors (companies that sell us parts) also often have libraries to interface wi
 These include the [Phoenix library](https://v6.docs.ctr-electronics.com/en/stable/) made by CTRE, the manufacturer of the majority of our motor controllers.
 
 We also use other libraries for other tasks that WPILib doesn't support. One of these is [Photonvision](../Specifics/Vision.md), a library that processes our camera feeds to turn them into useful target information.
-Another is Pathplanner, a library to create and follow paths for the Autonomous portion of a match.
+Another is Choreo, a library to follow paths generated in a standalone app for the Autonomous portion of a match.
 Many of these libraries will have their own articles here as well as their own documentation.
 
 ## Resources
