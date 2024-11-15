@@ -53,13 +53,13 @@ The LL2+ was not satisfactory for apriltag detection for us, and we will likely 
 ### Exercises
 
 - Once you have photonvision installed and the web dashboard set up, mess around with the pipeline tuning settings
-- wip
+  
 
 ### Notes
 
 - Photonvision is installed on the coprocessor not on your computer, what you’re looking at on your computer is just a web dashboard
-- Last year we used a system called a Limelight which had a camera bundled in with a coprocessor. It had a couple of performance issues, so this year we’re probably going to use custom hardware **still tbd if we’re going to use an opi or not so i’ll come back and edit this**
+- Last year we used a system called a Limelight which had a camera bundled in with a coprocessor. It had a couple of performance issues, so this year we’re probably going to use custom hardware **still tbd if we’re going to use an opi or not so I’ll come back and edit this**
 
-### Whats Next?
+### What's Next?
 
 - Next course in course progression, if applicable
