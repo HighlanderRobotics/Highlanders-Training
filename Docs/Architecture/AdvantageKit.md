@@ -41,7 +41,7 @@ We have not yet done significant on-robot r&d with AdvantageKit and need to asse
 
 - [6328 2023 code](https://github.com/Mechanical-Advantage/RobotCode2023)
 - [3476 2023 code](https://github.com/FRC3476/FRC-2023)
-- [8033 2023 AdvantageKit port](https://github.com/HighlanderRobotics/Charged-Up/tree/advantagekit)
+- [8033 2023 AdvantageKit port](https://github.com/HighlanderRobotics/Charged-Up/tree/advantagekit) [LINK DOWN]
 
 ### Exercises
 
