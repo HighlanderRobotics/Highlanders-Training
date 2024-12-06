@@ -64,3 +64,4 @@ This means that while one person works on code for the autonomous, another could
 - Sam Charlson
 - Viviane Oesterer
 - Jeffery Tornatore
+- Ariel Shusteff
