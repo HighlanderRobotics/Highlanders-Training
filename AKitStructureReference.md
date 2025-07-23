@@ -50,7 +50,7 @@ It includes 3 layers:
 - Generally we will have 2 types of `IOImplementation`, `IOSim` and `IOReal`.
   - `IOReal` defines it's methods to command real hardware to have real outputs.
   - `IOSim` often looks similar to `IOReal`, but will have some behaviour added to fake the behaviour of real world physics.
-  This can include a physics sim which approximates physical behaviour, setting outputs which we can't sim to a default value (like temparature), or other ways of "faking" real world behaviour.
+    This can include a physics sim which approximates physical behaviour, setting outputs which we can't sim to a default value (like temparature), or other ways of "faking" real world behaviour.
 - `IOImplementation`s will contain the actual hardware objects such as `TalonFx`s.
 
 ## Intake Example
@@ -94,8 +94,8 @@ Here is a list of common logged fields for motors
   - This lets us see if the motor is stalling (trying to move but stuck) as well as how much energy the motor is using.
 - Temperature (Celsius)
   - If a motor gets too hot it will turn itself off to protect its electronics.
-  This lets us see if we are having issues related to that.
-  In addition, motors are less efficient as they heat up.
+    This lets us see if we are having issues related to that.
+    In addition, motors are less efficient as they heat up.
 - Voltage (Voltage)
   - This lets us see how much we are commanding our motors to move.
 
@@ -124,7 +124,7 @@ public interface IntakeIO {
 
     // Methods that IOImplementations will implement
     public abstract void extend();
-    
+
     public abstract void retract();
 
     public abstract void setVoltage(double volts);
