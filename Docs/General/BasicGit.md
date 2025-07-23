@@ -11,10 +11,16 @@ This means that while one person works on code for the autonomous, another could
 
 ### Resources
 
+Read one of the following:
+
 - [WPILib Git intro](https://docs.wpilib.org/en/stable/docs/software/basic-programming/git-getting-started.html)
 - [Github Git intro](https://docs.github.com/en/get-started/using-git/about-git)
-- _Record quick intro to git vid/talk at some point, talk to kevin or a software lead until then_
-- [Git install](https://gitforwindows.org/)
+- _Record quick intro to git vid/talk at some point, talk to kevin or a software lead until then if you prefer a non-text intro_
+
+Install the following:
+
+- [Windows Git install](https://gitforwindows.org/)
+- [Linux/Mac Git install](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 ### Examples
 
@@ -40,7 +46,9 @@ This means that while one person works on code for the autonomous, another could
 
 ### Notes
 
-- _We may begin using Github's pull request feature in the future, update with current practices_
+- We use GitHub's pull request (PR) feature to manage branches and merges.
+Always make sure to merge to main using a PR.
+PR's will be explained further in the Git Workflow docs.
 - Always commit code that at the very least compiles (you can check this by running the "Build robot code" option in WPILibs command bar)
 - Commit messages should be short and simple, ~10 words is a good target.
   If it's too long, use multiple lines in the commit message
@@ -54,11 +62,14 @@ This means that while one person works on code for the autonomous, another could
 
 ### Names
 
-- Lewy Seiden
-- Petro Papahadjopoluos
-- Sneha Narayan
-- Aliya Vora
-- Athena Li
-- Jerry Yu
-- Nathan Tuan (8/15/24)
-- Sam Charlson
+- Lewy
+- Petro
+- Sneha
+- Aliya
+- Athena
+- Jerry
+- Nathan (8/15/24)
+- Sam
+- Viviane
+- Jeffery
+- Ariel
