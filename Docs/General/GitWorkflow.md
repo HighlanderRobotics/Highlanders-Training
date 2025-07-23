@@ -66,7 +66,10 @@ If you have something that you think should be added or fixed, open an issue!
 - Aliya
 - Sneha
 - Jerry
-
+- Sam
+- Nathan
+- Vivie
+- Jeffery
 ### Notes
 
 - We use pull requests to make sure our code is readable and maintainable by having regular review of code.

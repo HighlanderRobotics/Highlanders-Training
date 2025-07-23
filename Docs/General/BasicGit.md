@@ -68,4 +68,8 @@ PR's will be explained further in the Git Workflow docs.
 - Aliya
 - Athena
 - Jerry
-- Nathan
+- Nathan (8/15/24)
+- Sam
+- Viviane
+- Jeffery
+- Ariel
