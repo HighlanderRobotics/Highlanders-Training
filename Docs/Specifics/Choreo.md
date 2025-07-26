@@ -1,90 +1,175 @@
 # Choreo
 
-Choreo is a path planning library that uses path-optimization to create time-constrained autonomous paths for the autonomous period. Learning to integrate Choreo into our codebase is important as autonomous, the first 15 seconds of the match, can be the make or break of a high-scoring teleop match.
+Choreo is a library that helps us create autonomous paths.
+Each path is composed of waypoints (places that we would like the robot to hit along the way) and constraints (limitations of the path or robot).
+Choreo allows us to find the most optimal path that gets to all those waypoints, while also staying within those constraints.
 
+## Choreo GUI
 
-## Choreo Structure
+<img src="../../Assets/choreo.png" alt="Choreo screenshot" width="600"/>
 
-The following is the stack that is involved to integrate with Choreo:
+This is where we create and save the paths. 
+It's an independent app from Visual Studio or WPILib.
+More extensive documentation can be found [here](https://choreo.autos/), but generally you'll just click on the field to add waypoints (usually at pickup/scoring locations), add any constraints from the top toolbar, and click the Generate Path button to generate a file for the path that we can then use.
 
-### Choreo GUI
+So what happens when you hit Generate?
 
-![Choreo Hero Home Page](/Assets/choreo-hero.png)
+## Numerical Optimization
+You might have done optimization problems in classes like HMA/precalc or Calculus (it's okay if you haven't), where you're trying to find the minimum/maximum amount of something (say I'm trying to maximize my backyard's area) given some constraint (I only have 100 feet of fence).
+Choreo uses the same basic idea of modeling our real life problem (and its constraints) with equations and mathematically finding the best solution.
+There are infinite ways to go from point A to point B, but we want to find the fastest way for our robot to do so.
+In other words, time is a constraint.
+We also need to consider other constraints, like our particular robot's maximum acceleration, velocity, motor torque, etc.
 
-The Choreo GUI is the multiplatform Tauri (React + Rust) app that allows you to create and save the paths. It's an independent app from Visual Studio or WPILib (although for the 2025 season it might be bundled in WPILib).
+Choreo uses the Sleipnir solver (which in turn uses CasADi, a numerical optimization software) to calculate the fastest path.
+At a high level, the solver takes the waypoints and repeatedly "guesses" better ways to interpolate between those waypoints.
+(This is what's happening when the path sort of balloons around after you click the generate button).
+If you're interested in learning more about how this works under the hood, check out [Sleipnir](https://github.com/SleipnirGroup/Sleipnir).
 
-### [Sleipnir](https://github.com/SleipnirGroup/Sleipnir)
+## Why Choreo?
 
-Sleipnir, written in C++23, is a "a linearity-exploiting sparse nonlinear constrained optimization problem solver that uses the interior-point method." What this really means is that based on multiple constraints and variables (some listed [here](https://sleipnirgroup.github.io/Choreo/document-settings/robot-configuration/)), the problem-solver is able to constrain them while optimizing the path time. 8033 was the first team to run Choreo at a competition (Chezy Champs, where we saw very reliable paths and great potential in constrast to what we used to use: PathPlanner). 
+8033 used to use [PathPlanner](https://pathplanner.dev/), which instead uses [Bezier splines](https://en.wikipedia.org/wiki/Bézier_curve).
+However, these splines aren't able to take real-life constraints into account, so there would often be a discrepancy between what was "supposed" to work and what actually happened because the spline would require the robot to do something it couldn't physically do.
 
-### Communication: From Path to Trajectory
+## Choreolib Installation
 
-The Choreo GUI communicates with Sleipnr and receives results back (as Sleipnir runs through step iterations). First, Choreo sends all the project robot data and the paths as data to Choreo's backend. Choreo's backend is able to communicate with Sleipnir, which generates the trajectory. While the trajectories are generating, each iteration of the trajectory (which theoretically gets closer to a more optimized solution) is communicated back to Choreo, where the GUI can show a preliminary trajectory. Finally, the trajectory is finalized, Choreo displays it and autosaves the project. 
+First, follow the [instructions](https://choreo.autos/choreolib/getting-started/) to add the Choreo vendordep.
 
-## Official Choreo Docs
+As of 2025, this is how we set up Choreo (and other auto things) in code.
+This may change, so leads should ensure they keep this page up to date.
+Check the [docs](https://choreo.autos/) for more info.
 
-The official Choreo [usage docs](https://sleipnirgroup.github.io/Choreo/usage/editing-paths/) give the best instructions on how to use the Choreo GUI app for creating these paths.
+There are 3 major files that concern autos: `Autos.java`, `SwerveSubsystem.java`, and `Robot.java`.
 
-## Why Choreo
+### `Autos.java`
 
-### Intro to Numerical Optimization
+This file will contain an `AutoFactory`, which is the class Choreo uses to create auto trajectories.
+The constructor of this file will look something like this:
 
-Choreo is a new approach to creating auto trajectories by using numerical optimization, namely Convex Optimization. Convex Optimization with respect to time constraints applies to minimizing the time it takes to travel a path. A convex function simply is a function that curves downward, like an upward parabola. The constraints (independent variables) axis would be changed to affect the time (dependent variables) axis. It's the solver's job to try as hard as possible to minimize the time taken for a path, which in turn allows robotics teams to score more points in the auto period.
+```Java
+public Autos(
+      SwerveSubsystem swerve
+      // other subsystems
+      ) {
+    this.swerve = swerve;
+    // other subsystems
+    factory =
+        new AutoFactory(
+            swerve::getPose, // A function that returns the current field-relative Pose2d of the robot
+            swerve::resetPose, // A function that receives a field-relative Pose2d to reset the robot's odometry to.
+            swerve.choreoDriveController(), // A function that receives the current SampleType and controls the robot. More info below
+            true, // If this is true, when on the red alliance, the path will be mirrored to the opposite side, while keeping the same coordinate system origin.
+            swerve, // The drive Subsystem to require for AutoTrajectory Commands.
+            (traj, edge) -> { // Log trajectories
+              if (Robot.ROBOT_TYPE != RobotType.REAL)
+                Logger.recordOutput(
+                    "Choreo/Active Traj",
+                    DriverStation.getAlliance().isPresent()
+                            && DriverStation.getAlliance().get().equals(Alliance.Blue)
+                        ? traj.getPoses()
+                        : traj.flipped().getPoses());
+            });
+  }
+```
+The rest of the file has methods that return a `Command` corresponding to each auto path.
+They'll generally look like this:
 
-Resources:
-- [What Is Mathematical Optimization?](https://www.youtube.com/watch?v=AM6BY4btj-M)
+```Java
+  public Command autoPath() {
+    final var routine = factory.newRoutine("Auto Path"); // Uses the AutoFactory to create a new routine
+    final var traj = routine.trajectory("AutoPath"); // Uses that routine to load a new trajectory. This should match what the name of the trajectory is in the Choreo app
+    routine.active().whileTrue(Commands.sequence(traj.resetOdometry(), traj.cmd())); // When the routine starts, the pose will first reset and then the trajectory will be run
+    // May include other trigger bindings (scoring, intaking, etc)
+    return routine.cmd(); // Returns command to run this routine
+  }
+```
+Choreolib relies heavily on `Triggers`, which will not be discussed here.
+Refer to the [WPILib docs](https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html) for more *or potentially another article here?*
 
-![graph of a convex function](../../Assets/convex.png)
+You'll notice one of the parameters above is the `choreoDriveController()` method.
+This is in `SwerveSubsystem`.
 
-### Comparison of other Tools
+### `SwerveSubsystem.java`
 
-8033 used to use PathPlanner, a spline-based path system. The path is created by plotting waypoints on the field and using a spline based system with its arcs and rotations so people can manipulate it to their liking. However, many teams have found that the splines generated have noticeably inconsistent and had "fudging" of values to "make it work," instead of just generating a path in Choreo and having a higher confidence of it working as it did in the Choreo GUI/editor.
+The `SwerveSample` class is used by Choreo to represent the robot's state (position, velocity, acceleration, and the forces applied to each swerve module) at a point in time along the trajectory.
+The `choreoDriveController()` method returns a function that "consumes" (takes as a parameter) a `SwerveSample` and drives to it.
+Because different teams might have different ways of doing that driving (for example we've added logging statements), the implementation is left up to teams.
 
-### How the Solver Generates Paths
+```Java
 
-The solver is first given a list of waypoints that include its position, angle, and other metadata. Then it guesses initial guess points that can be used to better interpolate between the path. Next, control intervals are gussed based on a guess of its general shape (trapezoid, ..) (the biggest factor of generation times).
+/**
+   * This function bypasses the command-based framework because Choreolib handles setting
+   * requirements internally. Do NOT use outside of ChoreoLib
+   *
+   * @return a Consumer that runs the drivebase to follow a SwerveSample with PID feedback, sample
+   *     target vel feedforward, and module force feedforward.
+   */
+  @SuppressWarnings("resource") // This is here because otherwise it gets angry about the pid controllers not being closed
+  public Consumer<SwerveSample> choreoDriveController() {
+    // PID controllers for x, y, and theta
+    final PIDController xController = new PIDController(5.0, 0.0, 0.0);
+    final PIDController yController = new PIDController(5.0, 0.0, 0.0);
+    final PIDController thetaController =
+        new PIDController(constants.getHeadingVelocityKP(), 0.0, 0.0);
+    thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-![alt text](image.png)
+    return (sample) -> { // returns a new function that takes in a sample and then does all the stuff inside the brackets
+      final var pose = getPose(); // Gets the current pose of the robot on the field
 
+      Logger.recordOutput(
+          "Choreo/Target Pose",
+          new Pose2d(sample.x, sample.y, Rotation2d.fromRadians(sample.heading)));
+      Logger.recordOutput(
+          "Choreo/Target Speeds Field Relative",
+          new ChassisSpeeds(sample.vx, sample.vy, sample.omega));
 
-## Choreo Java Integration
+      var feedback =
+          new ChassisSpeeds(
+              xController.calculate(pose.getX(), sample.x),
+              yController.calculate(pose.getY(), sample.y),
+              thetaController.calculate(pose.getRotation().getRadians(), sample.heading)); // Calculates how to get from its current pose to the target pose in the sample
+      var speeds =
+          ChassisSpeeds.fromFieldRelativeSpeeds(
+              new ChassisSpeeds(sample.vx, sample.vy, sample.omega).plus(feedback), getRotation()); // Adds what we just calculated ^ to the chassis speeds specified by the sample
 
-To integrate Choreo into our Java codebase, first follow the instructions to add Choreo to the project via vendordeps online. See full instructions [here](https://sleipnirgroup.github.io/Choreo/choreolib/installation/).
+      Logger.recordOutput("Choreo/Feedback + FF Target Speeds Robot Relative", speeds);
 
-After installing via vendordeps, we need to integrate the Choreo auto swerve command within our SwerveSubsystem. We integrate it in the SwerveSubsystem because the `choreoSwerveCommand` consumes our drive subsystem to correctly drive. 
+      // Drives with the chassis speeds we just calculated
+      this.drive(
+          speeds,
+          false,
+          useModuleForceFF ? sample.moduleForcesX() : new double[4],
+          useModuleForceFF ? sample.moduleForcesY() : new double[4]);
+    };
+  }
+```
 
-Reference the [Choreo Java Usage](https://sleipnirgroup.github.io/Choreo/choreolib/usage/) for a general understanding of the usage of `choreoSwerveCommand`.
+### `Robot.java`
 
-A few notes while setting up the `choreoSwerveCommand`:
-1. Make sure to set your PIDControllers's PID values or have a designated day to test out PID values for possible new motors.
+We have several different auto options, so picking one is handled in `Robot.java` with the `LoggedDashboardChooser<Command>` which puts a dropdown list on the dashboard.
+We then add all the methods in `Autos.java` that return our auto paths to that chooser in the `addAutos()` method, which is triggered on startup or by an alliance change.
 
-2. Choreo already accounts for field mirroring, so we generally don't need to worry about field flipping in the GUI, but we need to flip it in our code as follows:
+```Java
+private final Autos autos;
+private final LoggedDashboardChooser<Command> autoChooser = new LoggedDashboardChooser<>("Autos");
 
-```java
-public Command runChoreoTraj(ChoreoTrajectory traj, boolean resetPose) {
-    return choreoFullFollowSwerveCommand(
-            traj,
-            () -> pose,
-            Choreo.choreoSwerveController(
-                new PIDController(1.5, 0.0, 0.0), // don't copy these values, test these on your own. These values didn't work perfectly for our season.
-                new PIDController(1.5, 0.0, 0.0),
-                new PIDController(3.0, 0.0, 0.0)),
-            (ChassisSpeeds speeds) -> this.runVelocity(speeds),
-            () -> {
-                Optional<Alliance> alliance = DriverStation.getAlliance();
-                return alliance.isPresent() && alliance.get() == Alliance.Red;
-            },
-            this)
-        .beforeStarting(
-            Commands.runOnce(
-                    () -> {
-                        if (DriverStation.getAlliance().isPresent() // Checking if the `DriverStation` before accessing (with `get()`) so we don't need to handle possible Exceptions back up the stack (where `runChoreoTraj` is called).
-                            && DriverStation.getAlliance().get().equals(Alliance.Red)) {
-                        setPose(traj.getInitialState().flipped().getPose());
-                        } else {
-                        setPose(traj.getInitialPose());
-                        }
-                    })
-                .onlyIf(() -> resetPose));
+public Robot() {
+    //...
+    RobotModeTriggers.autonomous()
+        .whileTrue(Commands.defer(() -> autoChooser.get().asProxy(), Set.of())); // Starts whatever auto command is selected in the chooser once the autonomous period starts
+
+    new Trigger(
+            () -> { // alliance changing stuff
+              var allianceChange = !DriverStation.getAlliance().equals(lastAlliance);
+              lastAlliance = DriverStation.getAlliance();
+              return allianceChange && DriverStation.getAlliance().isPresent();
+            })
+        .onTrue(
+            Commands.runOnce(() -> addAutos()));
+}
+
+private void addAutos() {
+    autoChooser.addOption("Auto Path", autos.getAutoPath()); // adds all our auto options to the chooser so they can be selected
+    //...
 }
 ```
