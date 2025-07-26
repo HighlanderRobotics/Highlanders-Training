@@ -12,7 +12,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DrivetrainSubsystem extends SubsystemBase {
@@ -29,11 +29,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
     io.setVolts(left, right);
   }
 
-  public CommandBase setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
+  public Command setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
     return this.run(() -> this.setVoltages(left.getAsDouble(), right.getAsDouble()));
   }
 
-  public CommandBase setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier steer) {
+  public Command setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier steer) {
     return this.run(() -> {
       var speeds = DifferentialDrive.arcadeDriveIK(drive.getAsDouble(), steer.getAsDouble(), false);
       this.setVoltages(speeds.left * 12, speeds.right * 12);
