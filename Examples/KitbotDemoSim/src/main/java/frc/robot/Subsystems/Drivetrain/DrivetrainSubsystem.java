@@ -43,7 +43,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    Logger.getInstance().processInputs("Drivetrain", inputs);
+    Logger.processInputs("Drivetrain", inputs);
 
     odometry.update(
         odometry.getPoseMeters().getRotation()
@@ -52,6 +52,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
             .plus(Rotation2d.fromRadians((inputs.leftVelocityMetersPerSecond - inputs.rightVelocityMetersPerSecond)
                 * 0.020 / Units.inchesToMeters(26))),
         inputs.leftPositionMeters, inputs.rightPositionMeters);
-    Logger.getInstance().recordOutput("Drivetrain Pose", odometry.getPoseMeters());
+    Logger.recordOutput("Drivetrain Pose", odometry.getPoseMeters());
   }
 }

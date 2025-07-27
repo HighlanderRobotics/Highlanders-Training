@@ -4,8 +4,8 @@
 
 package frc.robot.Subsystems.Drivetrain;
 
-import com.ctre.phoenixpro.controls.VoltageOut;
-import com.ctre.phoenixpro.hardware.TalonFX;
+import com.ctre.phoenix6.controls.VoltageOut;
+import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotGearing;

@@ -44,7 +44,7 @@ Commands.run(intakeSubsystem::spinRoller, intakeSubsystem);
 Commands.runOnce(intakeSubsystem::retract, intakeSubsystem);
 ```
 
-If these Commands are defined in a Subsystem file, we can make them even simpler by calling `run` and `runOnce` on the subsystem itself
+Currently, we tend to define these Commands in the Subsystem file, so we can make them even simpler by calling `run` and `runOnce` on the subsystem itself
 
 ```Java
 // Inside IntakeSubsystem.java
@@ -75,11 +75,11 @@ controller.a().whenPressed(Commands.run(intakeSubsystem::runRollers, intakeSubsy
 
 - This is somewhat wordy
 - But Commands are objects, so we can pass them around!
-- Let's make a method that returns the `RunCommand` instead of having to make it here
+- Let's make a method that returns the `Command` instead of having to make it here
 
 ```Java
 // In IntakeSubsystem.java
-public CommandBase runRollersCommand() {
+public Command runRollersCommand() {
     // Note implicit requirements
     return this.run(this::runRollers);
 }

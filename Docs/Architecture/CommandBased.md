@@ -8,7 +8,7 @@ A Subsystem is a set of hardware that forms one system on our robot, like the dr
 Each subsystem contains some associated hardware (motors, pistons, sensors, etc.) They are the "nouns" of our robot, what it is.
 Each Subsystem is generally made to contain a broad set of hardware that will always operate as a unit.
 
-Commands are the "verbs" of the robt, or what our robot does.
+Commands are the "verbs" of the robot, or what our robot does.
 Each Subsystem can be used by one Command at the same time, but Commands may use many Subsystems.
 Commands can be composed together, so the `LineUp`, `Extend`, and `Outake` Commands might be put together to make a `Score` Command.
 Because each Subsystem can only be used by one Command at once, we are safe from multiple pieces of code trying to command the same motor to different speeds, for example.
@@ -28,6 +28,8 @@ Another common type is one which checks for when the robot enables.
 One non-obvious Trigger we used in 2024 was one which checked when we had detected a game piece in the robot, which we used to flash our LEDs and vibrate the driver controller.
 Triggers can be made of any function that returns a boolean which makes them very powerful.
 Some large Commands are better represented by several Commands and some Triggers!
+
+# update with superstructure stuff later
 
 ### Resources
 
@@ -58,5 +60,5 @@ Some large Commands are better represented by several Commands and some Triggers
 - We prefer making simple Commands with Command factories, or methods in a subsystem that return a Command.
   These methods should be simple interactions like `setTargetExtensionMeters()` or `extendIntake()`.
   Then you can use decorators as described [here](https://docs.wpilib.org/en/stable/docs/software/commandbased/command-compositions.html) to compose the basic Commands into more complex sequences.
-  Generally we make these compositions in `Robot` but you can also make single-Subsystem compositions within that Subsystem.
+  Generally we make these compositions in `Robot` and `Superstructure` but you can also make single-Subsystem compositions within that Subsystem.
   See our code from previous years for examples of this pattern, or talk to a software lead.
