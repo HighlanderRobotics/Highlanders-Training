@@ -20,6 +20,7 @@ public class Robot extends LoggedRobot {
   private RobotContainer m_robotContainer;
 
   @Override
+  @SuppressWarnings("resource")
   public void robotInit() {
     Logger.recordMetadata("ProjectName", "KitbotExample"); // Set a metadata value
 
