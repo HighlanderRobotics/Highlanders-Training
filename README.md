@@ -53,6 +53,7 @@ We encourage you to browse through these, and to ask a lead if you'd like to lea
 - [3.2 Motion Profiling](Docs/3_Specifics/3.2_MotionProfiling.md)
 
 ### Swerve
+
 - [3.3 Swerve](Docs/3_Specifics/3.3_Swerve.md)
 
 ### Libraries and Tooling
