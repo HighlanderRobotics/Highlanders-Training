@@ -18,7 +18,7 @@ Note that some of the code shown in the video differs from the current version o
   - Motors
   - Pneumatics
   - Sensors
-- Mutex, prevents multiple things from using the same hardware at the same time
+- [Mutex (short for "mutually exclusive")](https://en.wikipedia.org/wiki/Lock_(computer_science)), prevents multiple things from using the same hardware at the same time
 
 ### Commands
 
@@ -36,24 +36,24 @@ For example:
 
 ```Java
 // Runs the intake rollers forever
-Commands.run(() -> intakeSubsystem.spinRoller(), intakeSubsystem);
+Commands.run(intakeSubsystem::spinRoller, intakeSubsystem);
 
 // Retracts the intake
 // Note that the real hardware doesn't move instantly
 // But we only need to set it once in code
-Commands.runOnce(() -> intakeSubsystem.retract(), intakeSubsystem);
+Commands.runOnce(intakeSubsystem::retract, intakeSubsystem);
 ```
 
-If these Commands are defined in a Subsystem file, we can make them even simpler by calling `run` and `runOnce` on the subsystem itself
+Currently, we tend to define these Commands in the Subsystem file, so we can make them even simpler by calling `run` and `runOnce` on the subsystem itself
 
 ```Java
 // Inside IntakeSubsystem.java
 
 // Notice how we don't need to define the requirements for these
 // The subsystem does it implicitly
-this.run(() -> spinRoller());
+this.run(this::spinRoller);
 
-this.runOnce(() -> retract());
+this.runOnce(this::retract);
 ```
 
 Anatomy of a Command declaration:
@@ -70,18 +70,18 @@ Anatomy of a Command declaration:
 ```Java
 // In RobotContainer.java
 // When the a button on the controller is pressed, run the rollers on the intake
-controller.a().whenPressed(Commands.run(() -> intakeSubsystem.runRollers(), intakeSubsystem));
+controller.a().whenPressed(Commands.run(intakeSubsystem::runRollers, intakeSubsystem));
 ```
 
 - This is somewhat wordy
 - But Commands are objects, so we can pass them around!
-- Let's make a method that returns the `RunCommand` instead of having to make it here
+- Let's make a method that returns the `Command` instead of having to make it here
 
 ```Java
 // In IntakeSubsystem.java
-public CommandBase runRollersCommand() {
+public Command runRollersCommand() {
     // Note implicit requirements
-    return this.run(() -> runRollers());
+    return this.run(this::runRollers);
 }
 ```
 
@@ -113,9 +113,7 @@ intakeSubsystem.extendCommand().andThen(intakeSubsystem.runRollersCommand())
 // An example of a more complex group
 
 intakeSubsystem.extend().andThen(
-    intakeSubsystem.runRollers().until(() ->
-        intakeSubsystem.hasGamePiece()
-    ),
+    intakeSubsystem.runRollers().until(intakeSubsystem::hasGamePiece),
     intakeSubsystem.retract()
 )
 
@@ -124,7 +122,7 @@ intakeSubsystem.extend().andThen(
 elevatorSubsystem.runToScoringHeight()
   .alongWith(
     grabberSubsystem.holdGamePiece()
-  ).until(() -> elevatorSubsystem.isAtScoringHeight())
+  ).until(elevatorSubsystem::isAtScoringHeight)
   .andThen(
     // Outtake game piece for 1 second
     grabberSubsystem.outtakeGamePiece().withTimeout(1.0)

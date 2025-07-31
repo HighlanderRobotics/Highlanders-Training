@@ -6,12 +6,11 @@ package frc.robot.Subsystems;
 
 import java.util.function.DoubleSupplier;
 
-import com.ctre.phoenixpro.controls.VoltageOut;
-import com.ctre.phoenixpro.hardware.TalonFX;
+import com.ctre.phoenix6.controls.VoltageOut;
+import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -31,15 +30,15 @@ public class DrivetrainSubsystem extends SubsystemBase {
     rightFalcon.setControl(rightVoltage.withOutput(left));
   }
 
-  public CommandBase setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
-    return new RunCommand(() -> this.setVoltages(left.getAsDouble(), right.getAsDouble()), this);
+  public Command setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
+    return this.run(() -> this.setVoltages(left.getAsDouble(), right.getAsDouble()));
   }
 
-  public CommandBase setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier steer) {
-    return new RunCommand(() -> {
+  public Command setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier steer) {
+    return this.run(() -> {
       var speeds = DifferentialDrive.arcadeDriveIK(drive.getAsDouble(), steer.getAsDouble(), false);
       this.setVoltages(speeds.left * 12, speeds.right * 12);
-    }, this);
+    });
   }
 
   @Override

@@ -8,17 +8,12 @@ import java.util.function.DoubleSupplier;
 
 import org.littletonrobotics.junction.Logger;
 
-import com.ctre.phoenixpro.controls.VoltageOut;
-import com.ctre.phoenixpro.hardware.TalonFX;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
 public class DrivetrainSubsystem extends SubsystemBase {
   DrivetrainIO io = new DrivetrainIOSim();
@@ -34,21 +29,21 @@ public class DrivetrainSubsystem extends SubsystemBase {
     io.setVolts(left, right);
   }
 
-  public CommandBase setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
-    return new RunCommand(() -> this.setVoltages(left.getAsDouble(), right.getAsDouble()), this);
+  public Command setVoltagesCommand(DoubleSupplier left, DoubleSupplier right) {
+    return this.run(() -> this.setVoltages(left.getAsDouble(), right.getAsDouble()));
   }
 
-  public CommandBase setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier steer) {
-    return new RunCommand(() -> {
+  public Command setVoltagesArcadeCommand(DoubleSupplier drive, DoubleSupplier steer) {
+    return this.run(() -> {
       var speeds = DifferentialDrive.arcadeDriveIK(drive.getAsDouble(), steer.getAsDouble(), false);
       this.setVoltages(speeds.left * 12, speeds.right * 12);
-    }, this);
+    });
   }
 
   @Override
   public void periodic() {
     io.updateInputs(inputs);
-    Logger.getInstance().processInputs("Drivetrain", inputs);
+    Logger.processInputs("Drivetrain", inputs);
 
     odometry.update(
         odometry.getPoseMeters().getRotation()
@@ -57,6 +52,6 @@ public class DrivetrainSubsystem extends SubsystemBase {
             .plus(Rotation2d.fromRadians((inputs.leftVelocityMetersPerSecond - inputs.rightVelocityMetersPerSecond)
                 * 0.020 / Units.inchesToMeters(26))),
         inputs.leftPositionMeters, inputs.rightPositionMeters);
-    Logger.getInstance().recordOutput("Drivetrain Pose", odometry.getPoseMeters());
+    Logger.recordOutput("Drivetrain Pose", odometry.getPoseMeters());
   }
 }
