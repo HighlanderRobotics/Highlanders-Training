@@ -14,11 +14,18 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 
 public class DrivetrainSubsystem extends SubsystemBase {
-  DrivetrainIO io = new DrivetrainIOSim();
+  public static final int LEFT_TALON_ID = 0;
+  public static final int RIGHT_TALON_ID = 1;
+
+  DrivetrainIO io = Robot.isReal() ? new DrivetrainIOReal() : new DrivetrainIOSim();
   DrivetrainIOInputsAutoLogged inputs = new DrivetrainIOInputsAutoLogged();
 
+  // Odometry keeps track of our position on the field
+  // We can upgrade this to a pose estimator, which fuses vision readings to
+  // correct our estimate
   DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
 
   /** Creates a new Drivetrain. */
