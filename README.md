@@ -43,9 +43,9 @@ We encourage you to browse through these, and to ask a lead if you'd like to lea
 - [2.1 WPILib / Intro to FRC Programming](Docs/2_Architecture/2.1_WPILib.md)
 - [2.2 Electrical Intro](Docs/2_Architecture/2.2_ElectronicsCrashCourse.md)
 - [2.3-2.5 Command Based](Docs/2_Architecture/2.3_CommandBased.md)
-- [2.6-2.7 AdvantageKit and Logging](Docs/2_Architecture/2.6_AdvantageKit.md)
-- [2.8-2.9 Simulation](Docs/2_Architecture/2.8_Simulation.md)
-- [2.10 Overall architecture(??)](Docs/2_Architecture/2.10_Superstructure.md)
+- [2.6-2.8 AdvantageKit and Logging](Docs/2_Architecture/2.6_AdvantageKit.md)
+- [2.9-2.10 Simulation](Docs/2_Architecture/2.9_Simulation.md)
+- [2.11 Overall architecture(??)](Docs/2_Architecture/2.11_Superstructure.md)
 
 ### Controls
 
