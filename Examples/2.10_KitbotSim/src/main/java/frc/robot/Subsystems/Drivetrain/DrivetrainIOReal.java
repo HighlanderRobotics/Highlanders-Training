@@ -18,8 +18,8 @@ import edu.wpi.first.units.measure.Voltage;
 /** Add your docs here. */
 public class DrivetrainIOReal implements DrivetrainIO {
 
-    TalonFX leftTalon = new TalonFX(DrivetrainSubsystem.LEFT_TALON_ID);
-    TalonFX rightTalon = new TalonFX(DrivetrainSubsystem.RIGHT_TALON_ID);
+    protected TalonFX leftTalon = new TalonFX(DrivetrainSubsystem.LEFT_TALON_ID);
+    protected TalonFX rightTalon = new TalonFX(DrivetrainSubsystem.RIGHT_TALON_ID);
 
     VoltageOut leftVoltage = new VoltageOut(0);
     VoltageOut rightVoltage = new VoltageOut(0);

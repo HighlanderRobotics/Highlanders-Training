@@ -4,77 +4,55 @@
 
 package frc.robot.Subsystems.Drivetrain;
 
-import com.ctre.phoenix6.controls.VoltageOut;
-import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.CANBus;
+import com.ctre.phoenix6.sim.TalonFXSimState;
 
+import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotGearing;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotMotor;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotWheelSize;
-import edu.wpi.first.wpilibj.simulation.RoboRioSim;
 
-public class DrivetrainIOSim implements DrivetrainIO {
-    // Here we have 2 motors, one for each side
-    // Since we have 2 motors per side we would need to add "follower" motors
-    // Since this is a sim we can pretend those motors don't exist
-    TalonFX leftTalon = new TalonFX(DrivetrainSubsystem.LEFT_TALON_ID);
-    TalonFX rightTalon = new TalonFX(DrivetrainSubsystem.RIGHT_TALON_ID);
+public class DrivetrainIOSim extends DrivetrainIOReal {
+    
+    private DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
+            KitbotMotor.kSingleFalcon500PerSide,
+            KitbotGearing.k8p45,
+            KitbotWheelSize.kSixInch,
+            null
+    );
 
-    // ControlRequest objects represent what we want our motor to do
-    // There might be a cleaner way to have both voltage and velocity control than making two sets of objects
-    // This is part of the Phoenix v6/pro api, old code uses the v5 api which looks different
-    VoltageOut leftVoltage = new VoltageOut(0);
-    VoltageOut rightVoltage = new VoltageOut(0);
+    private TalonFXSimState leftSimState;
+    private TalonFXSimState rightSimState;
 
-    // This is a physics sim object
-    // This will calculate the movement of the drivetrain based off of a mathmatical model
-    // To learn more about how these models work, look at the book linked in the state space course
-    DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
-        KitbotMotor.kDoubleFalcon500PerSide, 
-        // This is the default gearing for the kitbot
-        // If this was a real robot, we would check with mechanical for actual numbers
-        // Note that the default gearbox is not compatible with falcons so this configuration is not realistic
-        KitbotGearing.k8p45, 
-        // Default wheels
-        KitbotWheelSize.kSixInch, 
-        // This is a way for us to model noise from our measurements
-        // We can leave it null to pretend our simulation is perfect for this exercise
-        null);
+    private double lastLoopTime = 0.0;
+    private Notifier notifier;
 
-    @Override
-    public void updateInputs(DrivetrainIOInputs inputs) {
-        // Start by updating our physics model with the default loop time of 20 ms
-        physicsSim.update(0.020);
+    public DrivetrainIOSim(CANBus canBus) {
+        super(); // TODO: UPDATE THIS
 
-        // Update the voltage available to each motor based off of a simulated robot battery
-        // This accounts for "voltage sag" when motors are running
-        var leftSimState = leftTalon.getSimState();
-        leftSimState.setSupplyVoltage(RoboRioSim.getVInVoltage());
+        leftSimState = leftTalon.getSimState();
+        rightSimState = rightTalon.getSimState();   
+        
+        notifier = new Notifier(() -> {
+            double currentTime = Timer.getTimestamp();
+            double deltaTime = currentTime - lastLoopTime;
+            lastLoopTime = currentTime;
 
-        var rightSimState = rightTalon.getSimState();
-        rightSimState.setSupplyVoltage(RoboRioSim.getVInVoltage());
+            leftSimState.setSupplyVoltage(RobotController.getBatteryVoltage());
+            rightSimState.setSupplyVoltage(RobotController.getBatteryVoltage());
 
-        // Use the motor output voltage to update the sim
-        physicsSim.setInputs(leftSimState.getMotorVoltage(), rightSimState.getMotorVoltage());
+            physicsSim.setInputs(leftSimState.getMotorVoltage(), rightSimState.getMotorVoltage());
+            physicsSim.update(deltaTime);
 
-        inputs.leftOutputVolts = leftSimState.getMotorVoltage();
-        inputs.rightOutputVolts = rightSimState.getMotorVoltage();
+            leftSimState.setRawRotorPosition(physicsSim.getLeftPositionMeters());
+            leftSimState.setRotorVelocity(physicsSim.getLeftVelocityMetersPerSecond());
 
-        inputs.leftVelocityMetersPerSecond = physicsSim.getLeftVelocityMetersPerSecond();
-        inputs.rightVelocityMetersPerSecond = physicsSim.getRightVelocityMetersPerSecond();
-
-        inputs.leftPositionMeters = physicsSim.getLeftPositionMeters();
-        inputs.rightPositionMeters = physicsSim.getRightPositionMeters();
-
-        inputs.leftCurrentAmps = leftSimState.getTorqueCurrent();
-        inputs.leftTempCelsius = 0.0;
-        inputs.rightCurrentAmps = rightSimState.getTorqueCurrent();
-        inputs.rightTempCelsius = 0.0;
-    }
-
-    @Override
-    public void setVolts(double left, double right) {
-        leftTalon.setControl(leftVoltage.withOutput(left));
-        rightTalon.setControl(rightVoltage.withOutput(right));
+            rightSimState.setRawRotorPosition(physicsSim.getRightPositionMeters());
+            rightSimState.setRotorVelocity(physicsSim.getRightVelocityMetersPerSecond());
+        });
+        notifier.startPeriodic(0.002);
     }
 }
