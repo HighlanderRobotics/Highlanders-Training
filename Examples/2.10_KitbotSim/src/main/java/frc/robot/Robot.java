@@ -9,6 +9,8 @@ import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 
+import com.ctre.phoenix6.CANBus;
+
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -19,7 +21,9 @@ public class Robot extends LoggedRobot {
 
   CommandXboxController controller = new CommandXboxController(0);
 
-  DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem();
+  CANBus canBus = new CANBus("*");
+
+  DrivetrainSubsystem drivetrainSubsystem = new DrivetrainSubsystem(canBus);
 
 
   public Robot() {

@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotGearing;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotMotor;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim.KitbotWheelSize;
 
-public class DrivetrainIOSim extends DrivetrainIOReal {
+public class DrivetrainIOSim extends DrivetrainIO {
     
     private DifferentialDrivetrainSim physicsSim = DifferentialDrivetrainSim.createKitbotSim(
             KitbotMotor.kSingleFalcon500PerSide,
@@ -31,7 +31,7 @@ public class DrivetrainIOSim extends DrivetrainIOReal {
     private Notifier notifier;
 
     public DrivetrainIOSim(CANBus canBus) {
-        super(); // TODO: UPDATE THIS
+        super(canBus);
 
         leftSimState = leftTalon.getSimState();
         rightSimState = rightTalon.getSimState();   
