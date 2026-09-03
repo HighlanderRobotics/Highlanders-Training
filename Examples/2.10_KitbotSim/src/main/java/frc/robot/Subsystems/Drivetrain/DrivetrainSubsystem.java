@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
-import frc.robot.Subsystems.Drivetrain.DrivetrainIOInputsAutoLogged;
 
 public class DrivetrainSubsystem extends SubsystemBase {
   public static final int LEFT_TALON_ID = 0;
