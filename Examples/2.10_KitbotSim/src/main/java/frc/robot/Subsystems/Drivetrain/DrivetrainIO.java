@@ -124,7 +124,7 @@ public class DrivetrainIO {
 
     public void setVolts(double left, double right) {
         leftTalon.setControl(leftVoltage.withOutput(left));
-        rightTalon.setControl(rightVoltage.withOutput(left));
+        rightTalon.setControl(rightVoltage.withOutput(right));
     }
     
 }
