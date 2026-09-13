@@ -45,14 +45,14 @@ public class DrivetrainIO {
 
     private final StatusSignal<Voltage> leftAppliedVoltage;
     private final StatusSignal<Voltage> rightAppliedVoltage;
-    private final StatusSignal<AngularVelocity> leftAngularVelocityRPS;
-    private final StatusSignal<AngularVelocity> rightAngularVelocityRPS;
 
     // A little hacky - the units don't match, but that would typically be handled in the 
     // SensorToMechanismRatio config. For the purposes of this lesson, YOU DO NOT NEED TO
     // WORRY ABOUT THIS, but ask a lead if you have questions!
     private final StatusSignal<Angle> leftPositionMeters; 
     private final StatusSignal<Angle> rightPositionMeters; 
+    private final StatusSignal<AngularVelocity> leftVelocityMetersPerSec;
+    private final StatusSignal<AngularVelocity> rightVelocityMetersPerSec;
 
     private final StatusSignal<Current> leftSupplyCurrent;
     private final StatusSignal<Current> rightSupplyCurrent;
@@ -66,8 +66,8 @@ public class DrivetrainIO {
         leftAppliedVoltage = leftTalon.getMotorVoltage();
         rightAppliedVoltage = rightTalon.getMotorVoltage();
 
-        leftAngularVelocityRPS = leftTalon.getVelocity();
-        rightAngularVelocityRPS = rightTalon.getVelocity();
+        leftVelocityMetersPerSec = leftTalon.getVelocity();
+        rightVelocityMetersPerSec = rightTalon.getVelocity();
         
         rightPositionMeters = rightTalon.getPosition(); 
         leftPositionMeters = leftTalon.getPosition(); 
@@ -82,8 +82,8 @@ public class DrivetrainIO {
             50.0, // update every 20ms
             leftAppliedVoltage, 
             rightAppliedVoltage, 
-            leftAngularVelocityRPS, 
-            rightAngularVelocityRPS, 
+            leftVelocityMetersPerSec, 
+            rightVelocityMetersPerSec, 
             leftPositionMeters, 
             rightPositionMeters, 
             leftSupplyCurrent, 
@@ -98,8 +98,8 @@ public class DrivetrainIO {
 
         BaseStatusSignal.refreshAll(leftAppliedVoltage, 
             rightAppliedVoltage, 
-            leftAngularVelocityRPS, 
-            rightAngularVelocityRPS, 
+            leftVelocityMetersPerSec, 
+            rightVelocityMetersPerSec, 
             leftPositionMeters, 
             rightPositionMeters, 
             leftSupplyCurrent, 
@@ -110,14 +110,14 @@ public class DrivetrainIO {
             inputs.leftOutputVolts = leftAppliedVoltage.getValueAsDouble();
             inputs.rightOutputVolts = rightAppliedVoltage.getValueAsDouble();
         
-            inputs.leftVelocityMetersPerSecond = leftAngularVelocityRPS.getValueAsDouble();
-            inputs.rightVelocityMetersPerSecond = rightAngularVelocityRPS.getValueAsDouble();
+            inputs.leftVelocityMetersPerSecond = leftVelocityMetersPerSec.getValueAsDouble();
+            inputs.rightVelocityMetersPerSecond = rightVelocityMetersPerSec.getValueAsDouble();
         
             inputs.leftPositionMeters = leftPositionMeters.getValueAsDouble();
             inputs.rightPositionMeters = rightPositionMeters.getValueAsDouble();
         
             inputs.leftCurrentAmps = leftSupplyCurrent.getValueAsDouble();
-            inputs.leftTempCelsius = rightSupplyCurrent.getValueAsDouble();
+            inputs.leftTempCelsius = leftTempCelsius.getValueAsDouble();
             inputs.rightCurrentAmps = rightSupplyCurrent.getValueAsDouble();
             inputs.rightTempCelsius = rightTempCelsius.getValueAsDouble();
     }
